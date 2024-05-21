@@ -1,5 +1,15 @@
+import { AppRouter } from './routes';
+import { NavBar } from './ui/nav/NavBar.tsx';
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <NavBar />
+      <div className="pt-[120px]">
+        <AppRouter />
+      </div>
+    </>
+  );
 }
 
 export default App;
