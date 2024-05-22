@@ -14,7 +14,7 @@ interface Props {
   icon: ComponentType<SvgIconProps>;
   text: string;
 }
-const NavBarLinkItem: FC<Props> = ({ to, icon: Icon, text }) => {
+const NavBarLinkButton: FC<Props> = ({ to, icon: Icon, text }) => {
   const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText('#000'),
     borderColor: '#fff',
@@ -47,4 +47,4 @@ const NavBarLinkItem: FC<Props> = ({ to, icon: Icon, text }) => {
   );
 };
 
-export default NavBarLinkItem;
+export default NavBarLinkButton;
