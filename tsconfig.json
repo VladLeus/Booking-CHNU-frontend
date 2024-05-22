@@ -3,13 +3,14 @@
     "baseUrl": "./src",
     "paths": {
       "@pages/*": ["./pages/*"],
-      "@ui/*": ["./ui/*"],
+      "@ui/*": ["./UI/*"],
       "@assets/*": ["./assets/*"],
       "@hooks/*": ["./shared/hooks/*"],
       "@utils/*": ["./shared/utils/*"],
       "@constants/*": ["./shared/constant/*"],
       "@modules/*": ["./modules/*"]
     },
+    "include": ["src"],
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
