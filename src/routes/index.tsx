@@ -1,18 +1,11 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 // import React from "react";
-import { Home } from '../pages/Home.tsx';
-import { Cars } from '../pages/Cars.tsx';
-import { ProfileSettings } from '../pages/ProfileSettings.tsx';
-import { TripHistory } from '../pages/TripHistory.tsx';
-import { Wallet } from '../pages/Wallet.tsx';
-
-export const AppRoutes = {
-  default: '/',
-  cars: '/cars',
-  profile_settings: '/profile_settings',
-  trip_history: '/trip_history',
-  wallet: '/wallet',
-};
+import { Home } from '../pages/home/Home.tsx';
+import { Cars } from '../pages/cars/Cars.tsx';
+import { ProfileSettings } from '../pages/profile/ProfileSettings.tsx';
+import { TripHistory } from '../pages/trip-history/TripHistory.tsx';
+import { Wallet } from '../pages/wallet/Wallet.tsx';
+import { AppRoutes } from './_data.ts';
 
 const routes: RouteObject[] = [
   {

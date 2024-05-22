@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ProfileMenu } from './ProfileMenu.tsx';
+import { ProfileMenu } from './components/ProfileMenu.tsx';
 
 export function NavBar() {
   return (

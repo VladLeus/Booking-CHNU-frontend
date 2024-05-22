@@ -1,5 +1,5 @@
 import { AppRouter } from './routes';
-import { NavBar } from './ui/nav/NavBar.tsx';
+import { NavBar } from './UI/nav/NavBar.tsx';
 
 function App() {
   return (
