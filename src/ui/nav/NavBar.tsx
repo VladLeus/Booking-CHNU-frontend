@@ -1,22 +1,50 @@
-import { Link } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import KingBedIcon from '@mui/icons-material/KingBed';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+
 import { ProfileMenu } from './components/ProfileMenu.tsx';
+import NavBarLinkButton from '@ui/nav/elements/NavBarLinkButton.tsx';
 
 export function NavBar() {
   return (
-    <div className="w-screen h-[110px] flex flex-col items-center bg-blue-500 fixed top-0">
-      <div className="flex w-[90%] m-2 justify-between">
-        <h1 className="text-4xl text-amber-50 font-bold">Booking</h1>
-        <ProfileMenu />
-      </div>
-
-      <nav className="flex flex-row w-[90%] mt-2 gap-16">
-        <Link to="/" className="text-amber-100 hover:text-white">
-          Home
-        </Link>
-        <Link to="/cars" className="text-amber-100 hover:text-white">
-          Cars
-        </Link>
-      </nav>
-    </div>
+    <AppBar position="fixed" sx={{ height: 150, backgroundColor: '#01579b' }}>
+      <Toolbar sx={{ flexDirection: 'column', alignItems: 'center' }}>
+        <Box
+          sx={{
+            width: '90%',
+            display: 'flex',
+            justifyContent: 'space-between',
+            m: 2,
+          }}
+        >
+          <Typography variant="h4" sx={{ color: 'amber', fontWeight: 'bold' }}>
+            Booking
+          </Typography>
+          <ProfileMenu />
+        </Box>
+        <Box
+          component="nav"
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            width: '92%',
+            mt: 1,
+            gap: 2,
+          }}
+        >
+          <NavBarLinkButton to="/" icon={KingBedIcon} text="Помешкання" />
+          <NavBarLinkButton
+            to="/cars"
+            icon={DirectionsCarIcon}
+            text="Оренда авто"
+          />
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
+
+export default NavBar;
