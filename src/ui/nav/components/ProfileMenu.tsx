@@ -3,11 +3,15 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
-import { Link } from 'react-router-dom';
+import PopoverMenuItem from '@ui/nav/elements/PopoverMenuItem.tsx';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import HistoryIcon from '@mui/icons-material/History';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { IconButton } from '@mui/material';
 
 export function ProfileMenu() {
   const [open, setOpen] = React.useState(false);
@@ -51,17 +55,28 @@ export function ProfileMenu() {
     <>
       <Stack direction="row" spacing={2}>
         <div>
-          <button
+          <IconButton
             id="composition-button"
             aria-controls={open ? 'composition-menu' : undefined}
             aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
             ref={anchorRef}
             onClick={handleToggle}
-            className="flex items-center p-1 mt-2"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              p: 1,
+              mt: 2,
+              bgcolor: '#99dfff',
+              borderRadius: '50%',
+              width: '2.5rem',
+              height: '2.5rem',
+            }}
           >
-            <PersonIcon className="text-2xl" />
-          </button>
+            <PersonIcon sx={{ color: 'black' }} />
+          </IconButton>
+
           <Popper
             open={open}
             anchorEl={anchorRef.current}
@@ -87,15 +102,33 @@ export function ProfileMenu() {
                       onKeyDown={handleListKeyDown}
                     >
                       <nav>
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/profile_settings">Profile</Link>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/trip_history">Trip history</Link>
-                        </MenuItem>
-                        <MenuItem onClick={handleClose}>
-                          <Link to="/wallet">Wallet</Link>
-                        </MenuItem>
+                        <PopoverMenuItem
+                          to={'/profile_settings'}
+                          icon={ManageAccountsIcon}
+                          text={'Профіль'}
+                          handleClose={handleClose}
+                        />
+
+                        <PopoverMenuItem
+                          to={'/trip_history'}
+                          icon={HistoryIcon}
+                          text={'Історія подорожей'}
+                          handleClose={handleClose}
+                        />
+
+                        <PopoverMenuItem
+                          to={'/wallet'}
+                          icon={AccountBalanceWalletIcon}
+                          text={'Гаманець'}
+                          handleClose={handleClose}
+                        />
+
+                        <PopoverMenuItem
+                          to={'/'}
+                          icon={LogoutIcon}
+                          text={'Вийти'}
+                          handleClose={handleClose}
+                        />
                       </nav>
                     </MenuList>
                   </ClickAwayListener>

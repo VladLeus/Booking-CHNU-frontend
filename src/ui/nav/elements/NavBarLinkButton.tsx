@@ -6,7 +6,7 @@ import {
   SvgIconProps,
   Typography,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 
 interface Props {
@@ -14,13 +14,17 @@ interface Props {
   icon: ComponentType<SvgIconProps>;
   text: string;
 }
+
 const NavBarLinkButton: FC<Props> = ({ to, icon: Icon, text }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
   const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
     color: theme.palette.getContrastText('#000'),
-    borderColor: '#fff',
+    borderColor: isActive ? '#fff' : 'transparent',
     outline: 'none',
     borderRadius: '20px',
-    padding: '10px 20px',
+    padding: '8px 16px',
     textTransform: 'none',
     '&:hover': {
       borderColor: '#fff',
