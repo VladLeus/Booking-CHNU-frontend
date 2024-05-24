@@ -6,7 +6,7 @@ import KingBedIcon from '@mui/icons-material/KingBed';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
 import { ProfileMenu } from './components/ProfileMenu.tsx';
-import NavBarLinkButton from '@ui/nav/elements/NavBarLinkButton.tsx';
+import NavBarLinkButton from '../nav/elements/NavBarLinkButton.tsx';
 
 export function NavBar() {
   return (

@@ -6,7 +6,7 @@ import Popper from '@mui/material/Popper';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
-import PopoverMenuItem from '@ui/nav/elements/PopoverMenuItem.tsx';
+import PopoverMenuItem from '../../nav/elements/PopoverMenuItem.tsx';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import HistoryIcon from '@mui/icons-material/History';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
