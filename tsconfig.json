@@ -8,7 +8,8 @@
       "@hooks/*": ["./shared/hooks/*"],
       "@utils/*": ["./shared/utils/*"],
       "@constants/*": ["./shared/constant/*"],
-      "@modules/*": ["./modules/*"]
+      "@modules/*": ["./modules/*"],
+      "@components/*": ["./components/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
