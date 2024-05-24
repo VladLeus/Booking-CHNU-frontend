@@ -1,4 +1,3 @@
-import * as React from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -6,50 +5,30 @@ import Popper from '@mui/material/Popper';
 import MenuList from '@mui/material/MenuList';
 import Stack from '@mui/material/Stack';
 import PersonIcon from '@mui/icons-material/Person';
-import PopoverMenuItem from '../../nav/elements/PopoverMenuItem.tsx';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import HistoryIcon from '@mui/icons-material/History';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import PopoverMenuItem from '@ui/PopoverMenuItem';
+import {
+  handleToggle,
+  handleClose,
+  handleListKeyDown,
+  usePrevious,
+} from './actions';
 
 export function ProfileMenu() {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState<boolean>(false);
+  const anchorRef = useRef<HTMLButtonElement>(null);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  }
-
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current && !open) {
+  const prevOpen = usePrevious(open);
+  useEffect(() => {
+    if (prevOpen && !open) {
       anchorRef.current!.focus();
     }
-
-    prevOpen.current = open;
-  }, [open]);
+  }, [open, prevOpen]);
 
   return (
     <>
@@ -61,7 +40,7 @@ export function ProfileMenu() {
             aria-expanded={open ? 'true' : undefined}
             aria-haspopup="true"
             ref={anchorRef}
-            onClick={handleToggle}
+            onClick={handleToggle(setOpen)}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -94,40 +73,42 @@ export function ProfileMenu() {
                 }}
               >
                 <Paper>
-                  <ClickAwayListener onClickAway={handleClose}>
+                  <ClickAwayListener
+                    onClickAway={handleClose(setOpen, anchorRef)}
+                  >
                     <MenuList
                       autoFocusItem={open}
                       id="composition-menu"
                       aria-labelledby="composition-button"
-                      onKeyDown={handleListKeyDown}
+                      onKeyDown={handleListKeyDown(setOpen)}
                     >
                       <nav>
                         <PopoverMenuItem
                           to={'/profile_settings'}
                           icon={ManageAccountsIcon}
                           text={'Профіль'}
-                          handleClose={handleClose}
+                          handleClose={handleClose(setOpen, anchorRef)}
                         />
 
                         <PopoverMenuItem
                           to={'/trip_history'}
                           icon={HistoryIcon}
                           text={'Історія подорожей'}
-                          handleClose={handleClose}
+                          handleClose={handleClose(setOpen, anchorRef)}
                         />
 
                         <PopoverMenuItem
                           to={'/wallet'}
                           icon={AccountBalanceWalletIcon}
                           text={'Гаманець'}
-                          handleClose={handleClose}
+                          handleClose={handleClose(setOpen, anchorRef)}
                         />
 
                         <PopoverMenuItem
                           to={'/'}
                           icon={LogoutIcon}
                           text={'Вийти'}
-                          handleClose={handleClose}
+                          handleClose={handleClose(setOpen, anchorRef)}
                         />
                       </nav>
                     </MenuList>
