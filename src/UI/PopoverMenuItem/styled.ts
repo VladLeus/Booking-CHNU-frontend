@@ -1,6 +1,6 @@
 import { Button, ButtonProps, styled } from '@mui/material';
 
-const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
+const CustomPopoverMenuItem = styled(Button)<ButtonProps>(({ theme }) => ({
   color: theme.palette.getContrastText('#fff'),
   border: 'none',
   outline: 'none',
@@ -21,4 +21,4 @@ const CustomButton = styled(Button)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-export default CustomButton;
+export default CustomPopoverMenuItem;

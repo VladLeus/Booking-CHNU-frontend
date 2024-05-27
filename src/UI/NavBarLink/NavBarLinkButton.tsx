@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import CustomButton from './styled.ts';
+import CustomNavLink from './styled.ts';
 import { NavBarLinkProps } from './types.ts';
 
 const NavBarLinkButton: FC<NavBarLinkProps> = ({ to, icon: Icon, text }) => {
@@ -12,13 +12,13 @@ const NavBarLinkButton: FC<NavBarLinkProps> = ({ to, icon: Icon, text }) => {
   return (
     <Link to={to}>
       <Stack direction="row" gap={2}>
-        <CustomButton
+        <CustomNavLink
           variant="outlined"
           startIcon={<Icon />}
           isActive={isActive}
         >
           <Typography variant="body1">{text}</Typography>
-        </CustomButton>
+        </CustomNavLink>
       </Stack>
     </Link>
   );
