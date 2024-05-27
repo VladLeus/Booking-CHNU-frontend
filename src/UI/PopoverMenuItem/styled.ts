@@ -1,12 +1,9 @@
-import { Button, ButtonProps, styled } from '@mui/material';
-
-interface CustomButtonProps extends ButtonProps {
-  isActive: boolean;
-}
+import { Button, styled } from '@mui/material';
+import { CustomPopoverProps } from '@ui/PopoverMenuItem/types.ts';
 
 const CustomPopoverMenuItem = styled(Button, {
   shouldForwardProp: (prop) => prop !== 'isActive',
-})<CustomButtonProps>(({ theme, isActive }) => ({
+})<CustomPopoverProps>(({ theme, isActive }) => ({
   color: isActive
     ? theme.palette.primary.main
     : theme.palette.getContrastText('#fff'),

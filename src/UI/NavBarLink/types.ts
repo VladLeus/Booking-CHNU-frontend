@@ -7,6 +7,6 @@ export interface NavBarLinkProps {
   text: string;
 }
 
-export interface CustomButtonProps extends ButtonProps {
+export interface CustomNavBarLinkProps extends ButtonProps {
   isActive: boolean;
 }

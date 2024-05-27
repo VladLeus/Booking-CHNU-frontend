@@ -8,8 +8,9 @@ const CustomButton: FC<CustomButtonProps> = ({
   variant,
   color,
   disabled,
+  handleClick,
+  type,
   icon: Icon,
-  ...props
 }) => {
   return (
     <Button
@@ -17,9 +18,9 @@ const CustomButton: FC<CustomButtonProps> = ({
       variant={variant}
       color={color}
       disabled={disabled}
-      onClick={props.handleClick}
-      onSubmit={props.handleSubmit}
-      endIcon={<Icon />}
+      onClick={handleClick}
+      endIcon={Icon ? <Icon /> : null}
+      type={type}
       sx={{
         outline: 'none',
         '&:focus': {

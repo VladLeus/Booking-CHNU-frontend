@@ -1,5 +1,5 @@
 import { ComponentType } from 'react';
-import { SvgIconProps } from '@mui/material';
+import { ButtonProps, SvgIconProps } from '@mui/material';
 import * as React from 'react';
 
 export interface PopoverMenuItemProps {
@@ -7,4 +7,8 @@ export interface PopoverMenuItemProps {
   icon: ComponentType<SvgIconProps>;
   text: string;
   handleClose: (event: Event | React.SyntheticEvent) => void;
+}
+
+export interface CustomPopoverProps extends ButtonProps {
+  isActive: boolean;
 }

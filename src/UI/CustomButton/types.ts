@@ -7,7 +7,7 @@ export interface CustomButtonProps {
   size: 'small' | 'medium' | 'large';
   color: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
   disabled: boolean;
-  icon: ComponentType<SvgIconProps>;
-  handleClick?: () => void;
-  handleSubmit?: () => void;
+  handleClick: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  icon?: ComponentType<SvgIconProps>;
 }
