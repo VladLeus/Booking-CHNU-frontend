@@ -1,7 +1,15 @@
 import { Button, ButtonProps, styled } from '@mui/material';
 
-const CustomPopoverMenuItem = styled(Button)<ButtonProps>(({ theme }) => ({
-  color: theme.palette.getContrastText('#fff'),
+interface CustomButtonProps extends ButtonProps {
+  isActive: boolean;
+}
+
+const CustomPopoverMenuItem = styled(Button, {
+  shouldForwardProp: (prop) => prop !== 'isActive',
+})<CustomButtonProps>(({ theme, isActive }) => ({
+  color: isActive
+    ? theme.palette.primary.main
+    : theme.palette.getContrastText('#fff'),
   border: 'none',
   outline: 'none',
   textAlign: 'left',
