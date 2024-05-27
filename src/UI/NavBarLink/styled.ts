@@ -1,7 +1,7 @@
 import { Button, styled } from '@mui/material';
 import { CustomButtonProps } from '@ui/NavBarLink/types.ts';
 
-const CustomButton = styled(Button)<CustomButtonProps>(
+const CustomNavLink = styled(Button)<CustomButtonProps>(
   ({ theme, isActive }) => ({
     color: theme.palette.getContrastText('#000'),
     borderColor: isActive ? '#fff' : 'transparent',
@@ -24,4 +24,4 @@ const CustomButton = styled(Button)<CustomButtonProps>(
   }),
 );
 
-export default CustomButton;
+export default CustomNavLink;
