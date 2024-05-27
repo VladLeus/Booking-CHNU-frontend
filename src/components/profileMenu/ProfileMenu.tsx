@@ -81,6 +81,7 @@ export function ProfileMenu() {
                       id="composition-menu"
                       aria-labelledby="composition-button"
                       onKeyDown={handleListKeyDown(setOpen)}
+                      sx={{ py: 0 }}
                     >
                       <nav>
                         <PopoverMenuItem
