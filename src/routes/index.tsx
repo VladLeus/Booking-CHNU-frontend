@@ -6,6 +6,7 @@ import { TripHistory } from '@pages/trip-history/TripHistory.tsx';
 import { Wallet } from '@pages/wallet/Wallet.tsx';
 import { AppRoutes } from './_data.ts';
 import Private from './private.tsx';
+import { LoginPage } from '@pages/Login/LoginPage.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -45,6 +46,10 @@ const routes: RouteObject[] = [
         element: <Wallet />,
       },
     ],
+  },
+  {
+    path: AppRoutes.login,
+    element: <LoginPage />,
   },
   {
     path: '*',
