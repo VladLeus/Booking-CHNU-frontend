@@ -5,13 +5,15 @@ import Stack from '@mui/material/Stack';
 import CustomInput from '@ui/CustomInput';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { useCallback, useState } from 'react';
-import { FormGroup, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import CustomButton from '@ui/CustomButton';
 
 const LoginForm = () => {
   const {
     control,
+    handleSubmit,
     formState: { errors },
   } = useForm<LoginFormSchema>({
     mode: 'all',
@@ -26,8 +28,12 @@ const LoginForm = () => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
+  const onSubmit = () => {
+    console.log('submit');
+  };
+
   return (
-    <FormGroup>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack
         gap={2}
         minWidth={300}
@@ -64,8 +70,15 @@ const LoginForm = () => {
           setValue={setPassword}
           handleIconClick={togglePasswordVisibility}
         />
+        <CustomButton
+          type="submit"
+          text="Submit"
+          size="medium"
+          color="primary"
+          variant="contained"
+        />
       </Stack>
-    </FormGroup>
+    </form>
   );
 };
 

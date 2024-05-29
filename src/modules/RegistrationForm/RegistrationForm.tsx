@@ -1,114 +1,107 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Box from '@mui/material/Box';
-import { Button, FormGroup, InputAdornment, TextField } from '@mui/material';
+import { Button, FormGroup } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import DropDownSelector from '@ui/DropDownSelector';
-import PasswordInput from '@ui/PasswordInput';
 import {
   handleClickShowPassword,
   handleMouseDownPassword,
 } from '@modules/RegistrationForm/actions.ts';
 import { GENDER } from '@modules/RegistrationForm/_data.ts';
 import { useForm } from 'react-hook-form';
-import { Schema, registrationSchema } from './schema/registrationSchema.ts';
+import {
+  RegistrationSchema,
+  registrationSchema,
+} from './schema/registrationSchema.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Dayjs } from 'dayjs';
+import Stack from '@mui/material/Stack';
+import CustomInput from '@ui/CustomInput';
 
 const RegistrationForm = () => {
+  const [firstName, setFirstName] = useState<string>('');
+  const [surname, setSurname] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
   const [sex, setSex] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [birthday, setBirthday] = useState<Dayjs | null>(null);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const onSubmit = useCallback(() => console.log('submit'), []);
 
   const {
     register,
+    control,
+    handleSubmit,
     formState: { errors },
-  } = useForm<Schema>({
+  } = useForm<RegistrationSchema>({
     mode: 'all',
     resolver: zodResolver(registrationSchema),
   });
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
+      <Stack justifyItems="center" alignItems="center">
         <FormGroup
           sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
+          onSubmit={handleSubmit(onSubmit)}
         >
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, fontWeight: 'bold', mb: '10px' }}
-          >
-            Registration
-          </Typography>
-
-          <Box
-            component="form"
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              mt: 1,
-              gap: 2,
-            }}
-          >
-            <TextField
-              label="First name"
-              id="outlined-size-small"
-              size="small"
-              sx={{ width: '220px' }}
-              {...register('firstName')}
+          <Stack gap={2}>
+            <Typography
+              variant="h3"
+              component="h1"
+              sx={{ fontWeight: 'bold', my: '5px' }}
+            >
+              Registration
+            </Typography>
+            <CustomInput
+              name="firstName"
+              control={control}
+              label="Name"
+              variant="outlined"
               error={!!errors.firstName}
-              helperText={errors.firstName?.message}
+              helperText={errors.firstName?.message || ''}
+              value={firstName}
+              setValue={setFirstName}
             />
-
-            <TextField
-              label="Second name"
-              id="outlined-size-small"
-              size="small"
-              sx={{ width: '220px' }}
-              {...register('secondName')}
-              error={!!errors.secondName}
-              helperText={errors.secondName?.message}
+            <CustomInput
+              name="surname"
+              control={control}
+              label="Surname"
+              variant="outlined"
+              error={!!errors.surname}
+              helperText={errors.surname?.message || ''}
+              value={surname}
+              setValue={setSurname}
             />
-
-            <TextField
-              label="Phone number"
-              id="outlined-start-adornment"
-              placeholder="Your phone number"
-              size="small"
-              sx={{ width: '220px' }}
-              {...register('phone')}
-              error={!!errors.phone}
-              helperText={errors.phone?.message}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">+380</InputAdornment>
-                ),
-              }}
-            />
-
-            <TextField
-              id="outlined-basic"
-              label="Your mail"
-              placeholder="example@gmail.com"
-              size="small"
-              sx={{ width: '220px' }}
-              {...register('email')}
+            <CustomInput
+              name="email"
+              control={control}
+              type="email"
+              label="Email"
+              variant="outlined"
               error={!!errors.email}
-              helperText={errors.email?.message}
+              helperText={errors.email?.message || ''}
+              value={email}
+              setValue={setEmail}
+            />
+            <CustomInput
+              name="password"
+              control={control}
+              type="password"
+              label="Password"
+              variant="outlined"
+              error={!!errors.password}
+              helperText={errors.password?.message || ''}
+              value={password}
+              setValue={setPassword}
             />
 
             <DropDownSelector
@@ -127,7 +120,7 @@ const RegistrationForm = () => {
                 textField: { size: 'small', sx: { width: '220px' } },
               }}
             />
-
+            {/*
             <PasswordInput
               label={'Password'}
               key={1}
@@ -148,21 +141,21 @@ const RegistrationForm = () => {
               setShowPassword={setShowPassword}
               togglePasswordVisibility={handleClickShowPassword}
               handleMouseDown={handleMouseDownPassword}
-            />
-          </Box>
+            />*/}
 
-          <Button
-            variant="contained"
-            sx={{
-              mt: 2,
-              borderRadius: 5,
-              backgroundColor: 'rgba(0, 125, 255, 0.8)',
-            }}
-          >
-            Sign up
-          </Button>
+            <Button
+              variant="contained"
+              sx={{
+                mt: 2,
+                borderRadius: 5,
+                backgroundColor: 'rgba(0, 125, 255, 0.8)',
+              }}
+            >
+              Sign up
+            </Button>
+          </Stack>
         </FormGroup>
-      </Box>
+      </Stack>
     </LocalizationProvider>
   );
 };

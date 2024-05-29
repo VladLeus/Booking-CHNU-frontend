@@ -3,6 +3,6 @@ import { ButtonProps, SvgIconProps } from '@mui/material';
 
 export interface CustomButtonProps extends ButtonProps {
   text: string;
-  handleClick: () => void;
+  handleClick?: () => void;
   icon?: ComponentType<SvgIconProps>;
 }
