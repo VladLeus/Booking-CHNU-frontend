@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
-import CustomNavLink from './styled.ts';
+import CustomNavLink from './styles.ts';
 import { NavBarLinkProps } from './types.ts';
 
 const NavBarLinkButton: FC<NavBarLinkProps> = ({ to, icon: Icon, text }) => {

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { domen } from '@modules/registrationForm/_data.tsx';
+import { domen } from '@modules/RegistrationForm/_data.ts';
 
-export const schema = z.object({
+export const registrationSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),
   secondName: z.string().min(2, 'Second name is required'),
   phone: z
@@ -26,4 +26,4 @@ export const schema = z.object({
     .transform((date) => new Date(date)),
 });
 
-export type Schema = z.infer<typeof schema>;
+export type Schema = z.infer<typeof registrationSchema>;

@@ -14,6 +14,7 @@ const CustomInput = <T extends FieldValues>({
   helperText,
   value,
   setValue,
+  handleIconClick,
 }: CustomInputProps<T>) => {
   return (
     <Controller
@@ -28,6 +29,7 @@ const CustomInput = <T extends FieldValues>({
           value={value}
           type={type || 'text'}
           helperText={helperText}
+          fullWidth={true}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             field.onChange(event);
             setValue(event.target.value);
@@ -35,7 +37,7 @@ const CustomInput = <T extends FieldValues>({
           InputProps={{
             startAdornment: Icon && (
               <InputAdornment position="start">
-                <Icon />
+                <Icon onClick={handleIconClick} />
               </InputAdornment>
             ),
           }}

@@ -9,10 +9,10 @@ import PasswordInput from '@ui/PasswordInput';
 import {
   handleClickShowPassword,
   handleMouseDownPassword,
-} from '@modules/registrationForm/actions.ts';
-import { gender } from '@modules/registrationForm/_data.tsx';
+} from '@modules/RegistrationForm/actions.ts';
+import { GENDER } from '@modules/RegistrationForm/_data.ts';
 import { useForm } from 'react-hook-form';
-import { Schema, schema } from './schema.ts';
+import { Schema, registrationSchema } from './schema/registrationSchema.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const RegistrationForm = () => {
@@ -26,7 +26,7 @@ const RegistrationForm = () => {
     formState: { errors },
   } = useForm<Schema>({
     mode: 'all',
-    resolver: zodResolver(schema),
+    resolver: zodResolver(registrationSchema),
   });
 
   return (
@@ -115,7 +115,7 @@ const RegistrationForm = () => {
               label={'Gender'}
               helperText={'Select your gender'}
               width={'220px'}
-              valuesArray={gender}
+              valuesArray={GENDER}
               setValue={setSex}
               {...register('gender')}
               error={!!errors.gender}

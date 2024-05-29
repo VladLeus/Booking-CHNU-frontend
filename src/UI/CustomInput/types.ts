@@ -8,9 +8,10 @@ export interface CustomInputProps<T extends FieldValues> {
   label: string;
   type?: string;
   variant: 'filled' | 'outlined' | 'standard';
-  icon: ComponentType<SvgIconProps>;
+  icon?: ComponentType<SvgIconProps>;
   error: boolean;
   helperText: string;
   value: string;
   setValue: (newValue: string) => void;
+  handleIconClick?: () => void;
 }

@@ -1,25 +1,42 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
-import { Home } from '@pages/home/Home.tsx';
-import { Cars } from '@pages/cars/Cars.tsx';
-import { ProfileSettings } from '@pages/profile/ProfileSettings.tsx';
-import { TripHistory } from '@pages/trip-history/TripHistory.tsx';
-import { Wallet } from '@pages/wallet/Wallet.tsx';
 import { AppRoutes } from './_data.ts';
-import Private from './private.tsx';
-import { LoginPage } from '@pages/Login/LoginPage.tsx';
+import PrivateRoute from './PrivateRoute.tsx';
+import { Registration } from '@pages/registration';
+import { Home } from '@pages/home';
+import { Cars } from '@pages/cars';
+import { ProfileSettings } from '@pages/profile';
+import { TripHistory } from '@pages/trip-history';
+import { Wallet } from '@pages/wallet';
+import { LoginPage } from '@pages/Login';
 
 const routes: RouteObject[] = [
   {
     path: AppRoutes.default,
-    element: <Home />,
+    element: <Registration />,
+  },
+  {
+    path: AppRoutes.home,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.home,
+        element: <Home />,
+      },
+    ],
   },
   {
     path: AppRoutes.cars,
-    element: <Cars />,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.cars,
+        element: <Cars />,
+      },
+    ],
   },
   {
     path: AppRoutes.profile_settings,
-    element: <Private />,
+    element: <PrivateRoute />,
     children: [
       {
         path: AppRoutes.profile_settings,
@@ -29,7 +46,7 @@ const routes: RouteObject[] = [
   },
   {
     path: AppRoutes.trip_history,
-    element: <Private />,
+    element: <PrivateRoute />,
     children: [
       {
         path: AppRoutes.trip_history,
@@ -39,7 +56,7 @@ const routes: RouteObject[] = [
   },
   {
     path: AppRoutes.wallet,
-    element: <Private />,
+    element: <PrivateRoute />,
     children: [
       {
         path: AppRoutes.wallet,

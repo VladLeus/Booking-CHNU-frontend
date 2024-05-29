@@ -1,4 +1,4 @@
-import RegistrationForm from '@modules/registrationForm/RegistrationForm.tsx';
+import RegistrationForm from '@modules/RegistrationForm/RegistrationForm.tsx';
 
 export function Registration() {
   return (
