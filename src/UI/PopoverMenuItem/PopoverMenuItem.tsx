@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
 import MenuItem from '@mui/material/MenuItem';
 import { PopoverMenuItemProps } from './types.ts';
-import CustomPopoverMenuItem from './styled.ts';
+import CustomPopoverMenuItem from './styles.ts';
 
 const PopoverMenuItem: FC<PopoverMenuItemProps> = ({
   to,
