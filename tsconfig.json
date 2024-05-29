@@ -9,7 +9,8 @@
       "@utils/*": ["./shared/utils/*"],
       "@constants/*": ["./shared/constant/*"],
       "@modules/*": ["./modules/*"],
-      "@components/*": ["./components/*"]
+      "@components/*": ["./components/*"],
+      "@shared/*": ["./shared/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
