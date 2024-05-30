@@ -6,10 +6,10 @@ export const loginFormSchema = z.object({
   email: z.string().email().min(1),
   password: z
     .string()
-    .min(8, { message: 'Password must be not less than 8 characters' })
+    .min(8, { message: 'Пароль має бути не менше 8 символів' })
     .regex(patterns.password, {
       message:
-        'Required at least one uppercase letter, one lowercase letter, one number and one special character',
+        'Пароль має містити хоча б: одну велику та маленьку літери, число та спеціальний символ',
     }),
 });
 

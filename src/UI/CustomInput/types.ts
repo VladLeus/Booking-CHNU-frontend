@@ -11,7 +11,5 @@ export interface CustomInputProps<T extends FieldValues> {
   icon?: ComponentType<SvgIconProps>;
   error: boolean;
   helperText: string;
-  value: string;
-  setValue: (newValue: string) => void;
   handleIconClick?: () => void;
 }

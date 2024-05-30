@@ -8,7 +8,7 @@ export function LoginPage() {
       <LoginForm />
       <Divider sx={{ width: 400, mt: -2 }}>
         <Typography color="textSecondary" variant="body2">
-          Or use next to authorize
+          Вхід через соціальні мережі
         </Typography>
       </Divider>
       <Box>

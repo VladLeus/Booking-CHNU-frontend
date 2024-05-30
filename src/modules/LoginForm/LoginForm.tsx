@@ -18,19 +18,21 @@ const LoginForm = () => {
   } = useForm<LoginFormSchema>({
     mode: 'all',
     resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
 
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const togglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
-  const onSubmit = () => {
-    console.log('submit');
-  };
+  const onSubmit = useCallback((data: LoginFormSchema) => {
+    console.log('submit', data);
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -43,36 +45,32 @@ const LoginForm = () => {
         justifyItems="center"
       >
         <Typography variant="h3" fontWeight="bold" component="h1">
-          Login
+          Вхід
         </Typography>
         <CustomInput
-          name={'email'}
+          name="email"
           control={control}
-          label={'Email'}
-          type={'email'}
-          variant={'outlined'}
+          label="Email"
+          type="email"
+          variant="outlined"
           icon={EmailOutlinedIcon}
           error={!!errors.email}
           helperText={errors.email?.message || ''}
-          value={email}
-          setValue={setEmail}
         />
         <CustomInput
           name="password"
           control={control}
-          label="Password"
+          label="Пароль"
           type={isPasswordVisible ? 'text' : 'password'}
           variant="outlined"
           icon={isPasswordVisible ? VisibilityIcon : VisibilityOffIcon}
           error={!!errors.password}
           helperText={errors.password?.message || ''}
-          value={password}
-          setValue={setPassword}
           handleIconClick={togglePasswordVisibility}
         />
         <CustomButton
           type="submit"
-          text="Submit"
+          text="Увійти"
           size="medium"
           color="primary"
           variant="contained"
