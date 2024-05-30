@@ -14,6 +14,8 @@ import CustomInput from '@ui/CustomInput';
 import Box from '@mui/material/Box';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import DropDownSelector from '@ui/DropDownSelector';
+import { GENDER } from '@modules/RegistrationForm/_data.ts';
 
 const RegistrationForm = () => {
   const {
@@ -134,6 +136,14 @@ const RegistrationForm = () => {
               variant="outlined"
               error={!!errors.phone}
               helperText={errors.phone?.message || ''}
+            />
+            <DropDownSelector
+              name="gender"
+              control={control}
+              label="Оберіть гендер"
+              valuesArray={GENDER}
+              error={!!errors.gender}
+              helperText={errors.gender?.message || ''}
             />
           </Stack>
         </form>

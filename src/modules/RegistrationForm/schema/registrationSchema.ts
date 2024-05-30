@@ -19,15 +19,11 @@ export const registrationSchema = z
       .max(10, 'Номер має містити 10 цифр'),
     email: z
       .string()
-      .min(1, " Обов'язкове поле")
+      .min(1, "Обов'язкове поле")
       .email('Електронна адреса не валідна'),
     password: passwordSchema,
     passwordConfirmation: passwordSchema,
-    gender: z.string({
-      errorMap: () => {
-        return { message: 'Select your gender' };
-      },
-    }),
+    gender: z.string().min(1, "Обов'язкове поле"),
     birthdate: z
       .string()
       .refine(
@@ -38,7 +34,7 @@ export const registrationSchema = z
   })
   .refine((schema) => schema.password === schema.passwordConfirmation, {
     message: 'Паролі не співпадають',
-    path: ['passwordConfirmation'], // Шлях до поля, яке не пройшло перевірку
+    path: ['passwordConfirmation'],
   });
 
 export type RegistrationSchema = z.infer<typeof registrationSchema>;
