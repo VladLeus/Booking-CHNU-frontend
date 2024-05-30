@@ -27,11 +27,15 @@ const CustomInput = <T extends FieldValues>({
           helperText={helperText}
           fullWidth={true}
           InputProps={{
-            startAdornment: Icon && (
-              <InputAdornment position="start">
-                <Icon onClick={handleIconClick} />
-              </InputAdornment>
-            ),
+            startAdornment:
+              (Icon && (
+                <InputAdornment position="start">
+                  <Icon onClick={handleIconClick} />
+                </InputAdornment>
+              )) ||
+              (type === 'tel' && (
+                <InputAdornment position="start">+38</InputAdornment>
+              )),
           }}
         />
       )}
