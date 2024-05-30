@@ -1,12 +1,14 @@
 import { z } from 'zod';
 import { patterns } from '@shared/constants';
+import dayjs from 'dayjs';
+import 'dayjs/locale/uk';
 
 const passwordSchema = z
   .string()
   .min(8, 'Пароль має містити хоча б 8 символів')
   .regex(patterns.password, {
     message:
-      'Пароль має містити хоча б: одну велику та маленьку літери, число та спеціальний символ',
+      'Пароль має містити хоча б: одну велику та маленьку латинські літери, число та спеціальний символ',
   });
 
 export const registrationSchema = z
@@ -26,11 +28,11 @@ export const registrationSchema = z
     gender: z.string().min(1, "Обов'язкове поле"),
     birthdate: z
       .string()
+      .min(1, "Обов'язкове поле")
       .refine(
-        (date) => new Date(date).toString() !== 'Invalid Date',
-        "Дата народження є обов'язковим полем",
-      )
-      .transform((date) => new Date(date)),
+        (date) => dayjs(date, 'DD.MM.YYYY', 'uk-UA').isValid(),
+        "Дата народження є обов'язковим полем та має бути у форматі ДД.ММ.РРРР",
+      ),
   })
   .refine((schema) => schema.password === schema.passwordConfirmation, {
     message: 'Паролі не співпадають',

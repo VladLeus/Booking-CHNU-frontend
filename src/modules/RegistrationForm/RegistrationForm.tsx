@@ -145,6 +145,14 @@ const RegistrationForm = () => {
               error={!!errors.gender}
               helperText={errors.gender?.message || ''}
             />
+
+            {/*<SingleDatePicker
+              name="birthdate"
+              control={control}
+              label="Дата народження"
+              error={!!errors.birthdate}
+              helperText={errors.birthdate?.message || ''}
+            />*/}
           </Stack>
         </form>
       </Stack>
