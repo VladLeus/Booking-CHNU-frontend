@@ -16,6 +16,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import DropDownSelector from '@ui/DropDownSelector';
 import { GENDER } from '@modules/RegistrationForm/_data.ts';
+import SingleDatePicker from '@ui/SingleDatePicker';
+import 'dayjs/locale/uk';
 
 const RegistrationForm = () => {
   const {
@@ -33,7 +35,7 @@ const RegistrationForm = () => {
       password: '',
       passwordConfirmation: '',
       gender: '',
-      birthdate: '',
+      birthdate: null,
     },
   });
 
@@ -51,13 +53,13 @@ const RegistrationForm = () => {
   const isSmScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'uk'}>
       <Stack
         justifyItems="center"
         alignItems="center"
         maxWidth={650}
         minWidth={350}
-        width={isSmScreen ? 600 : 300}
+        width={isSmScreen ? 650 : 300}
       >
         <form
           onSubmit={(e) => {
@@ -88,6 +90,7 @@ const RegistrationForm = () => {
               display="grid"
               gridTemplateColumns={isSmScreen ? '1fr 1fr' : '1fr'}
               gap={2}
+              width={isSmScreen ? 600 : 300}
             >
               <CustomInput
                 name="firstName"
@@ -105,6 +108,38 @@ const RegistrationForm = () => {
                 error={!!errors.surname}
                 helperText={errors.surname?.message || ''}
               />
+              <SingleDatePicker
+                name="birthdate"
+                control={control}
+                label="Дата народження"
+                disableFuture={true}
+                error={!!errors.birthdate}
+                helperText={errors.birthdate?.message || ''}
+              />
+              <DropDownSelector
+                name="gender"
+                control={control}
+                label="Оберіть гендер"
+                valuesArray={GENDER}
+                error={!!errors.gender}
+                helperText={errors.gender?.message || ''}
+              />
+            </Box>
+            <CustomInput
+              name="phone"
+              control={control}
+              type="tel"
+              label="Номер телефону"
+              variant="outlined"
+              error={!!errors.phone}
+              helperText={errors.phone?.message || ''}
+            />
+            <Box
+              display="grid"
+              gridTemplateColumns={isSmScreen ? '1fr 1fr' : '1fr'}
+              gap={2}
+              width={isSmScreen ? 600 : 300}
+            >
               <CustomInput
                 name="password"
                 control={control}
@@ -128,31 +163,6 @@ const RegistrationForm = () => {
                 handleIconClick={togglePasswordVisibility}
               />
             </Box>
-            <CustomInput
-              name="phone"
-              control={control}
-              type="tel"
-              label="Номер телефону"
-              variant="outlined"
-              error={!!errors.phone}
-              helperText={errors.phone?.message || ''}
-            />
-            <DropDownSelector
-              name="gender"
-              control={control}
-              label="Оберіть гендер"
-              valuesArray={GENDER}
-              error={!!errors.gender}
-              helperText={errors.gender?.message || ''}
-            />
-
-            {/*<SingleDatePicker
-              name="birthdate"
-              control={control}
-              label="Дата народження"
-              error={!!errors.birthdate}
-              helperText={errors.birthdate?.message || ''}
-            />*/}
           </Stack>
         </form>
       </Stack>

@@ -6,4 +6,5 @@ export interface SingleDatePickerProps<T extends FieldValues> {
   label: string;
   error: boolean;
   helperText: string;
+  disableFuture: boolean;
 }
