@@ -23,7 +23,7 @@ function App() {
           <AppRouter />
         </>
       )}
-      <AppRouter />
+      {!isAuth && <AppRouter />}
     </Stack>
   );
 }

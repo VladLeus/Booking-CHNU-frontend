@@ -8,11 +8,18 @@ import { ProfileSettings } from '@pages/profile';
 import { TripHistory } from '@pages/trip-history';
 import { Wallet } from '@pages/wallet';
 import { LoginPage } from '@pages/Login';
+import PublicRoute from './PublicRoute.tsx';
 
 const routes: RouteObject[] = [
   {
     path: AppRoutes.default,
-    element: <Registration />,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.default,
+        element: <Registration />,
+      },
+    ],
   },
   {
     path: AppRoutes.home,
@@ -66,7 +73,13 @@ const routes: RouteObject[] = [
   },
   {
     path: AppRoutes.login,
-    element: <LoginPage />,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.login,
+        element: <LoginPage />,
+      },
+    ],
   },
   {
     path: '*',
