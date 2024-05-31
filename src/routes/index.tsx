@@ -1,7 +1,7 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 import { AppRoutes } from './_data.ts';
 import PrivateRoute from './PrivateRoute.tsx';
-import { Registration } from '@pages/registration';
+import { RegistrationPage } from '@pages/registration';
 import { Home } from '@pages/home';
 import { Cars } from '@pages/cars';
 import { ProfileSettings } from '@pages/profile';
@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: AppRoutes.default,
-        element: <Registration />,
+        element: <RegistrationPage />,
       },
     ],
   },

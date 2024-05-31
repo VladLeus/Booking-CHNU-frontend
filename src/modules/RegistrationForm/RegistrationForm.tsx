@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { useMediaQuery, useTheme } from '@mui/material';
+import { Divider, useMediaQuery, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 import {
@@ -18,6 +18,8 @@ import DropDownSelector from '@ui/DropDownSelector';
 import { GENDER } from '@modules/RegistrationForm/_data.ts';
 import SingleDatePicker from '@ui/SingleDatePicker';
 import 'dayjs/locale/uk';
+import CustomButton from '@ui/CustomButton';
+import { Link } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const {
@@ -163,9 +165,30 @@ const RegistrationForm = () => {
                 handleIconClick={togglePasswordVisibility}
               />
             </Box>
+            <CustomButton
+              type="submit"
+              text="Зареєструватись"
+              size={isSmScreen ? 'large' : 'medium'}
+              color="primary"
+              variant="contained"
+            />
+            <Link to="/login">
+              <CustomButton
+                type="button"
+                text="Маєте акаунт?"
+                size="small"
+                color="info"
+                variant="text"
+              />
+            </Link>
           </Stack>
         </form>
       </Stack>
+      <Divider sx={{ width: isSmScreen ? 600 : 300, mt: -2 }}>
+        <Typography color="textSecondary" variant="body2">
+          Вхід через соціальні мережі
+        </Typography>
+      </Divider>
     </LocalizationProvider>
   );
 };
