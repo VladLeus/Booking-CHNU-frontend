@@ -85,14 +85,14 @@ export function ProfileMenu() {
                     >
                       <nav>
                         <PopoverMenuItem
-                          to={'/profile_settings'}
+                          to={'/profile-settings'}
                           icon={ManageAccountsIcon}
                           text={'Профіль'}
                           handleClose={handleClose(setOpen, anchorRef)}
                         />
 
                         <PopoverMenuItem
-                          to={'/trip_history'}
+                          to={'/trip-history'}
                           icon={HistoryIcon}
                           text={'Історія подорожей'}
                           handleClose={handleClose(setOpen, anchorRef)}

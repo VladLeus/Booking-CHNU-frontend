@@ -12,7 +12,7 @@ const LoginPage = () => {
         </Typography>
       </Divider>
       <Box>
-        <Typography>Here will be Google and X auth</Typography>
+        <Typography>Here will be Google auth</Typography>
       </Box>
     </>
   );

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Divider, useMediaQuery, useTheme } from '@mui/material';
+import { Divider, Theme, useMediaQuery, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 import {
@@ -19,7 +19,7 @@ import { GENDER } from '@modules/RegistrationForm/_data.ts';
 import SingleDatePicker from '@ui/SingleDatePicker';
 import 'dayjs/locale/uk';
 import CustomButton from '@ui/CustomButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 const RegistrationForm = () => {
@@ -41,6 +41,7 @@ const RegistrationForm = () => {
       birthdate: null,
     },
   });
+  const navigate = useNavigate();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -49,11 +50,13 @@ const RegistrationForm = () => {
   }, [isPasswordVisible]);
 
   const onSubmit = useCallback((data: RegistrationSchema) => {
-    console.log('Form submitted:', data);
+    console.log('Form submitted, check ur email for confirmation:', data);
+    console.log('ur code is 123456');
+    navigate('/email/confirm');
   }, []);
 
-  const theme = useTheme();
-  const isSmScreen = useMediaQuery(theme.breakpoints.up('sm'));
+  const theme: Theme = useTheme();
+  const isSmScreen: boolean = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={'uk'}>

@@ -1,17 +1,19 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 import { AppRoutes } from './_data.ts';
-import PrivateRoute from './PrivateRoute.tsx';
-import PublicRoute from './PublicRoute.tsx';
-import ForgotPassword from '@pages/ForgotPassword';
-import RegistrationPage from '@pages/registration';
-import Home from '@pages/home';
-import Cars from '@pages/cars';
-import ProfileSettings from '@pages/profile';
-import TripHistory from '@pages/trip-history/TripHistory.tsx';
-import Wallet from '@pages/wallet';
+import PublicRoute from './PublicRoutes/PublicRoute';
+import PrivateRoute from './PrivateRoutes/PrivateRoute';
+import PrivatePasswordResetRoute from './PrivateRoutes/PrivatePasswordResetRoute';
+import RegistrationPage from '@pages/Registration';
 import LoginPage from '@pages/Login';
+import ForgotPassword from '@pages/ForgotPassword';
 import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
 import PasswordReset from '@pages/PasswordReset';
+import Home from '@pages/Home';
+import Cars from '@pages/Cars';
+import ProfileSettings from '@pages/Profile';
+import TripHistory from '@pages/TripHistory';
+import Wallet from '@pages/Wallet';
+import EmailConfirmation from '@pages/EmailConfirmation';
 
 const routes: RouteObject[] = [
   {
@@ -55,8 +57,18 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: AppRoutes.passwordReset,
+    path: AppRoutes.emailConfirmation,
     element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.emailConfirmation,
+        element: <EmailConfirmation />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.passwordReset,
+    element: <PrivatePasswordResetRoute />,
     children: [
       {
         path: AppRoutes.passwordReset,

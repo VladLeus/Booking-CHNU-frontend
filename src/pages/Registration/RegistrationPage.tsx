@@ -7,7 +7,7 @@ const RegistrationPage = () => {
     <>
       <RegistrationForm />
       <Box maxWidth={600} minWidth={300} sx={{ mx: 'auto' }} textAlign="center">
-        <Typography>Here will be Google and X auth</Typography>
+        <Typography>Here will be Google auth</Typography>
       </Box>
     </>
   );

@@ -6,7 +6,8 @@ export const AppRoutes = {
   tripHistory: '/trip-history',
   wallet: '/wallet',
   login: '/login',
+  emailConfirmation: '/email/confirm',
   forgotPassword: '/forgot-password',
-  resetTokenCheck: '/password/reset/*',
+  resetTokenCheck: '/password/reset/edit',
   passwordReset: '/password-reset',
 };

@@ -27,6 +27,12 @@ const ForgotPasswordForm = () => {
 
   const onSubmit = useCallback((data: ForgotPasswordFormSchema) => {
     console.log('submit', data);
+
+    // Simulate work
+    setTimeout(() => {}, 500);
+
+    // Test logging
+    console.log(`http://localhost:5173/password/reset/edit?token=test`);
   }, []);
 
   const theme = useTheme();
