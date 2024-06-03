@@ -1,1 +1,1 @@
-export { default } from './GoogleOauth.tsx'
+export { default } from './GoogleOauth.tsx';
