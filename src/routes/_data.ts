@@ -2,8 +2,11 @@ export const AppRoutes = {
   default: '/',
   home: '/home',
   cars: '/cars',
-  profile_settings: '/profile_settings',
-  trip_history: '/trip_history',
+  profileSettings: '/profile-settings',
+  tripHistory: '/trip-history',
   wallet: '/wallet',
   login: '/login',
+  forgotPassword: '/forgot-password',
+  resetTokenCheck: '/password/reset/*',
+  passwordReset: '/password-reset',
 };

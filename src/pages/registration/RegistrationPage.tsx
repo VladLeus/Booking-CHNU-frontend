@@ -2,7 +2,7 @@ import RegistrationForm from '@modules/RegistrationForm/RegistrationForm.tsx';
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
-export function RegistrationPage() {
+const RegistrationPage = () => {
   return (
     <>
       <RegistrationForm />
@@ -11,4 +11,6 @@ export function RegistrationPage() {
       </Box>
     </>
   );
-}
+};
+
+export default RegistrationPage;

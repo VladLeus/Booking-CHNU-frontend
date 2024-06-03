@@ -1,1 +1,1 @@
-export * from './Wallet.tsx';
+export { default } from './Wallet.tsx';

@@ -15,7 +15,7 @@ export const registrationSchema = z
     email: z
       .string()
       .min(1, "Обов'язкове поле")
-      .email('Електронна адреса не валідна'),
+      .email('Некоректна електронна адреса'),
     password: passwordSchema,
     passwordConfirmation: passwordSchema,
     gender: z.string().min(1, "Обов'язкове поле"),

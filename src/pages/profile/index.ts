@@ -1,1 +1,1 @@
-export * from './ProfileSettings.tsx';
+export { default } from './ProfileSettings.tsx';

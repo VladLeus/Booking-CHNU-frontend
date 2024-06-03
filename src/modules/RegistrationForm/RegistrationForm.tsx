@@ -20,6 +20,7 @@ import SingleDatePicker from '@ui/SingleDatePicker';
 import 'dayjs/locale/uk';
 import CustomButton from '@ui/CustomButton';
 import { Link } from 'react-router-dom';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 const RegistrationForm = () => {
   const {
@@ -87,6 +88,7 @@ const RegistrationForm = () => {
               variant="outlined"
               error={!!errors.email}
               helperText={errors.email?.message || ''}
+              icon={EmailOutlinedIcon}
             />
             <Box
               display="grid"

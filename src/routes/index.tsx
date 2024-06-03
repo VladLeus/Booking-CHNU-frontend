@@ -1,14 +1,17 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
 import { AppRoutes } from './_data.ts';
 import PrivateRoute from './PrivateRoute.tsx';
-import { RegistrationPage } from '@pages/registration';
-import { Home } from '@pages/home';
-import { Cars } from '@pages/cars';
-import { ProfileSettings } from '@pages/profile';
-import { TripHistory } from '@pages/trip-history';
-import { Wallet } from '@pages/wallet';
-import { LoginPage } from '@pages/Login';
 import PublicRoute from './PublicRoute.tsx';
+import ForgotPassword from '@pages/ForgotPassword';
+import RegistrationPage from '@pages/registration';
+import Home from '@pages/home';
+import Cars from '@pages/cars';
+import ProfileSettings from '@pages/profile';
+import TripHistory from '@pages/trip-history/TripHistory.tsx';
+import Wallet from '@pages/wallet';
+import LoginPage from '@pages/Login';
+import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
+import PasswordReset from '@pages/PasswordReset';
 
 const routes: RouteObject[] = [
   {
@@ -18,6 +21,46 @@ const routes: RouteObject[] = [
       {
         path: AppRoutes.default,
         element: <RegistrationPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.login,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.login,
+        element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.forgotPassword,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.forgotPassword,
+        element: <ForgotPassword />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.resetTokenCheck,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.resetTokenCheck,
+        element: <ResetTokenCheckPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.passwordReset,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.passwordReset,
+        element: <PasswordReset />,
       },
     ],
   },
@@ -42,21 +85,21 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: AppRoutes.profile_settings,
+    path: AppRoutes.profileSettings,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.profile_settings,
+        path: AppRoutes.profileSettings,
         element: <ProfileSettings />,
       },
     ],
   },
   {
-    path: AppRoutes.trip_history,
+    path: AppRoutes.tripHistory,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.trip_history,
+        path: AppRoutes.tripHistory,
         element: <TripHistory />,
       },
     ],
@@ -68,16 +111,6 @@ const routes: RouteObject[] = [
       {
         path: AppRoutes.wallet,
         element: <Wallet />,
-      },
-    ],
-  },
-  {
-    path: AppRoutes.login,
-    element: <PublicRoute />,
-    children: [
-      {
-        path: AppRoutes.login,
-        element: <LoginPage />,
       },
     ],
   },

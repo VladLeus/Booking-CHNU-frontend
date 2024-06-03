@@ -3,7 +3,10 @@ import { z } from 'zod';
 import { patterns } from '@shared/constants';
 
 export const loginFormSchema = z.object({
-  email: z.string().email().min(1),
+  email: z
+    .string()
+    .email('Некоректна електронна адреса')
+    .min(1, "Обов'язкове поле"),
   password: z
     .string()
     .min(8, { message: 'Пароль має бути не менше 8 символів' })

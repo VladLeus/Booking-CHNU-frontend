@@ -9,6 +9,7 @@ import { Typography } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import CustomButton from '@ui/CustomButton';
+import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
   const {
@@ -57,21 +58,38 @@ const LoginForm = () => {
           error={!!errors.email}
           helperText={errors.email?.message || ''}
         />
-        <CustomInput
-          name="password"
-          control={control}
-          label="Пароль"
-          type={isPasswordVisible ? 'text' : 'password'}
-          variant="outlined"
-          icon={isPasswordVisible ? VisibilityIcon : VisibilityOffIcon}
-          error={!!errors.password}
-          helperText={errors.password?.message || ''}
-          handleIconClick={togglePasswordVisibility}
-        />
+        <Stack
+          gap={1}
+          justifyItems="center"
+          alignItems="left"
+          minWidth={300}
+          maxWidth={400}
+        >
+          <CustomInput
+            name="password"
+            control={control}
+            label="Пароль"
+            type={isPasswordVisible ? 'text' : 'password'}
+            variant="outlined"
+            icon={isPasswordVisible ? VisibilityIcon : VisibilityOffIcon}
+            error={!!errors.password}
+            helperText={errors.password?.message || ''}
+            handleIconClick={togglePasswordVisibility}
+          />
+          <Link to={'/forgot-password'}>
+            <CustomButton
+              type="button"
+              text="Забули пароль?"
+              variant="text"
+              size="small"
+              color="info"
+            />
+          </Link>
+        </Stack>
         <CustomButton
           type="submit"
           text="Увійти"
-          size="medium"
+          size="large"
           color="primary"
           variant="contained"
         />

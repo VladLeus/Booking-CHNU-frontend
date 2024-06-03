@@ -2,7 +2,7 @@ import LoginForm from '@modules/LoginForm';
 import Box from '@mui/material/Box';
 import { Divider, Typography } from '@mui/material';
 
-export function LoginPage() {
+const LoginPage = () => {
   return (
     <>
       <LoginForm />
@@ -16,4 +16,6 @@ export function LoginPage() {
       </Box>
     </>
   );
-}
+};
+
+export default LoginPage;
