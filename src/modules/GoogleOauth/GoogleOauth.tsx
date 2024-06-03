@@ -22,11 +22,11 @@ const GoogleOauth = () => {
               console.log(details);
               console.log(credentialResponse);
             } else {
-              console.log('No credential found');
+              console.log('No credential found.');
             }
           }}
           onError={() => {
-            console.log('Login Failed');
+            console.log('Login Failed!');
           }}
         />
       </Box>
