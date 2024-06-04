@@ -10,7 +10,7 @@ import { Typography } from '@mui/material';
 import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
 import { useNavigate } from 'react-router-dom';
-import { useActions } from '@hooks/actions.ts';
+import { useActions } from '@shared/hooks';
 
 const EmailConfirmationForm = () => {
   const {

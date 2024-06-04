@@ -1,18 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from './user/user.slice.ts';
+import { userReducer } from '@shared/store/user';
 import { signupAPI } from '@modules/RegistrationForm/api';
-import { confirmationApi } from '@modules/EmailConfirmationForm/api';
+import { confirmationAPI } from '@modules/EmailConfirmationForm/api';
+import { loginAPI } from '@modules/LoginForm/api';
 
 export const store = configureStore({
   reducer: {
     [signupAPI.reducerPath]: signupAPI.reducer,
-    [confirmationApi.reducerPath]: confirmationApi.reducer,
+    [confirmationAPI.reducerPath]: confirmationAPI.reducer,
+    [loginAPI.reducerPath]: loginAPI.reducer,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(signupAPI.middleware)
-      .concat(confirmationApi.middleware),
+      .concat(confirmationAPI.middleware)
+      .concat(loginAPI.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

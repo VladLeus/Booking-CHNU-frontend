@@ -4,7 +4,7 @@ import { Response } from '@shared/types';
 import { CodeConfirmationRequest, CodeConfirmationResponse } from './types.ts';
 import { identity } from '@shared/utils';
 
-export const confirmationApi = createApi({
+export const confirmationAPI = createApi({
   reducerPath: 'confirmation/api',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
@@ -25,4 +25,4 @@ export const confirmationApi = createApi({
   }),
 });
 
-export const { useConfirmCodeMutation } = confirmationApi;
+export const { useConfirmCodeMutation } = confirmationAPI;

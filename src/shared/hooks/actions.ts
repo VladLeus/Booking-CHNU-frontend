@@ -1,4 +1,4 @@
-import { userActions } from '../store/user/user.slice.ts';
+import { userActions } from '@shared/store/user';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
 

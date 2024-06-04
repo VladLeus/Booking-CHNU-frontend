@@ -1,4 +1,4 @@
-export type UserSignupRequest = {
+type User = {
   email: string;
   password: string;
   name: string;
@@ -8,6 +8,10 @@ export type UserSignupRequest = {
   birthdate: string;
 };
 
-export type SignUpResponse = {
+export type UserSignupRequest = {
+  user: User;
+};
+
+export type SignupResponse = {
   confirmation_code: string;
 };

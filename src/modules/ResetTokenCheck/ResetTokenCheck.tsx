@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@hooks/useQuery'; // Ensure this is correctly implemented
+import { useQuery } from '@shared/hooks';
 
 const ResetTokenCheck = () => {
   const query = useQuery();

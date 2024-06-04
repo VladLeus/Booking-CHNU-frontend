@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import 'dayjs/locale/uk';
-import passwordSchema from '@shared/schema/passwordSchema.ts';
+
 import dayJsSchema from '@modules/RegistrationForm/schema/dayjsSchema.ts';
 import dayjs from 'dayjs';
+import { passwordSchema } from '@shared/schema';
 
 export const registrationSchema = z
   .object({

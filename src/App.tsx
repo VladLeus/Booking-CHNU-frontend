@@ -1,10 +1,9 @@
 import { AppRouter } from './routes';
 import { NavBar } from '@components/navBar';
-import { useActions } from '@hooks/actions.ts';
 import { useEffect } from 'react';
 import { redirect } from 'react-router-dom';
-import { useAppSelector } from '@hooks/redux.ts';
 import Stack from '@mui/material/Stack';
+import { useActions, useAppSelector } from '@shared/hooks';
 
 function App() {
   const { setAuth } = useActions();

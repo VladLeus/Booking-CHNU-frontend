@@ -1,6 +1,6 @@
 // WE DO NOT SUPPORT RUSSIA IT'S OFFICIAL ZOD DOCS(
 import { z } from 'zod';
-import passwordSchema from '@shared/schema/passwordSchema.ts';
+import { passwordSchema } from '@shared/schema';
 
 export const loginFormSchema = z.object({
   email: z

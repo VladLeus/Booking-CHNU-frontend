@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { useAppSelector } from '@hooks/redux.ts';
+import { useAppSelector } from '@shared/hooks';
 
 const PublicRoute = () => {
   const { isAuth } = useAppSelector((state) => state.user);
