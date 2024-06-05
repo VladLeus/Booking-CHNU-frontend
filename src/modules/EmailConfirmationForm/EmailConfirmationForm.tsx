@@ -9,8 +9,8 @@ import Stack from '@mui/material/Stack';
 import { Alert, Typography } from '@mui/material';
 import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
-//import { useNavigate } from 'react-router-dom';
-//import { useActions } from '@shared/hooks';
+import { useNavigate } from 'react-router-dom';
+import { useActions } from '@shared/hooks';
 import { useConfirmCodeMutation } from '@modules/EmailConfirmationForm/api';
 
 const EmailConfirmationForm = () => {
@@ -25,20 +25,25 @@ const EmailConfirmationForm = () => {
       code: '',
     },
   });
-  //const navigate = useNavigate();
-  //const { setAuth } = useActions();
+  const navigate = useNavigate();
   const [confirm, { isLoading, isError }] = useConfirmCodeMutation();
+  const { setUserRegData } = useActions();
 
   const onSubmit = useCallback(async (data: EmailConfirmationSchema) => {
     const response = await confirm({
       email: JSON.parse(localStorage.getItem('temp-email')!),
-      code: data.code,
+      confirmation_code: data.code,
     });
 
-    if ('data' in response!) {
+    if (response.data) {
       console.log(response.data);
-      //localStorage.removeItem('temp-email');
-      //navigate('/home');
+      localStorage.removeItem('temp-email');
+      setUserRegData(response.data.data.user);
+      localStorage.setItem(
+        'user_auth_token',
+        JSON.stringify(response.data.data.token),
+      );
+      navigate('/home');
     } else if ('error' in response!) {
       console.log(response.error);
     }

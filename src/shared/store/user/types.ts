@@ -1,7 +1,8 @@
 export interface User {
-  name: string;
-  surname: string;
+  id: string | undefined;
   email: string;
+  name: string;
+  surname?: string;
   phone?: string;
   gender?: string;
   birthdate?: string;
@@ -11,7 +12,7 @@ export interface User {
 }
 
 export interface UserStateAfterReg {
+  id: string;
   name: string;
-  last_name: string;
   email: string;
 }

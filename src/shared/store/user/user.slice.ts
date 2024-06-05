@@ -11,9 +11,9 @@ export const userSlice = createSlice({
     },
     setUserRegData(state, action: PayloadAction<UserStateAfterReg>) {
       state.user = {
-        name: action.payload.name,
-        surname: action.payload.last_name,
+        id: action.payload.id,
         email: action.payload.email,
+        name: action.payload.name,
         tripHistory: [],
         wallet: [],
         isAuth: true,

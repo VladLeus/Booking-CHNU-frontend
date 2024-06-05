@@ -1,7 +1,7 @@
 type User = {
-  name: string;
-  last_name: string;
+  id: string;
   email: string;
+  name: string;
 };
 
 export type CodeConfirmationResponse = {
@@ -11,5 +11,5 @@ export type CodeConfirmationResponse = {
 
 export type CodeConfirmationRequest = {
   email: string;
-  code: string;
+  confirmation_code: string;
 };
