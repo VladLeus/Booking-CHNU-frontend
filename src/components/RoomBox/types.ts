@@ -6,4 +6,5 @@ export interface RoomBoxProps {
   roomCategory: 'Saver' | 'Common' | 'Luxury' | 'Royal';
   description: string;
   price: number;
+  isLoading: boolean;
 }

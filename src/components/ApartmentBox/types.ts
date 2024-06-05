@@ -8,4 +8,5 @@ export interface ApartmentBoxProps {
   // dateRange: DateRange<Dayjs>;
   dateRange: string;
   availability: number;
+  isLoading: boolean;
 }
