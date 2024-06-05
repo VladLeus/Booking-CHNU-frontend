@@ -1,5 +1,5 @@
 import { AppRouter } from './routes';
-import { NavBar } from '@components/navBar';
+import { NavBar } from '@components/NavBar';
 import { useEffect } from 'react';
 import { redirect } from 'react-router-dom';
 import Stack from '@mui/material/Stack';

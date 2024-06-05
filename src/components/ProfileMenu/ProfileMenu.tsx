@@ -17,7 +17,7 @@ import {
   handleClose,
   handleListKeyDown,
   usePrevious,
-} from './actions';
+} from './actions.ts';
 
 export function ProfileMenu() {
   const [open, setOpen] = useState<boolean>(false);

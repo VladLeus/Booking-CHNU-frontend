@@ -4,7 +4,7 @@ export type Response<T> = {
   data: T;
 };
 
-export type ErrorResponse = {
+/*export type ErrorResponse = {
   status: number;
   message: string;
-};
+};*/

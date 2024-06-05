@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import KingBedIcon from '@mui/icons-material/KingBed';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import NavBarLinkButton from '@ui/NavBarLink';
-import { ProfileMenu } from '../profileMenu';
+import { ProfileMenu } from '../ProfileMenu';
 
 export function NavBar() {
   return (
