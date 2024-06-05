@@ -8,4 +8,5 @@ export interface CarRentalProps {
   isPrepared: 'Yes' | 'No';
   description: string;
   price: number;
+  isLoading: boolean;
 }
