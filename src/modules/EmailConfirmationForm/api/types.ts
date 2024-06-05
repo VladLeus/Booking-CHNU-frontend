@@ -10,5 +10,6 @@ export type CodeConfirmationResponse = {
 };
 
 export type CodeConfirmationRequest = {
+  email: string;
   code: string;
 };

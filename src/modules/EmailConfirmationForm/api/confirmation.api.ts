@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '@shared/constants';
-import { ErrorResponse, Response } from '@shared/types';
+import { Response } from '@shared/types';
 import { CodeConfirmationRequest, CodeConfirmationResponse } from './types.ts';
 import { identity } from '@shared/utils';
 
@@ -11,7 +11,7 @@ export const confirmationAPI = createApi({
   }),
   endpoints: (build) => ({
     confirmCode: build.mutation<
-      Response<CodeConfirmationResponse> | ErrorResponse,
+      Response<CodeConfirmationResponse>,
       CodeConfirmationRequest
     >({
       query: (body: CodeConfirmationRequest) => ({
@@ -19,9 +19,7 @@ export const confirmationAPI = createApi({
         method: 'POST',
         body: body,
       }),
-      transformResponse: identity<
-        Response<CodeConfirmationResponse> | ErrorResponse
-      >,
+      transformResponse: identity<Response<CodeConfirmationResponse>>,
       transformErrorResponse: identity,
     }),
   }),

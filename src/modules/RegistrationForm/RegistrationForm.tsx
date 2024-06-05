@@ -15,7 +15,10 @@ import Box from '@mui/material/Box';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import DropDownSelector from '@ui/DropDownSelector';
-import { GENDER } from '@modules/RegistrationForm/_data.ts';
+import {
+  DEFAULT_REG_SCHEMA_VALUES,
+  GENDER,
+} from '@modules/RegistrationForm/_data.ts';
 import SingleDatePicker from '@ui/SingleDatePicker';
 import 'dayjs/locale/uk';
 import CustomButton from '@ui/CustomButton';
@@ -32,16 +35,7 @@ const RegistrationForm = () => {
   } = useForm<RegistrationSchema>({
     mode: 'all',
     resolver: zodResolver(registrationSchema),
-    defaultValues: {
-      firstName: '',
-      surname: '',
-      email: '',
-      phone: '',
-      password: '',
-      passwordConfirmation: '',
-      gender: '',
-      birthdate: null,
-    },
+    defaultValues: DEFAULT_REG_SCHEMA_VALUES,
   });
   const navigate = useNavigate();
   const [signup, { isLoading, isError }] = useSignupMutation();
@@ -55,23 +49,23 @@ const RegistrationForm = () => {
   const onSubmit = useCallback(async (data: RegistrationSchema) => {
     const userDTO: UserSignupRequest = {
       user: {
-        email: '',
-        password: '',
-        name: '',
-        last_name: '',
+        email: data.email,
+        password: data.password,
+        name: data.firstName,
+        last_name: data.surname,
         phone_number: '+38' + data.phone,
-        gender: '',
+        gender: 'male',
         birthdate: data.birthdate?.toString(),
       },
     };
 
     const response = await signup(userDTO);
 
-    if (response.data) {
-      const data = response.data;
-      console.log(data);
+    if ('data' in response!) {
+      console.log('Your code is ' + response.data?.data.confirmation_code);
+      localStorage.setItem('temp-email', JSON.stringify(data.email));
       navigate('/email/confirm');
-    } else if ('error' in response) {
+    } else if ('error' in response!) {
       console.log(response.error);
     }
   }, []);
