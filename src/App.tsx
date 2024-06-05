@@ -7,7 +7,7 @@ import { useActions, useAppSelector } from '@shared/hooks';
 
 function App() {
   const { setAuth } = useActions();
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     const token: string | null = localStorage.getItem('user_auth_token');
@@ -16,13 +16,13 @@ function App() {
   }, []);
   return (
     <Stack gap={4} justifyItems="center" alignItems="center">
-      {isAuth && (
+      {user.isAuth && (
         <>
           <NavBar />
           <AppRouter />
         </>
       )}
-      {!isAuth && <AppRouter />}
+      {!user.isAuth && <AppRouter />}
     </Stack>
   );
 }

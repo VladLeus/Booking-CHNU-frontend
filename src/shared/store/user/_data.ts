@@ -1,10 +1,14 @@
-import { UserInitState } from './types.ts';
+import { User } from './types.ts';
 
-export const initialState: UserInitState = {
+const user: User = {
   name: '',
   surname: '',
   email: '',
   tripHistory: [],
   wallet: [],
   isAuth: false,
+};
+
+export const initialState = {
+  user: user,
 };

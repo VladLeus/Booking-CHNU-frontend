@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Divider, Theme, useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Divider, Theme, useMediaQuery, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 import {
@@ -21,6 +21,8 @@ import 'dayjs/locale/uk';
 import CustomButton from '@ui/CustomButton';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { UserSignupRequest } from '@modules/RegistrationForm/api/types.ts';
+import { useSignupMutation } from '@modules/RegistrationForm/api';
 
 const RegistrationForm = () => {
   const {
@@ -42,6 +44,7 @@ const RegistrationForm = () => {
     },
   });
   const navigate = useNavigate();
+  const [signup, { isLoading, isError }] = useSignupMutation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -49,10 +52,28 @@ const RegistrationForm = () => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
-  const onSubmit = useCallback((data: RegistrationSchema) => {
-    console.log('Form submitted, check ur email for confirmation:', data);
-    console.log('ur code is 123456');
-    navigate('/email/confirm');
+  const onSubmit = useCallback(async (data: RegistrationSchema) => {
+    const userDTO: UserSignupRequest = {
+      user: {
+        email: '',
+        password: '',
+        name: '',
+        last_name: '',
+        phone_number: '+38' + data.phone,
+        gender: '',
+        birthdate: data.birthdate?.toString(),
+      },
+    };
+
+    const response = await signup(userDTO);
+
+    if (response.data) {
+      const data = response.data;
+      console.log(data);
+      navigate('/email/confirm');
+    } else if ('error' in response) {
+      console.log(response.error);
+    }
   }, []);
 
   const theme: Theme = useTheme();
@@ -67,6 +88,17 @@ const RegistrationForm = () => {
         minWidth={350}
         width={isSmScreen ? 650 : 300}
       >
+        {isLoading && (
+          <Alert severity="info">
+            Запит обробляється, зачекайте будь-ласка.
+          </Alert>
+        )}
+
+        {isError && (
+          <Alert severity="error" variant="filled" sx={{ my: 2 }}>
+            Помилка підключення з сервером, спробуйте пізніше.
+          </Alert>
+        )}
         <form
           onSubmit={(e) => {
             e.preventDefault();
