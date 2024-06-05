@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import { Controller, FieldValues } from 'react-hook-form';
 import { InputAdornment, TextField } from '@mui/material';
 import { CustomInputProps } from './types';
@@ -12,8 +11,7 @@ const CustomInput = <T extends FieldValues>({
   icon: Icon,
   error,
   helperText,
-  value,
-  setValue,
+  handleIconClick,
 }: CustomInputProps<T>) => {
   return (
     <Controller
@@ -25,19 +23,19 @@ const CustomInput = <T extends FieldValues>({
           label={label}
           error={error}
           variant={variant}
-          value={value}
           type={type || 'text'}
           helperText={helperText}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
-            field.onChange(event);
-            setValue(event.target.value);
-          }}
+          fullWidth={true}
           InputProps={{
-            startAdornment: Icon && (
-              <InputAdornment position="start">
-                <Icon />
-              </InputAdornment>
-            ),
+            startAdornment:
+              (Icon && (
+                <InputAdornment position="start">
+                  <Icon onClick={handleIconClick} />
+                </InputAdornment>
+              )) ||
+              (type === 'tel' && (
+                <InputAdornment position="start">+38</InputAdornment>
+              )),
           }}
         />
       )}

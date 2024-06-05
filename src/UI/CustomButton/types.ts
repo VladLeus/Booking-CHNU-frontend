@@ -1,13 +1,8 @@
 import { ComponentType } from 'react';
-import { SvgIconProps } from '@mui/material';
+import { ButtonProps, SvgIconProps } from '@mui/material';
 
-export interface CustomButtonProps {
+export interface CustomButtonProps extends ButtonProps {
   text: string;
-  variant: 'outlined' | 'text' | 'contained';
-  size: 'small' | 'medium' | 'large';
-  color: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
-  disabled: boolean;
-  handleClick: () => void;
-  type?: 'button' | 'submit' | 'reset';
+  handleClick?: () => void;
   icon?: ComponentType<SvgIconProps>;
 }

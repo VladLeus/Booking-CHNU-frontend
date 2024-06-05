@@ -1,35 +1,46 @@
 import MenuItem from '@mui/material/MenuItem';
-import { TextField } from '@mui/material';
-
+import { InputAdornment, TextField } from '@mui/material';
 import { DropDownSelectorProps } from '@ui/DropDownSelector/types.ts';
-import { FC } from 'react';
+import { Controller, FieldValues } from 'react-hook-form';
 
-const DropDownSelector: FC<DropDownSelectorProps> = ({
+const DropDownSelector = <T extends FieldValues>({
+  name,
+  control,
   label,
-  helperText,
-  width,
   valuesArray,
-  setValue,
   error,
-}) => {
+  helperText,
+  icon: Icon,
+}: DropDownSelectorProps<T>) => {
   return (
-    <TextField
-      id="outlined-select-currency"
-      select
-      label={label}
-      onChange={(event) => setValue(event.target.value)}
-      // defaultValue={valuesArray[0]}
-      helperText={helperText}
-      error={error}
-      size="small"
-      sx={{ width: width }}
-    >
-      {valuesArray.map((option) => (
-        <MenuItem sx={{ py: 0 }} key={option} value={option}>
-          {option}
-        </MenuItem>
-      ))}
-    </TextField>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <TextField
+          {...field}
+          select
+          label={label}
+          defaultValue={valuesArray[0]}
+          helperText={helperText}
+          error={error}
+          fullWidth={true}
+          InputProps={{
+            startAdornment: Icon && (
+              <InputAdornment position="start">
+                <Icon />
+              </InputAdornment>
+            ),
+          }}
+        >
+          {valuesArray.map((option: string) => (
+            <MenuItem sx={{ py: 0 }} key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField>
+      )}
+    ></Controller>
   );
 };
 

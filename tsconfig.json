@@ -5,9 +5,6 @@
       "@pages/*": ["./pages/*"],
       "@ui/*": ["./UI/*"],
       "@assets/*": ["./assets/*"],
-      "@hooks/*": ["./shared/hooks/*"],
-      "@utils/*": ["./shared/utils/*"],
-      "@constants/*": ["./shared/constant/*"],
       "@modules/*": ["./modules/*"],
       "@components/*": ["./components/*"],
       "@shared/*": ["./shared/*"]

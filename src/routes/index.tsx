@@ -1,55 +1,130 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
-import { Home } from '@pages/home/Home.tsx';
-import { Cars } from '@pages/cars/Cars.tsx';
-import { ProfileSettings } from '@pages/profile/ProfileSettings.tsx';
-import { TripHistory } from '@pages/trip-history/TripHistory.tsx';
-import { Wallet } from '@pages/wallet/Wallet.tsx';
 import { AppRoutes } from './_data.ts';
-import Private from './private.tsx';
-import { LoginPage } from '@pages/Login/LoginPage.tsx';
+import PublicRoute from './PublicRoutes/PublicRoute';
+import PrivateRoute from './PrivateRoutes/PrivateRoute';
+import PrivatePasswordResetRoute from './PrivateRoutes/PrivatePasswordResetRoute';
+import RegistrationPage from '@pages/Registration';
+import LoginPage from '@pages/Login';
+import ForgotPassword from '@pages/ForgotPassword';
+import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
+import PasswordReset from '@pages/PasswordReset';
+import Home from '@pages/Home';
+import Cars from '@pages/Cars';
+import ProfileSettings from '@pages/Profile';
+import TripHistory from '@pages/TripHistory';
+import Wallet from '@pages/Wallet';
+import EmailConfirmation from '@pages/EmailConfirmation';
 
 const routes: RouteObject[] = [
   {
     path: AppRoutes.default,
-    element: <Home />,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.default,
+        element: <RegistrationPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.login,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.login,
+        element: <LoginPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.forgotPassword,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.forgotPassword,
+        element: <ForgotPassword />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.resetTokenCheck,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.resetTokenCheck,
+        element: <ResetTokenCheckPage />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.emailConfirmation,
+    element: <PublicRoute />,
+    children: [
+      {
+        path: AppRoutes.emailConfirmation,
+        element: <EmailConfirmation />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.passwordReset,
+    element: <PrivatePasswordResetRoute />,
+    children: [
+      {
+        path: AppRoutes.passwordReset,
+        element: <PasswordReset />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.home,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.home,
+        element: <Home />,
+      },
+    ],
   },
   {
     path: AppRoutes.cars,
-    element: <Cars />,
-  },
-  {
-    path: AppRoutes.profile_settings,
-    element: <Private />,
+    element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.profile_settings,
+        path: AppRoutes.cars,
+        element: <Cars />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.profileSettings,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.profileSettings,
         element: <ProfileSettings />,
       },
     ],
   },
   {
-    path: AppRoutes.trip_history,
-    element: <Private />,
+    path: AppRoutes.tripHistory,
+    element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.trip_history,
+        path: AppRoutes.tripHistory,
         element: <TripHistory />,
       },
     ],
   },
   {
     path: AppRoutes.wallet,
-    element: <Private />,
+    element: <PrivateRoute />,
     children: [
       {
         path: AppRoutes.wallet,
         element: <Wallet />,
       },
     ],
-  },
-  {
-    path: AppRoutes.login,
-    element: <LoginPage />,
   },
   {
     path: '*',
