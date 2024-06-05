@@ -5,7 +5,7 @@ type User = {
   last_name: string;
   phone_number: string;
   gender: string;
-  birthdate: string;
+  birthdate: string | undefined;
 };
 
 export type UserSignupRequest = {

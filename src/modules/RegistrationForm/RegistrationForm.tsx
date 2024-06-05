@@ -21,6 +21,8 @@ import 'dayjs/locale/uk';
 import CustomButton from '@ui/CustomButton';
 import { Link, useNavigate } from 'react-router-dom';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { UserSignupRequest } from '@modules/RegistrationForm/api/types.ts';
+import { useSignupMutation } from '@modules/RegistrationForm/api';
 
 const RegistrationForm = () => {
   const {
@@ -41,7 +43,8 @@ const RegistrationForm = () => {
       birthdate: null,
     },
   });
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
+  const [signup, { isLoading, isError }] = useSignupMutation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -49,10 +52,29 @@ const RegistrationForm = () => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
-  const onSubmit = useCallback((data: RegistrationSchema) => {
-    console.log('Form submitted, check ur email for confirmation:', data);
-    console.log('ur code is 123456');
-    navigate('/email/confirm');
+  const onSubmit = useCallback(async (data: RegistrationSchema) => {
+    const userDTO: UserSignupRequest = {
+      user: {
+        email: data.email,
+        password: data.password,
+        name: data.firstName,
+        last_name: data.surname,
+        phone_number: '+38' + data.phone,
+        gender: data.gender,
+        birthdate: data.birthdate?.toString(),
+      },
+    };
+
+    const response = await signup(userDTO);
+
+    if ('data' in response) {
+      console.log(response.data);
+    } else {
+      console.log(response.error);
+    }
+
+    //console.log('ur code is 123456');
+    //navigate('/email/confirm');
   }, []);
 
   const theme: Theme = useTheme();
