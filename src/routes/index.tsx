@@ -14,6 +14,7 @@ import ProfileSettings from '@pages/Profile';
 import TripHistory from '@pages/TripHistory';
 import Wallet from '@pages/Wallet';
 import EmailConfirmation from '@pages/EmailConfirmation';
+import CarBooking from '@pages/CarBooking/CarBooking.tsx';
 
 const routes: RouteObject[] = [
   {
@@ -93,6 +94,16 @@ const routes: RouteObject[] = [
       {
         path: AppRoutes.cars,
         element: <Cars />,
+      },
+    ],
+  },
+  {
+    path: AppRoutes.carbooking,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.carbooking,
+        element: <CarBooking />,
       },
     ],
   },
