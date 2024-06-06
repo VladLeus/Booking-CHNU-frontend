@@ -7,22 +7,26 @@ import CustomButton from '@ui/CustomButton';
 import { FC } from 'react';
 import { CarRentalProps } from '@components/CarRental/types.ts';
 import SkeletonLoad from '@modules/SkeletonLoad';
+import { useNavigate } from 'react-router-dom';
 
 const CarRental: FC<CarRentalProps> = ({
+  id,
   icon,
   carModel,
   seats,
   transmissionType,
   manufactureYear,
-  isPrepared,
+  // isPrepared,
   description,
   price,
   isLoading,
 }) => {
   const formatedPrice = price.toLocaleString();
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
-    console.log('The car is yours now!');
+    navigate(`/cars/booking/${id}`);
   };
 
   return (
@@ -48,16 +52,24 @@ const CarRental: FC<CarRentalProps> = ({
         />
       ) : (
         <Box
-          component="img"
           sx={{
-            height: 233,
-            width: 380,
-            maxHeight: { xs: 233, md: 167 },
-            maxWidth: { xs: 380, md: 290 },
+            display: 'flex',
+            alignItems: 'center',
+            p: 1,
           }}
-          alt="The house from the offer."
-          src={icon}
-        />
+        >
+          <Box
+            component="img"
+            sx={{
+              height: 233,
+              width: 380,
+              maxHeight: { xs: 233, md: 170 },
+              maxWidth: { xs: 380, md: 290 },
+              borderRadius: 2,
+            }}
+            src={icon}
+          />
+        </Box>
       )}
 
       <Box
@@ -289,7 +301,7 @@ const CarRental: FC<CarRentalProps> = ({
                 >
                   <KeyIcon />
                   <Box component="span" sx={{ fontSize: '0.875rem' }}>
-                    {isPrepared}
+                    Готова
                   </Box>
                 </Box>
               </Box>

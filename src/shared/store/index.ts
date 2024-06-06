@@ -6,6 +6,7 @@ import { loginAPI } from '@modules/LoginForm/api';
 import { forgotPasswordAPI } from '@modules/ForgotPasswordForm/api';
 import { resetTokenCheckAPI } from '@modules/ResetTokenCheck/api';
 import { passwordResetAPI } from '@modules/PasswordResetForm/api';
+import { carsListApi } from '@modules/CarsListCheck/api';
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,8 @@ export const store = configureStore({
     [resetTokenCheckAPI.reducerPath]: resetTokenCheckAPI.reducer,
     [passwordResetAPI.reducerPath]: passwordResetAPI.reducer,
     user: userReducer,
+
+    [carsListApi.reducerPath]: carsListApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -24,7 +27,8 @@ export const store = configureStore({
       .concat(loginAPI.middleware)
       .concat(forgotPasswordAPI.middleware)
       .concat(resetTokenCheckAPI.middleware)
-      .concat(passwordResetAPI.middleware),
+      .concat(passwordResetAPI.middleware)
+      .concat(carsListApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

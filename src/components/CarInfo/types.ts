@@ -1,9 +1,8 @@
-export interface CarRentalProps {
+export interface CarInfoProps {
   id: number;
   icon: string;
   carModel: string;
   seats: number;
-  // transmissionType: 'auto' | 'mechanical';
   transmissionType: string;
   manufactureYear: number;
   // isPrepared: boolean;
