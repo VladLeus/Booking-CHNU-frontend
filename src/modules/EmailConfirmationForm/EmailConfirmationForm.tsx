@@ -38,7 +38,11 @@ const EmailConfirmationForm = () => {
     if (response.data) {
       console.log(response.data);
       localStorage.removeItem('temp-email');
-      setUserRegData(response.data.data.user);
+      setUserRegData({
+        id: response.data.data.id,
+        name: response.data.data.name,
+        email: response.data.data.email,
+      });
       localStorage.setItem(
         'user_auth_token',
         JSON.stringify(response.data.data.token),

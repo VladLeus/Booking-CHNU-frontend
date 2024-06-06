@@ -1,12 +1,8 @@
-type User = {
-  id: string;
-  email: string;
-  name: string;
-};
-
 export type CodeConfirmationResponse = {
-  user: User;
+  id: number;
+  name: string;
   token: string;
+  email: string;
 };
 
 export type CodeConfirmationRequest = {

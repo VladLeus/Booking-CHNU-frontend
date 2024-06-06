@@ -54,7 +54,7 @@ const RegistrationForm = () => {
         name: data.firstName,
         last_name: data.surname,
         phone_number: '+38' + data.phone,
-        gender: 'male',
+        gender: data.gender,
         birthdate: data.birthdate?.toString(),
       },
     };
