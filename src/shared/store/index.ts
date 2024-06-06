@@ -6,6 +6,8 @@ import { loginAPI } from '@modules/LoginForm/api';
 import { forgotPasswordAPI } from '@modules/ForgotPasswordForm/api';
 import { resetTokenCheckAPI } from '@modules/ResetTokenCheck/api';
 import { passwordResetAPI } from '@modules/PasswordResetForm/api';
+import { logoutAPI } from '@modules/LogOut/api';
+import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
 
 export const store = configureStore({
@@ -16,6 +18,8 @@ export const store = configureStore({
     [forgotPasswordAPI.reducerPath]: forgotPasswordAPI.reducer,
     [resetTokenCheckAPI.reducerPath]: resetTokenCheckAPI.reducer,
     [passwordResetAPI.reducerPath]: passwordResetAPI.reducer,
+    [logoutAPI.reducerPath]: logoutAPI.reducer,
+    [loginActiveUserAPI.reducerPath]: loginActiveUserAPI.reducer,
     user: userReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
@@ -28,6 +32,8 @@ export const store = configureStore({
       .concat(forgotPasswordAPI.middleware)
       .concat(resetTokenCheckAPI.middleware)
       .concat(passwordResetAPI.middleware)
+      .concat(logoutAPI.middleware)
+      .concat(loginActiveUserAPI.middleware)
       .concat(carsListApi.middleware),
 });
 

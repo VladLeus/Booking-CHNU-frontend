@@ -9,7 +9,6 @@ import Stack from '@mui/material/Stack';
 import { Alert, Typography } from '@mui/material';
 import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
-import { useNavigate } from 'react-router-dom';
 import { useActions } from '@shared/hooks';
 import { useConfirmCodeMutation } from '@modules/EmailConfirmationForm/api';
 
@@ -22,21 +21,32 @@ const EmailConfirmationForm = () => {
     mode: 'all',
     resolver: zodResolver(emailConfirmationSchema),
     defaultValues: {
-      code: undefined,
+      code: '',
     },
   });
-  const navigate = useNavigate();
-  const { setAuth } = useActions();
   const [confirm, { isLoading, isError }] = useConfirmCodeMutation();
+  const { setUserRegOrLogData } = useActions();
 
   const onSubmit = useCallback(async (data: EmailConfirmationSchema) => {
-    const response = confirm({ code: data.code });
+    const response = await confirm({
+      email: JSON.parse(localStorage.getItem('temp-email')!),
+      confirmation_code: data.code,
+    });
 
-    if ('data' in response) {
+    if (response.data) {
       console.log(response.data);
-      //navigate('/home');
-    } else if ('error' in response) {
-      console.log('incorrect code');
+      localStorage.removeItem('temp-email');
+      setUserRegOrLogData({
+        id: response.data.data.id,
+        name: response.data.data.name,
+        email: response.data.data.email,
+      });
+      localStorage.setItem(
+        'user_auth_token',
+        JSON.stringify(response.data.data.token),
+      );
+    } else if ('error' in response!) {
+      console.log(response.error);
     }
   }, []);
 

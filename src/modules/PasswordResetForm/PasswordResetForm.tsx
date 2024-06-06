@@ -1,4 +1,10 @@
-import { Theme, Typography, useMediaQuery, useTheme } from '@mui/material';
+import {
+  Alert,
+  Theme,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { useForm } from 'react-hook-form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,6 +19,7 @@ import {
   passwordResetSchema,
   PasswordResetSchema,
 } from '@modules/PasswordResetForm/schema';
+import { useResetMutation } from '@modules/PasswordResetForm/api';
 
 const PasswordResetForm = () => {
   const {
@@ -29,17 +36,38 @@ const PasswordResetForm = () => {
   });
 
   const navigate = useNavigate();
+  const [reset, { isLoading, isError }] = useResetMutation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [isChanged, setIsChanged] = useState<boolean>(false);
 
   const togglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
-  const onSubmit = useCallback((data: PasswordResetSchema) => {
-    console.log('submit', data);
-    localStorage.removeItem('resetJWT');
-    navigate('/login');
+  const onSubmit = useCallback(async (data: PasswordResetSchema) => {
+    const token = JSON.parse(localStorage.getItem('resetJWT')!);
+    console.log(data);
+
+    const req = {
+      password: data.password,
+      password_confirmation: data.passwordConfirmation,
+      token: token,
+    };
+
+    console.log(req);
+    const response = await reset(req);
+
+    if (response.data) {
+      setIsChanged(true);
+    } else if (response.error) {
+      console.log(response.error);
+    }
+
+    setTimeout(() => {
+      localStorage.removeItem('resetJWT');
+      navigate('/login');
+    }, 2500);
   }, []);
 
   const theme: Theme = useTheme();
@@ -55,6 +83,24 @@ const PasswordResetForm = () => {
         minWidth={350}
         width={isSmScreen ? 450 : 300}
       >
+        {isLoading && (
+          <Alert severity="info">
+            Запит обробляється, зачекайте будь-ласка.
+          </Alert>
+        )}
+
+        {isError && (
+          <Alert severity="error" variant="filled" sx={{ my: 2 }}>
+            Помилка підключення з сервером, спробуйте пізніше.
+          </Alert>
+        )}
+
+        {isChanged && (
+          <Alert severity="info">
+            Пароль успішно змінено, вас зараз буде переведено на сторінку входу.
+          </Alert>
+        )}
+
         <Typography variant="h3" fontWeight="bold" component="h1">
           Зміна паролю
         </Typography>

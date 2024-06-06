@@ -1,9 +1,10 @@
 export interface User {
-  name: string;
-  surname: string;
+  id: number | undefined;
   email: string;
+  name: string;
+  surname?: string;
   phone?: string;
-  gender?: string;
+  gender?: 'Чоловік' | 'Жінка' | 'Інше';
   birthdate?: string;
   tripHistory: string[];
   wallet: string[];
@@ -11,7 +12,17 @@ export interface User {
 }
 
 export interface UserStateAfterReg {
+  id: number;
   name: string;
-  last_name: string;
   email: string;
+}
+
+export interface LoginActiveUserState {
+  id: number;
+  email: string;
+  name: string;
+  surname: string;
+  phone: string;
+  gender: 'Чоловік' | 'Жінка' | 'Інше';
+  birthdate: string;
 }

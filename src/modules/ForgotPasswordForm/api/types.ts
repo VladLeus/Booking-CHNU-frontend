@@ -3,5 +3,5 @@ export type ForgotPasswordRequest = {
 };
 
 export type ForgotPasswordResponse = {
-  url: string;
+  reset_password_url: string;
 };
