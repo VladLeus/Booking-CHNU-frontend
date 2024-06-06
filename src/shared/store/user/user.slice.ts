@@ -19,6 +19,9 @@ export const userSlice = createSlice({
         isAuth: true,
       };
     },
+    logOutUser(state) {
+      state.user = initialState.user;
+    },
   },
 });
 

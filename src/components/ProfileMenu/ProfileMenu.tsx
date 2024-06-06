@@ -8,7 +8,6 @@ import PersonIcon from '@mui/icons-material/Person';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import HistoryIcon from '@mui/icons-material/History';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import LogoutIcon from '@mui/icons-material/Logout';
 import { IconButton } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
 import PopoverMenuItem from '@ui/PopoverMenuItem';
@@ -18,6 +17,7 @@ import {
   handleListKeyDown,
   usePrevious,
 } from './actions.ts';
+import LogOut from '@modules/LogOut';
 
 export function ProfileMenu() {
   const [open, setOpen] = useState<boolean>(false);
@@ -105,12 +105,7 @@ export function ProfileMenu() {
                           handleClose={handleClose(setOpen, anchorRef)}
                         />
 
-                        <PopoverMenuItem
-                          to={'/'}
-                          icon={LogoutIcon}
-                          text={'Вийти'}
-                          handleClose={handleClose(setOpen, anchorRef)}
-                        />
+                        <LogOut anchorRef={anchorRef} setOpen={setOpen} />
                       </nav>
                     </MenuList>
                   </ClickAwayListener>
