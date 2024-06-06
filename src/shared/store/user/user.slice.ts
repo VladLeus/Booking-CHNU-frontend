@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './_data.ts';
-import { UserStateAfterReg } from './types.ts';
+import { LoginActiveUserState, UserStateAfterReg } from './types.ts';
 
 export const userSlice = createSlice({
   name: 'user',
@@ -22,6 +22,20 @@ export const userSlice = createSlice({
     logOutUser(state) {
       state.user = initialState.user;
     },
+    loginActiveUser(state, action: PayloadAction<LoginActiveUserState>) {
+      state.user = {
+        id: action.payload.id,
+        email: action.payload.email,
+        name: action.payload.name,
+        surname: action.payload.surname,
+        phone: action.payload.phone,
+        gender: action.payload.gender,
+        birthdate: action.payload.birthdate,
+        tripHistory: [],
+        wallet: [],
+        isAuth: true,
+      }
+    }
   },
 });
 
