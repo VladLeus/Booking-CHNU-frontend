@@ -11,6 +11,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import CustomButton from '@ui/CustomButton';
 import { Link } from 'react-router-dom';
 import { useLoginMutation } from '@modules/LoginForm/api';
+import { useActions } from '@shared/hooks';
 
 const LoginForm = () => {
   const {
@@ -26,6 +27,7 @@ const LoginForm = () => {
     },
   });
   const [login, { isLoading, isError }] = useLoginMutation();
+  const { setUserRegOrLogData } = useActions();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -34,14 +36,25 @@ const LoginForm = () => {
   }, [isPasswordVisible]);
 
   const onSubmit = useCallback(async (data: LoginFormSchema) => {
-    console.log('submit', data);
+    //console.log('submit', data);
 
     const response = await login({
       user: { email: data.email, password: data.password },
     });
 
-    if ('data' in response) {
-      console.log(data);
+    if (response.data) {
+      console.log(response.data);
+      setUserRegOrLogData({
+        id: response.data.data.user.id,
+        name: response.data.data.user.name,
+        email: response.data.data.user.email,
+      });
+      localStorage.setItem(
+        'user_auth_token',
+        JSON.stringify(response.data.data.user.token),
+      );
+    } else if ('error' in response) {
+      console.log(response.error);
     }
   }, []);
 

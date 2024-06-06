@@ -7,8 +7,9 @@ export type UserLoginRequest = {
 
 export type LoginResponse = {
   user: {
+    id: number;
     name: string;
-    last_name: string;
     email: string;
+    token: string;
   };
 };

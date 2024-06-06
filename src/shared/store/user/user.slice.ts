@@ -9,7 +9,7 @@ export const userSlice = createSlice({
     setAuth(state, action: PayloadAction<boolean>) {
       state.user.isAuth = action.payload;
     },
-    setUserRegData(state, action: PayloadAction<UserStateAfterReg>) {
+    setUserRegOrLogData(state, action: PayloadAction<UserStateAfterReg>) {
       state.user = {
         id: action.payload.id,
         email: action.payload.email,
