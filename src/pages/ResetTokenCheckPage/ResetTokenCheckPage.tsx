@@ -5,7 +5,7 @@ const ResetTokenCheckPage = () => {
   return (
     <>
       <Typography variant="h3" fontWeight="bold" component="h1">
-        Check
+        Перевірка валідності посилання
       </Typography>
       <ResetTokenCheck />
     </>

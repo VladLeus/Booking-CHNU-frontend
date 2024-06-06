@@ -14,10 +14,18 @@ export const passwordResetAPI = createApi({
       Response<PasswordResetResponse>,
       PasswordResetRequest
     >({
-      query: (body: PasswordResetRequest) => ({
+      query: (req: PasswordResetRequest) => ({
         url: BASE_URL + '/password/reset/edit',
         method: 'PATCH',
-        body: body,
+        params: {
+          token: req.token,
+        },
+        body: {
+          user: {
+            password: req.password,
+            password_confirmation: req.password_confirmation,
+          },
+        },
       }),
       transformResponse: identity<Response<PasswordResetResponse>>,
       transformErrorResponse: identity,

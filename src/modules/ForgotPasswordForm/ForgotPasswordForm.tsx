@@ -9,8 +9,9 @@ import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import SendIcon from '@mui/icons-material/Send';
-import { Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import { useForgotPasswordMutation } from '@modules/ForgotPasswordForm/api';
 
 const ForgotPasswordForm = () => {
   const {
@@ -24,15 +25,19 @@ const ForgotPasswordForm = () => {
       email: '',
     },
   });
+  const [getResetLink, { isLoading, isError }] = useForgotPasswordMutation();
 
-  const onSubmit = useCallback((data: ForgotPasswordFormSchema) => {
-    console.log('submit', data);
+  const onSubmit = useCallback(async (data: ForgotPasswordFormSchema) => {
+    const response = await getResetLink({ email: data.email });
 
-    // Simulate work
-    setTimeout(() => {}, 500);
+    if (response.data) {
+      console.log(response.data.data.reset_password_url);
+    } else if ('error' in response) {
+      console.log(response.error);
+    }
 
     // Test logging
-    console.log(`http://localhost:5173/password/reset/edit?token=test`);
+    // console.log(`http://localhost:5173/password/reset/edit?token=test`);
   }, []);
 
   const theme = useTheme();
@@ -49,6 +54,18 @@ const ForgotPasswordForm = () => {
         maxWidth={600}
         width={isSmScreen ? 600 : 300}
       >
+        {isLoading && (
+          <Alert severity="info">
+            Запит обробляється, зачекайте будь-ласка.
+          </Alert>
+        )}
+
+        {isError && (
+          <Alert severity="error" variant="filled" sx={{ my: 2 }}>
+            Помилка підключення з сервером, спробуйте пізніше.
+          </Alert>
+        )}
+
         <Typography
           variant={isSmScreen ? 'h3' : 'h4'}
           fontWeight="bold"

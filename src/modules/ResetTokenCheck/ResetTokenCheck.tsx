@@ -1,24 +1,35 @@
 import { useEffect, useState } from 'react';
-import { Typography } from '@mui/material';
+import { Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@shared/hooks';
+import { useLazyTokenCheckQuery } from '@modules/ResetTokenCheck/api';
 
 const ResetTokenCheck = () => {
   const query = useQuery();
   const jwtTempToken: string | null = query.get('token');
-  const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
+  const [isTokenValid, setIsTokenValid] = useState<boolean>();
   const navigate = useNavigate();
+  const [checkToken, { isLoading, isError }] = useLazyTokenCheckQuery();
 
-  const validateJWT = (token: string | null): boolean => {
-    return token !== null && token !== '';
+  const validateToken = async (): Promise<void> => {
+    const response = await checkToken(jwtTempToken!);
+
+    if (response.data) {
+      console.log(response.data);
+      setIsTokenValid(true);
+    } else if (response.error) {
+      console.log(response.error);
+      setIsTokenValid(false);
+    }
   };
 
   useEffect(() => {
-    // Simulate some request processing
-    setTimeout(() => {
-      setIsTokenValid(validateJWT(jwtTempToken));
-    }, 2000);
-  }, [jwtTempToken]);
+    if (jwtTempToken === null) {
+      setIsTokenValid(false);
+      return;
+    }
+    validateToken();
+  }, []);
 
   useEffect(() => {
     if (isTokenValid) {
@@ -29,15 +40,11 @@ const ResetTokenCheck = () => {
 
   return (
     <>
-      {isTokenValid === null && (
-        <Typography variant="body2" color="textSecondary">
-          Запит обробляється...
-        </Typography>
-      )}
-      {isTokenValid === false && (
-        <Typography variant="body2" color="textSecondary">
+      {isLoading && <Alert severity="info">Запит обробляється...</Alert>}
+      {isError && (
+        <Alert severity="error" variant="filled">
           Це посилання більше не валідне!
-        </Typography>
+        </Alert>
       )}
     </>
   );
