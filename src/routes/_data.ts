@@ -2,6 +2,7 @@ export const AppRoutes = {
   default: '/',
   home: '/home',
   cars: '/cars',
+  carbooking: '/cars/booking/:id',
   profileSettings: '/profile-settings',
   tripHistory: '/trip-history',
   wallet: '/wallet',
