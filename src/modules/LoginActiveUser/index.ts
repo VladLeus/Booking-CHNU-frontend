@@ -1,1 +1,1 @@
-export {default} from './LoginActiveUser.tsx';
+export { default } from './LoginActiveUser.tsx';

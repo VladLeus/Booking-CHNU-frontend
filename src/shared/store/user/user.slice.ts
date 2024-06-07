@@ -34,8 +34,8 @@ export const userSlice = createSlice({
         tripHistory: [],
         wallet: [],
         isAuth: true,
-      }
-    }
+      };
+    },
   },
 });
 

@@ -18,6 +18,7 @@ const SingleDatePicker = <T extends FieldValues>({
   error,
   helperText,
   disableFuture,
+  disablePast,
 }: SingleDatePickerProps<T>) => {
   return (
     <Controller
@@ -29,6 +30,7 @@ const SingleDatePicker = <T extends FieldValues>({
             {...field}
             label={label}
             disableFuture={disableFuture}
+            disablePast={disablePast}
             localeText={customPtBRLocaleText}
             slotProps={{
               textField: {
