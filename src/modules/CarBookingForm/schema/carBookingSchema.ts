@@ -7,7 +7,7 @@ import dayJsSchema from '@modules/RegistrationForm/schema/dayjsSchema.ts';
 export const carBookingSchema = z
   .object({
     firstName: z.string().min(2, "Обов'язкове поле"),
-    surname: z.string().min(2, "Обов'язкове поле"),
+    city: z.string().min(1, "Обов'язкове поле"),
     start_date: dayJsSchema
       .nullable()
       .refine((data) => data !== null, 'Оберіть початок оренди'),

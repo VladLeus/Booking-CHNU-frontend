@@ -14,10 +14,13 @@ export const carBookingApi = createApi({
   }),
   endpoints: (build) => ({
     rentCar: build.mutation<Response<RentCarResponse>, RentCarRequest>({
-      query: (body: RentCarRequest) => ({
+      query: (req: RentCarRequest) => ({
         url: BASE_URL + '/car_bookings',
         method: 'POST',
-        body: body,
+        headers: {
+          Authorization: req.token,
+        },
+        body: req.car_booking,
       }),
       transformResponse: identity<Response<RentCarResponse>>,
       transformErrorResponse: identity,
