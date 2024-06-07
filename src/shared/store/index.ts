@@ -9,6 +9,7 @@ import { passwordResetAPI } from '@modules/PasswordResetForm/api';
 import { logoutAPI } from '@modules/LogOut/api';
 import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
+import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     [passwordResetAPI.reducerPath]: passwordResetAPI.reducer,
     [logoutAPI.reducerPath]: logoutAPI.reducer,
     [loginActiveUserAPI.reducerPath]: loginActiveUserAPI.reducer,
+    [mapBoxApi.reducerPath]: mapBoxApi.reducer,
     user: userReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
@@ -34,7 +36,8 @@ export const store = configureStore({
       .concat(passwordResetAPI.middleware)
       .concat(logoutAPI.middleware)
       .concat(loginActiveUserAPI.middleware)
-      .concat(carsListApi.middleware),
+      .concat(carsListApi.middleware)
+      .concat(mapBoxApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

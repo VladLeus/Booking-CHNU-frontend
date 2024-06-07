@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { AppRouter } from './routes';
 import { NavBar } from '@components/NavBar';
 import Stack from '@mui/material/Stack';
@@ -6,10 +7,18 @@ import LoginActiveUser from '@modules/LoginActiveUser';
 
 function App() {
   const { user } = useAppSelector((state) => state.user);
+  const [checkComplete, setCheckComplete] = useState(false);
+
+  const handleCheckComplete = () => {
+    setCheckComplete(true);
+  };
+
+  if (!checkComplete) {
+    return <LoginActiveUser onCheckComplete={handleCheckComplete} />;
+  }
 
   return (
     <Stack gap={4} justifyItems="center" alignItems="center">
-      <LoginActiveUser />
       {user.isAuth && (
         <>
           <NavBar />
