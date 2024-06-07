@@ -9,6 +9,7 @@ import { passwordResetAPI } from '@modules/PasswordResetForm/api';
 import { logoutAPI } from '@modules/LogOut/api';
 import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
+import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
 
 export const store = configureStore({
@@ -21,6 +22,7 @@ export const store = configureStore({
     [passwordResetAPI.reducerPath]: passwordResetAPI.reducer,
     [logoutAPI.reducerPath]: logoutAPI.reducer,
     [loginActiveUserAPI.reducerPath]: loginActiveUserAPI.reducer,
+    [mapBoxApi.reducerPath]: mapBoxApi.reducer,
     user: userReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
@@ -37,6 +39,7 @@ export const store = configureStore({
       .concat(logoutAPI.middleware)
       .concat(loginActiveUserAPI.middleware)
       .concat(carsListApi.middleware)
+      .concat(mapBoxApi.middleware)
       .concat(carBookingApi.middleware),
 });
 
