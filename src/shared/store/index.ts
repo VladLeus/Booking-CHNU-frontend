@@ -9,6 +9,7 @@ import { passwordResetAPI } from '@modules/PasswordResetForm/api';
 import { logoutAPI } from '@modules/LogOut/api';
 import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
+import { carBookingApi } from '@modules/CarBookingForm/api';
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     user: userReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
+    [carBookingApi.reducerPath]: carBookingApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -34,7 +36,8 @@ export const store = configureStore({
       .concat(passwordResetAPI.middleware)
       .concat(logoutAPI.middleware)
       .concat(loginActiveUserAPI.middleware)
-      .concat(carsListApi.middleware),
+      .concat(carsListApi.middleware)
+      .concat(carBookingApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

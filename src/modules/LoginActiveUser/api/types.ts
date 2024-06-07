@@ -9,8 +9,8 @@ export type LoginActiveUserResponse = {
   provider: null;
   uid: null;
   role: 'user';
-}
+};
 
 export type LoginActiveRequest = {
   token: string;
-}
+};

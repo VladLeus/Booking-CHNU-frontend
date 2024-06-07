@@ -23,8 +23,20 @@ export const carBookingSchema = z
       return true;
     },
     {
-      message: 'Дата закінчення не може бути ранішою за дату початку',
+      message: 'Дата закінчення не має бути ранішою за дату початку',
       path: ['end_date'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.start_date && data.end_date) {
+        return dayjs(data.start_date).isBefore(dayjs(data.end_date));
+      }
+      return true;
+    },
+    {
+      message: 'Дата початку має раніше дати закінчення',
+      path: ['start_date'],
     },
   );
 
