@@ -10,7 +10,6 @@ import Stack from '@mui/material/Stack';
 import { Typography } from '@mui/material';
 
 const CarInfo: FC<CarInfoProps> = ({
-  id,
   icon,
   carModel,
   seats,
@@ -168,8 +167,6 @@ const CarInfo: FC<CarInfoProps> = ({
                       width={240}
                     />
                   </Box>
-                  {/*<SkeletonLoad variant="text" animation="wave" height={20} width={50}/>*/}
-                  {/*<SkeletonLoad variant="text" animation="wave" height={20} width={100}/>*/}
                 </>
               ) : (
                 <>
@@ -209,18 +206,6 @@ const CarInfo: FC<CarInfoProps> = ({
                       }}
                     >
                       {carModel}
-                    </Box>
-                    <Box
-                      component="span"
-                      sx={{
-                        fontSize: '0.875rem',
-                        color: 'text.primary',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      або схожий середній автомобіль
                     </Box>
                   </Box>
 

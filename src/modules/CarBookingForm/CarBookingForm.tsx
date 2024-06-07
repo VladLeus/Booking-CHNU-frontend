@@ -101,7 +101,7 @@ const CarBookingForm = () => {
             <DropDownSelector
               name="city"
               control={control}
-              label="Оберіть місто"
+              label="Оберіть місто отримання"
               valuesArray={CITIES}
               error={!!errors.city}
               helperText={errors.city?.message || ''}

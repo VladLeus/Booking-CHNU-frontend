@@ -173,8 +173,6 @@ const CarRental: FC<CarRentalProps> = ({
                   width={240}
                 />
               </Box>
-              {/*<SkeletonLoad variant="text" animation="wave" height={20} width={50}/>*/}
-              {/*<SkeletonLoad variant="text" animation="wave" height={20} width={100}/>*/}
             </>
           ) : (
             <>
@@ -214,18 +212,6 @@ const CarRental: FC<CarRentalProps> = ({
                   }}
                 >
                   {carModel}
-                </Box>
-                <Box
-                  component="span"
-                  sx={{
-                    fontSize: '0.875rem',
-                    color: 'text.primary',
-                    whiteSpace: 'nowrap',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                  }}
-                >
-                  або схожий середній автомобіль
                 </Box>
               </Box>
 
@@ -391,11 +377,10 @@ const CarRental: FC<CarRentalProps> = ({
               UAH {formatedPrice}
             </Box>
             <CustomButton
-              text={'Переглянути пропозицію'}
-              variant={'contained'}
-              size={'small'}
-              color={'primary'}
-              disabled={false}
+              text="Переглянути пропозицію"
+              variant="contained"
+              size="small"
+              color="primary"
               handleClick={handleClick}
             />
           </>
