@@ -9,7 +9,10 @@ import { ProfileMenu } from '../ProfileMenu';
 
 export function NavBar() {
   return (
-    <AppBar position="fixed" sx={{ height: 150, backgroundColor: '#01579b' }}>
+    <AppBar
+      position="fixed"
+      sx={{ height: 150, backgroundColor: '#01579b', mb: 4 }}
+    >
       <Toolbar sx={{ flexDirection: 'column', alignItems: 'center' }}>
         <Box
           sx={{

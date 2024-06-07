@@ -4,13 +4,13 @@ import { Alert } from '@mui/material';
 import { useEffect } from 'react';
 
 const LoginActiveUser = () => {
-  const [loginActive, {isLoading}] = useLazyLoginActiveQuery();
-  const {loginActiveUser} = useActions();
+  const [loginActive, { isLoading }] = useLazyLoginActiveQuery();
+  const { loginActiveUser } = useActions();
 
   const loginIfActive = async () => {
     if (localStorage.getItem('user_auth_token')) {
       const token = JSON.parse(localStorage.getItem('user_auth_token')!);
-      const response = await loginActive({token: token});
+      const response = await loginActive({ token: token });
       if (response.data) {
         loginActiveUser({
           id: response.data.data.id,
@@ -19,13 +19,13 @@ const LoginActiveUser = () => {
           surname: response.data.data.last_name,
           phone: response.data.data.phone_number,
           gender: response.data.data.gender,
-          birthdate: response.data.data.birthdate
-        })
+          birthdate: response.data.data.birthdate,
+        });
       } else if (response.error) {
         console.log(response.error);
       }
     }
-  }
+  };
 
   useEffect(() => {
     loginIfActive();
@@ -33,9 +33,11 @@ const LoginActiveUser = () => {
 
   return (
     <>
-      {isLoading && <Alert severity="info">Зачекайте, триває зв'язок з сервером </Alert>}
+      {isLoading && (
+        <Alert severity="info">Зачекайте, триває зв'язок з сервером </Alert>
+      )}
     </>
-  )
-}
+  );
+};
 
 export default LoginActiveUser;

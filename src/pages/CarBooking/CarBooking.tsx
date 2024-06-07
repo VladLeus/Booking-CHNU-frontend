@@ -32,7 +32,7 @@ const CarBooking = () => {
         <Typography
           variant="h6"
           gutterBottom
-          sx={{ fontWeight: 'bold', textAlign: 'left' }}
+          sx={{ fontWeight: 'bold', textAlign: 'left', mt: 16 }}
         >
           Ваша пропозиція
         </Typography>
@@ -59,6 +59,7 @@ const CarBooking = () => {
           price={carData.price}
           isLoading={isLoading}
         />
+
         <CarBookingForm />
       </Stack>
     </>
