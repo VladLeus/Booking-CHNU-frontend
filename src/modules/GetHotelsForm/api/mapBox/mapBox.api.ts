@@ -14,7 +14,7 @@ export const mapBoxApi = createApi({
         params: {
           access_token: import.meta.env.VITE_MAPBOX_API_KEY,
           types: 'place',
-          language: 'en',
+          language: 'uk',
         },
       }),
       transformResponse: (response: MapBoxResponse) => response.features,

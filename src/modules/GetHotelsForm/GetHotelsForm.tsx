@@ -9,6 +9,8 @@ import SearchCity from '@ui/SearchCityAutocomplete';
 import { useDebounce } from '@shared/hooks';
 import { IFeature } from '@modules/GetHotelsForm/api/mapBox/types.ts';
 import { Alert } from '@mui/material';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import SearchIcon from '@mui/icons-material/Search';
 
 const GetHotelsForm = () => {
   const [search, setSearch] = useState<string>('');
@@ -35,23 +37,26 @@ const GetHotelsForm = () => {
 
   useEffect(() => {
     if (debounced.length > 2 && cities) {
-      const results: string[] = [];
-      cities.map((city: IFeature) => results.push(city.text));
+      const results: string[] = cities.map((city: IFeature) => city.text);
       setOptions(results);
+      console.log(results); // Log the results directly
     }
   }, [debounced, cities]);
 
+  useEffect(() => {
+    console.log(options); // Log options whenever it changes
+  }, [options]);
+
   const onSubmit = useCallback(() => {}, []);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
-
       {isError && (
         <Alert severity="error" variant="filled">
           Помилка завантаження даних...
         </Alert>
       )}
-
       <Stack
         direction="row"
         gap={2}
@@ -65,6 +70,7 @@ const GetHotelsForm = () => {
           error={!!errors.city}
           helperText={errors.city?.message || ''}
           handleChange={(e) => setSearch(e.target.value)}
+          icon={LocationCityIcon}
         />
         <CustomButton
           type="submit"
@@ -72,6 +78,7 @@ const GetHotelsForm = () => {
           variant="contained"
           color="primary"
           size="medium"
+          icon={SearchIcon}
         />
       </Stack>
     </form>

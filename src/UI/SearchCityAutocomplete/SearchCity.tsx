@@ -19,15 +19,24 @@ const SearchCity = <T extends FieldValues>({
       render={({ field }) => (
         <Autocomplete
           {...field}
+          options={options}
+          getOptionLabel={(option) => option}
+          isOptionEqualToValue={(option, value) => option === value}
           onChange={(_, value) => field.onChange(value)}
+          sx={{ width: 250, minWidth: 200, maxWidth: 400 }}
           renderInput={(params) => (
             <TextField
               {...params}
-              onChange={(event) => handleChange(event)}
+              onChange={(event) => {
+                field.onChange(event);
+                handleChange(event);
+              }}
               label={label}
               error={error}
               helperText={helperText}
+              variant="standard"
               InputProps={{
+                ...params.InputProps,
                 startAdornment: Icon && (
                   <InputAdornment position="start">
                     <Icon />
@@ -36,7 +45,6 @@ const SearchCity = <T extends FieldValues>({
               }}
             />
           )}
-          options={options}
         />
       )}
     />
