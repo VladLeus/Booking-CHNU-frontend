@@ -11,6 +11,7 @@ import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
 import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
+import { getHotelsAPI } from '@modules/GetHotelsForm/api';
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     [logoutAPI.reducerPath]: logoutAPI.reducer,
     [loginActiveUserAPI.reducerPath]: loginActiveUserAPI.reducer,
     [mapBoxApi.reducerPath]: mapBoxApi.reducer,
+    [getHotelsAPI.reducerPath]: getHotelsAPI.reducer,
     user: userReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
@@ -40,7 +42,8 @@ export const store = configureStore({
       .concat(loginActiveUserAPI.middleware)
       .concat(carsListApi.middleware)
       .concat(mapBoxApi.middleware)
-      .concat(carBookingApi.middleware),
+      .concat(carBookingApi.middleware)
+      .concat(getHotelsAPI.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

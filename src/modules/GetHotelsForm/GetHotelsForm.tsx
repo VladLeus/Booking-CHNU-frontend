@@ -1,7 +1,10 @@
 import { useSearchCityQuery } from '@modules/GetHotelsForm/api/mapBox';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { getHotelsSchema } from '@modules/GetHotelsForm/schema';
+import {
+  GetHotelsSchema,
+  getHotelsSchema,
+} from '@modules/GetHotelsForm/schema';
 import { useCallback, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import CustomButton from '@ui/CustomButton';
@@ -11,6 +14,7 @@ import { IFeature } from '@modules/GetHotelsForm/api/mapBox/types.ts';
 import { Alert } from '@mui/material';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SearchIcon from '@mui/icons-material/Search';
+import { useLazyGetHotelsQuery } from '@modules/GetHotelsForm/api/getHotels.api.ts';
 
 const GetHotelsForm = () => {
   const [search, setSearch] = useState<string>('');
@@ -23,6 +27,8 @@ const GetHotelsForm = () => {
     skip: debounced.length < 2,
   });
   const [options, setOptions] = useState<string[]>([]);
+  const [getHotels, { isLoading: isHotelsLoading, isError: isHotelsError }] =
+    useLazyGetHotelsQuery();
   const {
     control,
     handleSubmit,
@@ -39,29 +45,31 @@ const GetHotelsForm = () => {
     if (debounced.length > 2 && cities) {
       const results: string[] = cities.map((city: IFeature) => city.text);
       setOptions(results);
-      console.log(results); // Log the results directly
     }
   }, [debounced, cities]);
 
-  useEffect(() => {
-    console.log(options); // Log options whenever it changes
-  }, [options]);
-
-  const onSubmit = useCallback(() => {}, []);
+  const onSubmit = useCallback(async (data: GetHotelsSchema) => {
+    const response = await getHotels(data.city);
+    if (response.data) {
+      console.log(response.data);
+    } else if (response.error) {
+      console.log(response.error);
+    }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
-      {isError && (
-        <Alert severity="error" variant="filled">
-          Помилка завантаження даних...
-        </Alert>
-      )}
-      <Stack
-        direction="row"
-        gap={2}
-        sx={{ p: 1, bgcolor: 'lightgoldenrodyellow' }}
-      >
+      {isLoading ||
+        (isHotelsLoading && (
+          <Alert severity="info">Дані завантажуються...</Alert>
+        ))}
+      {isError ||
+        (isHotelsError && (
+          <Alert severity="error" variant="filled">
+            Помилка завантаження даних...
+          </Alert>
+        ))}
+      <Stack direction="row" gap={2} sx={{ p: 1, bgcolor: 'lightgray' }}>
         <SearchCity
           name="city"
           control={control}
@@ -79,6 +87,7 @@ const GetHotelsForm = () => {
           color="primary"
           size="medium"
           icon={SearchIcon}
+          sx={{ maxHeight: 40 }}
         />
       </Stack>
     </form>
