@@ -9,12 +9,13 @@ import { useCallback, useEffect, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import CustomButton from '@ui/CustomButton';
 import SearchCity from '@ui/SearchCityAutocomplete';
-import { useDebounce } from '@shared/hooks';
+import { useActions, useDebounce } from '@shared/hooks';
 import { IFeature } from '@modules/GetHotelsForm/api/mapBox/types.ts';
 import { Alert } from '@mui/material';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLazyGetHotelsQuery } from '@modules/GetHotelsForm/api/getHotels.api.ts';
+import { HotelInfo } from '@shared/store/hotels/types.ts';
 
 const GetHotelsForm = () => {
   const [search, setSearch] = useState<string>('');
@@ -40,6 +41,7 @@ const GetHotelsForm = () => {
       city: '',
     },
   });
+  const { setHotels, setCity } = useActions();
 
   useEffect(() => {
     if (debounced.length > 2 && cities) {
@@ -48,10 +50,12 @@ const GetHotelsForm = () => {
     }
   }, [debounced, cities]);
 
-  const onSubmit = useCallback(async (data: GetHotelsSchema) => {
-    const response = await getHotels(data.city);
+  const onSubmit = useCallback(async (formData: GetHotelsSchema) => {
+    const response = await getHotels(formData.city);
     if (response.data) {
       console.log(response.data);
+      setHotels(response.data.data as HotelInfo[]);
+      setCity(formData.city);
     } else if (response.error) {
       console.log(response.error);
     }

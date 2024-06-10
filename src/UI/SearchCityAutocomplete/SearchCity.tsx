@@ -20,10 +20,11 @@ const SearchCity = <T extends FieldValues>({
         <Autocomplete
           {...field}
           options={options}
+          fullWidth={true}
           getOptionLabel={(option) => option}
           isOptionEqualToValue={(option, value) => option === value}
           onChange={(_, value) => field.onChange(value)}
-          sx={{ width: 250, minWidth: 200, maxWidth: 400 }}
+          sx={{ minWidth: 250 }}
           renderInput={(params) => (
             <TextField
               {...params}

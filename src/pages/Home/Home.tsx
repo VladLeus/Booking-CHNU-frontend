@@ -1,6 +1,7 @@
 import GetHotelsForm from '@modules/GetHotelsForm';
 import { Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
+import HotelsResultsGenerator from '@modules/HotelsResultsGenerator/HotelsResultsGenerator.tsx';
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
         Вітаємо, почнемо подорожувати?
       </Typography>
       <GetHotelsForm />
+      <HotelsResultsGenerator />
     </Stack>
   );
 };

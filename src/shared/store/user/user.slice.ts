@@ -6,10 +6,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setAuth(state, action: PayloadAction<boolean>) {
+    setAuth(state, action: PayloadAction<boolean>): void {
       state.user.isAuth = action.payload;
     },
-    setUserRegOrLogData(state, action: PayloadAction<UserStateAfterReg>) {
+    setUserRegOrLogData(state, action: PayloadAction<UserStateAfterReg>): void {
       state.user = {
         id: action.payload.id,
         email: action.payload.email,
@@ -19,10 +19,10 @@ export const userSlice = createSlice({
         isAuth: true,
       };
     },
-    logOutUser(state) {
+    logOutUser(state): void {
       state.user = initialState.user;
     },
-    loginActiveUser(state, action: PayloadAction<LoginActiveUserState>) {
+    loginActiveUser(state, action: PayloadAction<LoginActiveUserState>): void {
       state.user = {
         id: action.payload.id,
         email: action.payload.email,

@@ -12,6 +12,7 @@ import { carsListApi } from '@modules/CarsListCheck/api';
 import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
 import { getHotelsAPI } from '@modules/GetHotelsForm/api';
+import { hotelsReducer } from '@shared/store/hotels/hotels.slice.ts';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     [mapBoxApi.reducerPath]: mapBoxApi.reducer,
     [getHotelsAPI.reducerPath]: getHotelsAPI.reducer,
     user: userReducer,
+    hotels: hotelsReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
     [carBookingApi.reducerPath]: carBookingApi.reducer,

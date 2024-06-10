@@ -11,11 +11,11 @@ export const getHotelsAPI = createApi({
     baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
-    getHotels: build.query<Response<HotelsResponse>, string>({
+    getHotels: build.query<Response<HotelsResponse[]>, string>({
       query: (cityName: string) => ({
         url: BASE_URL + `/hotels/by_city/${getCityName(cityName)}`,
       }),
-      transformResponse: identity<Response<HotelsResponse>>,
+      transformResponse: identity<Response<HotelsResponse[]>>,
       transformErrorResponse: identity,
     }),
   }),
