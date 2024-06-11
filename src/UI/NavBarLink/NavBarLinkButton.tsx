@@ -7,7 +7,7 @@ import { NavBarLinkProps } from './types.ts';
 
 const NavBarLinkButton: FC<NavBarLinkProps> = ({ to, icon: Icon, text }) => {
   const location = useLocation();
-  const isActive = location.pathname === to;
+  const isActive = location.pathname.includes(to);
 
   return (
     <Link to={to}>

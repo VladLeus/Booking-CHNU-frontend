@@ -10,16 +10,17 @@ const CarsListCheck = () => {
 
   return (
     <Box>
-      {isLoading && <Alert severity="info">Loading</Alert>}
+      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
-          Error
+          Виникла помилка при завантаженні даних, спробуйте ще раз...
         </Alert>
       )}
 
       <Stack sx={{ flexDirection: 'column', gap: 3 }}>
         {cars?.data.map((car: CarsListResponse) => (
           <CarRental
+            key={car.id}
             id={car.id}
             icon={car.image_url}
             carModel={car.model}

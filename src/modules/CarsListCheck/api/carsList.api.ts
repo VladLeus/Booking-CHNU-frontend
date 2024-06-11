@@ -13,6 +13,9 @@ export const carsListApi = createApi({
     getAllCars: build.query<Response<CarsListResponse[]>, string>({
       query: () => ({
         url: BASE_URL + '/cars',
+        headers: {
+          Authorization: JSON.parse(localStorage.getItem('user_auth_token')!),
+        },
       }),
       transformResponse: identity<Response<CarsListResponse[]>>,
       transformErrorResponse: identity,
