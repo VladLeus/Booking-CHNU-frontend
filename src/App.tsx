@@ -19,13 +19,8 @@ function App() {
 
   return (
     <Stack gap={4} justifyItems="center" alignItems="center">
-      {user.isAuth && (
-        <>
-          <NavBar />
-          <AppRouter />
-        </>
-      )}
-      {!user.isAuth && <AppRouter />}
+      {user.isAuth && <NavBar />}
+      <AppRouter />
     </Stack>
   );
 }

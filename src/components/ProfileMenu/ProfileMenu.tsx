@@ -32,7 +32,7 @@ export function ProfileMenu() {
 
   return (
     <>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} zIndex={10}>
         <div>
           <IconButton
             id="composition-button"

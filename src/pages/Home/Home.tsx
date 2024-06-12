@@ -5,7 +5,7 @@ import HotelsResultsGenerator from '@modules/HotelsResultsGenerator/HotelsResult
 
 const Home = () => {
   return (
-    <Stack gap={2}>
+    <Stack gap={2} textAlign="center">
       <Typography variant="h4" component="h1">
         Вітаємо, почнемо подорожувати?
       </Typography>
