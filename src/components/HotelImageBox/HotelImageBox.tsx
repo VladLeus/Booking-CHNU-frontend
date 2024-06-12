@@ -13,7 +13,7 @@ const HotelImageBox: FC<HotelImageBoxProps> = ({
   price,
   isLoading,
 }) => {
-  const formatedPrice = price.toLocaleString();
+  const formatedPrice = price ? 'UAH ' + price.toLocaleString() : '';
 
   return (
     <>
@@ -152,7 +152,7 @@ const HotelImageBox: FC<HotelImageBoxProps> = ({
                     letterSpacing: 0.4,
                   }}
                 >
-                  UAH {formatedPrice}
+                  {formatedPrice}
                 </Box>
               </>
             )}

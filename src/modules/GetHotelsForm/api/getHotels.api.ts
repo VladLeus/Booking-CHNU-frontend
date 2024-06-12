@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '@shared/constants';
 import { Response } from '@shared/types';
 import { HotelsResponse } from './types.ts';
-import { getCityName } from '../_data.ts';
 import { identity } from '@shared/utils';
 
 export const getHotelsAPI = createApi({
@@ -13,7 +12,7 @@ export const getHotelsAPI = createApi({
   endpoints: (build) => ({
     getHotels: build.query<Response<HotelsResponse[]>, string>({
       query: (cityName: string) => ({
-        url: BASE_URL + `/hotels/by_city/${getCityName(cityName)}`,
+        url: BASE_URL + `/hotels/by_city/${cityName}`,
       }),
       transformResponse: identity<Response<HotelsResponse[]>>,
       transformErrorResponse: identity,

@@ -5,6 +5,6 @@ export interface HotelImageBoxProps {
   point: number;
   rating: string;
   reviews: number;
-  price: number;
+  price?: number;
   isLoading: boolean;
 }
