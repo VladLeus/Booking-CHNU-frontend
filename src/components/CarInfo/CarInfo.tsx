@@ -319,7 +319,6 @@ const CarInfo: FC<CarInfoProps> = ({
         <Box
           sx={{
             p: 1,
-            //minWidth: { md: 'auto' },
             display: 'flex',
             flexDirection: 'column',
             maxWidth: '230px',

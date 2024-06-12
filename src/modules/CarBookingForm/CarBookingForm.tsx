@@ -53,7 +53,9 @@ const CarBookingForm = () => {
 
     if (response.data) {
       setIsSuccess(true);
-      console.log('Ви забронювали ' + response.data?.data.car_id);
+      console.log(
+        'Ви успішно забронювали машину №' + response.data?.data.car_id,
+      );
     } else if ('error' in response!) {
       console.log(response.error);
     }
@@ -134,7 +136,7 @@ const CarBookingForm = () => {
           {isSuccess && (
             <Alert severity="info">
               Бронювання успішне, деталі вашого бронювання будуть надіслані на
-              ваш емайл!
+              ваш email!
             </Alert>
           )}
         </Stack>
