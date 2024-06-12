@@ -13,6 +13,8 @@ import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
 import { getHotelsAPI } from '@modules/GetHotelsForm/api';
 import { hotelsReducer } from '@shared/store/hotels/hotels.slice.ts';
+import { balanceApi } from '@modules/BalanceInfo/api';
+import { userInfoApi } from '@modules/UserInfo/api';
 
 export const store = configureStore({
   reducer: {
@@ -31,6 +33,8 @@ export const store = configureStore({
 
     [carsListApi.reducerPath]: carsListApi.reducer,
     [carBookingApi.reducerPath]: carBookingApi.reducer,
+    [balanceApi.reducerPath]: balanceApi.reducer,
+    [userInfoApi.reducerPath]: userInfoApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -45,7 +49,9 @@ export const store = configureStore({
       .concat(carsListApi.middleware)
       .concat(mapBoxApi.middleware)
       .concat(carBookingApi.middleware)
-      .concat(getHotelsAPI.middleware),
+      .concat(getHotelsAPI.middleware)
+      .concat(balanceApi.middleware)
+      .concat(userInfoApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
