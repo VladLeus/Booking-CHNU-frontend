@@ -1,1 +1,1 @@
-export * from './CarBookingForm.tsx';
+export { default } from './CarBookingForm.tsx';

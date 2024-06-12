@@ -12,7 +12,7 @@ export const mapBoxApi = createApi({
       query: (search: string) => ({
         url: `/v5/mapbox.places/` + search + `.json`,
         params: {
-          access_token: process.env.REACT_APP_MAPBOX_API_KEY,
+          access_token: import.meta.env.VITE_MAPBOX_API_KEY,
           types: 'place',
           language: 'uk',
         },
@@ -23,4 +23,4 @@ export const mapBoxApi = createApi({
   }),
 });
 
-export const { useLazySearchCityQuery } = mapBoxApi;
+export const { useLazySearchCityQuery, useSearchCityQuery } = mapBoxApi;

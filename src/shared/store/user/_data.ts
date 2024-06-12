@@ -11,5 +11,5 @@ const user: User = {
 };
 
 export const initialState = {
-  user: user,
+  user,
 };

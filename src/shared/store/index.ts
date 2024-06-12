@@ -11,6 +11,8 @@ import { loginActiveUserAPI } from '@modules/LoginActiveUser/api';
 import { carsListApi } from '@modules/CarsListCheck/api';
 import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
+import { getHotelsAPI } from '@modules/GetHotelsForm/api';
+import { hotelsReducer } from '@shared/store/hotels/hotels.slice.ts';
 import { balanceApi } from '@modules/BalanceInfo/api';
 import { userInfoApi } from '@modules/UserInfo/api';
 
@@ -25,7 +27,9 @@ export const store = configureStore({
     [logoutAPI.reducerPath]: logoutAPI.reducer,
     [loginActiveUserAPI.reducerPath]: loginActiveUserAPI.reducer,
     [mapBoxApi.reducerPath]: mapBoxApi.reducer,
+    [getHotelsAPI.reducerPath]: getHotelsAPI.reducer,
     user: userReducer,
+    hotels: hotelsReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
     [carBookingApi.reducerPath]: carBookingApi.reducer,
@@ -45,6 +49,7 @@ export const store = configureStore({
       .concat(carsListApi.middleware)
       .concat(mapBoxApi.middleware)
       .concat(carBookingApi.middleware)
+      .concat(getHotelsAPI.middleware)
       .concat(balanceApi.middleware)
       .concat(userInfoApi.middleware),
 });

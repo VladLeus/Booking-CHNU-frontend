@@ -1,9 +1,9 @@
 import { Alert, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { useGetAllCarsQuery } from '@modules/CarsListCheck/api/carsList.api.ts';
+import { useGetAllCarsQuery } from '@modules/CarsListCheck/api';
 import CarInfo from '@components/CarInfo';
 import Stack from '@mui/material/Stack';
-import CarBookingForm from '@modules/CarBookingForm/CarBookingForm.tsx';
+import CarBookingForm from '@modules/CarBookingForm';
 
 const CarBooking = () => {
   const { id } = useParams();
