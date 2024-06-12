@@ -34,7 +34,6 @@ const CarRental: FC<CarRentalProps> = ({
       sx={{
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
-        //alignItems: 'center',
         bgcolor: 'background.default',
         border: '1px solid',
         borderColor: 'divider',
@@ -75,10 +74,9 @@ const CarRental: FC<CarRentalProps> = ({
       <Box
         sx={{
           p: 1,
-          minWidth: { md: 'auto' },
           display: 'flex',
           flexDirection: 'column',
-          maxWidth: '340px',
+          width: '340px',
           alignItems: { xs: 'center', md: 'flex-start' },
         }}
       >

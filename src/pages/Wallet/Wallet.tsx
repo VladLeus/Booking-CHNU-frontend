@@ -1,8 +1,20 @@
+import BalanceInfo from '@modules/BalanceInfo/BalanceInfo.tsx';
+import { Typography } from '@mui/material';
+
 const Wallet = () => {
   return (
     <>
-      <h2>Ballance</h2>
-      <p>Here you can check your balance</p>
+      <Typography
+        variant="h6"
+        sx={{
+          color: 'text.primary',
+          fontWeight: 'bold',
+        }}
+      >
+        Ваші бонуси та кешбек
+      </Typography>
+
+      <BalanceInfo />
     </>
   );
 };

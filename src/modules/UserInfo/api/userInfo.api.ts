@@ -1,26 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '@shared/constants';
 import { Response } from '@shared/types';
-import { CarsListResponse } from '@modules/CarsListCheck/api/types.ts';
 import { identity } from '@shared/utils';
+import { UserInfoResponse } from '@modules/UserInfo/api/types.ts';
 
-export const carsListApi = createApi({
-  reducerPath: 'cars/api',
+export const userInfoApi = createApi({
+  reducerPath: 'profile-settings/api',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
   }),
   endpoints: (build) => ({
-    getAllCars: build.query<Response<CarsListResponse[]>, string>({
+    getUserInfo: build.query<Response<UserInfoResponse>, string>({
       query: () => ({
-        url: BASE_URL + '/cars',
+        url: BASE_URL + '/profile',
         headers: {
           Authorization: JSON.parse(localStorage.getItem('user_auth_token')!),
         },
       }),
-      transformResponse: identity<Response<CarsListResponse[]>>,
+      transformResponse: identity<Response<UserInfoResponse>>,
       transformErrorResponse: identity,
     }),
   }),
 });
 
-export const { useGetAllCarsQuery } = carsListApi;
+export const { useGetUserInfoQuery } = userInfoApi;
