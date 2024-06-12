@@ -4,7 +4,6 @@ import { FC } from 'react';
 import SkeletonLoad from '@modules/SkeletonLoad';
 
 const HotelImageBox: FC<HotelImageBoxProps> = ({
-  icon,
   hotelName,
   country,
   place,
@@ -33,25 +32,6 @@ const HotelImageBox: FC<HotelImageBoxProps> = ({
           cursor: 'pointer',
         }}
       >
-        {isLoading ? (
-          <SkeletonLoad
-            variant="rectangular"
-            animation="wave"
-            height={186.4}
-            width={280}
-          />
-        ) : (
-          <Box
-            component="img"
-            sx={{
-              height: 186.4,
-              width: 280,
-            }}
-            alt="The house from the offer."
-            src={icon}
-          />
-        )}
-
         <Box
           sx={{
             // p: 2,

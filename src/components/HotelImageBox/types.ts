@@ -1,5 +1,4 @@
 export interface HotelImageBoxProps {
-  icon: string;
   hotelName: string;
   country: string;
   place: string;

@@ -21,13 +21,12 @@ const HotelsResultsGenerator = () => {
       {hotels.map((hotel: HotelInfo) => (
         <HotelImageBox
           key={hotel.hotelId}
-          icon={'#'}
           hotelName={hotel.name}
           country={hotel.address.countryCode}
           place={city}
-          point={2}
-          rating={getRandomFloat(5.5, 10.0, 1).toString()}
-          reviews={0}
+          point={getRandomFloat(5.5, 10.0, 1)}
+          rating={''}
+          reviews={Math.floor(Math.random() * (6000 - 1000 + 1)) + 1000}
           price={Math.floor(Math.random() * (6000 - 1000 + 1)) + 1000}
           isLoading={isLoading}
         />
