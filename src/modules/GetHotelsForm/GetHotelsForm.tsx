@@ -18,10 +18,14 @@ import { useLazyGetHotelsQuery } from '@modules/GetHotelsForm/api/getHotels.api.
 import { HotelInfo } from '@shared/store/hotels/types.ts';
 import { useNavigate } from 'react-router-dom';
 import { getCityName } from '@modules/GetHotelsForm/_data.ts';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const GetHotelsForm = () => {
   const [search, setSearch] = useState<string>('');
+  const [errorText, setErrorText] = useState<string>('');
   const debounced: string = useDebounce(search, 500);
+
   const {
     data: cities,
     isLoading,
@@ -29,9 +33,11 @@ const GetHotelsForm = () => {
   } = useSearchCityQuery(debounced, {
     skip: debounced.length < 2,
   });
+
   const [options, setOptions] = useState<string[]>([]);
   const [getHotels, { isLoading: isHotelsLoading, isError: isHotelsError }] =
     useLazyGetHotelsQuery();
+
   const {
     control,
     handleSubmit,
@@ -43,6 +49,7 @@ const GetHotelsForm = () => {
       city: '',
     },
   });
+
   const { setHotels, setCity } = useActions();
   const navigate = useNavigate();
 
@@ -70,21 +77,19 @@ const GetHotelsForm = () => {
       setHotels(response.data.data as HotelInfo[]);
       setCity(formData.city);
       navigate(`/hotels?city=${formData.city}`);
-    } else if (response.error) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isLoading ||
-        (isHotelsLoading && (
-          <Alert severity="info">Дані завантажуються...</Alert>
-        ))}
+        (isHotelsLoading && <Alert severity="info">{LOADING_TEXT}</Alert>)}
       {isError ||
         (isHotelsError && (
           <Alert severity="error" variant="filled">
-            Помилка завантаження даних...
+            {errorText}
           </Alert>
         ))}
       <Stack direction="row" gap={2} sx={{ p: 1, bgcolor: 'lightgray' }}>

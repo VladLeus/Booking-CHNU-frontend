@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import { ProfileMenu } from '@components/ProfileMenu/ProfileMenu';
+import { ProfileMenu } from '@components/ProfileMenu/ProfileMenu.tsx';
 
 export default {
   title: 'Example/ProfileMenu',

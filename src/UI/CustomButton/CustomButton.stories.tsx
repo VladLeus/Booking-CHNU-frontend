@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import CustomButton from '@ui/CustomButton';
+import CustomButton from '@ui/CustomButton/index.ts';
 import { CustomButtonProps } from '@ui/CustomButton/types.ts';
 import { Add as AddIcon } from '@mui/icons-material';
 

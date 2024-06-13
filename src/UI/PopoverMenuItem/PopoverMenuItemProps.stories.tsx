@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import PopoverMenuItem from '@ui/PopoverMenuItem';
+import PopoverMenuItem from '@ui/PopoverMenuItem/index.ts';
 import { PopoverMenuItemProps } from '@ui/PopoverMenuItem/types.ts';
 import {
   Home as HomeIcon,

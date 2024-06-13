@@ -1,43 +1,49 @@
 import Stack from '@mui/material/Stack';
 import UserProfile from '@components/UserProfile';
 import { Alert } from '@mui/material';
-import { useGetUserInfoQuery } from '@modules/UserInfo/api';
+import { useLazyGetUserInfoQuery } from '@modules/UserInfo/api';
 import CustomButton from '@ui/CustomButton';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useActions, useAppSelector } from '@shared/hooks';
 import { LoginActiveUserState } from '@shared/store/user/types.ts';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
-  const { data: user_info, isLoading, isError } = useGetUserInfoQuery('');
+  const { user } = useAppSelector((state) => state.user);
+  const [getUserInfo, { isLoading, isError }] = useLazyGetUserInfoQuery();
   const { loginActiveUser } = useActions();
+  const [errorText, setErrorText] = useState<string>('');
 
-  useEffect(() => {
-    if (user_info) {
+  const getInfo = async () => {
+    const response = await getUserInfo('');
+    if (response.data) {
       const user: LoginActiveUserState = {
-        id: user_info.data.id,
-        email: user_info.data.email,
-        name: user_info.data.name,
-        surname: user_info.data.last_name,
-        phone: user_info.data.phone_number,
-        gender: user_info.data.gender,
-        birthdate: user_info.data.birthdate,
+        id: response.data.data.id,
+        email: response.data.data.email,
+        name: response.data.data.name,
+        surname: response.data.data.last_name,
+        phone: response.data.data.phone_number,
+        gender: response.data.data.gender,
+        birthdate: response.data.data.birthdate,
       };
       loginActiveUser(user);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status));
     }
-  }, [user_info]);
+  };
 
-  const { user } = useAppSelector((state) => state.user);
+  useEffect(() => {
+    getInfo();
+  }, []);
 
-  if (!user_info) {
-    return <Alert severity="error">Помилка завантаження даних</Alert>;
-  }
 
   return (
     <>
-      {isLoading && <Alert severity="info">Loading...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
-          Error fetching balance information.
+          {errorText}
         </Alert>
       )}
 

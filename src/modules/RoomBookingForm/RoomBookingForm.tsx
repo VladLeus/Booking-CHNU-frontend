@@ -4,7 +4,7 @@ import {
   RoomBookingSchema,
   roomBookingSchema,
 } from '@modules/RoomBookingForm/schema';
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import CustomInput from '@ui/CustomInput';
 import SingleDatePicker from '@ui/SingleDatePicker';
@@ -15,10 +15,12 @@ import { RoomBookingFormProps } from '@modules/RoomBookingForm/types.ts';
 import { useActions, useAppSelector } from '@shared/hooks';
 import { BookRoomRequest } from '@modules/RoomBookingForm/api/types.ts';
 import { useNavigate } from 'react-router-dom';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const RoomBookingForm: FC<RoomBookingFormProps> = ({
-  hotel_id,
-  apartment_id,
+  hotelId,
+  apartmentId,
 }) => {
   const { user } = useAppSelector((state) => state.user);
   const {
@@ -38,34 +40,32 @@ const RoomBookingForm: FC<RoomBookingFormProps> = ({
   const [book, { isLoading, isError, isSuccess }] = useBookRoomMutation();
   const navigate = useNavigate();
   const { clearHotels } = useActions();
+  const [errorText, setErrorText] = useState<string>('');
 
   const onSubmit = useCallback(async (formData: RoomBookingSchema) => {
     const bookRoomReq: BookRoomRequest = {
-      hotel_id: hotel_id,
-      apartment_id: apartment_id,
+      hotel_id: hotelId,
+      apartment_id: apartmentId,
       start_date: formData.start_date?.toString()!,
       end_date: formData.end_date?.toString()!,
     };
-    console.log(bookRoomReq);
     const response = await book(bookRoomReq);
 
     if (response.data) {
       clearHotels();
       setTimeout(() => navigate('/home'), 2500);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack gap={2}>
-        {isLoading && (
-          <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
 

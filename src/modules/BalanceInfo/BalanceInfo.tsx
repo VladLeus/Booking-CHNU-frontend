@@ -1,6 +1,7 @@
 import BalanceInfoCard from '@components/BalanceInfoCard';
 import { Alert } from '@mui/material';
 import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
+import { LOADING_TEXT } from '@shared/constants';
 
 const BalanceInfo = () => {
   const { data: wallet, isLoading, isError } = useGetBallanceQuery('');
@@ -11,11 +12,7 @@ const BalanceInfo = () => {
 
   return (
     <>
-      {isLoading && (
-        <Alert severity="info">
-          Дані завантажуються, будь ласка, зачекайте...
-        </Alert>
-      )}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
           Помилка отримання даних, спробуйте ще раз пізніше.

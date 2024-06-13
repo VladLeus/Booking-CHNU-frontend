@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import { UserApartamentsHistoryResponse } from '@modules/UserApartamentsHistory/api/types.ts';
 import CustomButton from '@ui/CustomButton';
 import { FC } from 'react';
+import { LOADING_TEXT } from '@shared/constants';
 
 const UserApartamentsHistory: FC<{ handleClick: () => void }> = ({
   handleClick,
@@ -17,7 +18,7 @@ const UserApartamentsHistory: FC<{ handleClick: () => void }> = ({
 
   return (
     <>
-      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
           Інформація відсутня, спробуйте пізніше...

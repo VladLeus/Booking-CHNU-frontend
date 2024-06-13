@@ -18,8 +18,6 @@ export const userSlice = createSlice({
         id: action.payload.id,
         email: action.payload.email,
         name: action.payload.name,
-        tripHistory: [],
-        wallet: [],
         isAuth: true,
       };
     },
@@ -35,8 +33,6 @@ export const userSlice = createSlice({
         phone: action.payload.phone,
         gender: action.payload.gender,
         birthdate: action.payload.birthdate,
-        tripHistory: [],
-        wallet: [],
         isAuth: true,
       };
     },
@@ -49,8 +45,6 @@ export const userSlice = createSlice({
         phone: action.payload.phone_number,
         gender: action.payload.gender,
         birthdate: action.payload.birthdate,
-        tripHistory: [],
-        wallet: [],
         isAuth: true,
       };
     },

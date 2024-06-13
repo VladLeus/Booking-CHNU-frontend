@@ -7,7 +7,7 @@ import {
   carBookingSchema,
   CarBookingSchema,
 } from '@modules/CarBookingForm/schema';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { RentCarRequest } from '@modules/CarBookingForm/api/types.ts';
 import { useRentCarMutation } from '@modules/CarBookingForm/api';
 import { Alert } from '@mui/material';
@@ -16,6 +16,8 @@ import CustomButton from '@ui/CustomButton';
 import DropDownSelector from '@ui/DropDownSelector';
 import { CITIES, CITY_MAP } from '@modules/CarBookingForm/_data.ts';
 import Stack from '@mui/material/Stack';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const CarBookingForm = () => {
   const { id } = useParams();
@@ -36,6 +38,8 @@ const CarBookingForm = () => {
 
   const [rentCar, { isLoading, isError, isSuccess }] = useRentCarMutation();
 
+  const [errorText, setErrorText] = useState<string>('');
+
   const onSubmit = useCallback(async (data: CarBookingSchema) => {
     const carDTO: RentCarRequest = {
       car_booking: {
@@ -46,16 +50,14 @@ const CarBookingForm = () => {
       },
       token: JSON.parse(localStorage.getItem('user_auth_token')!),
     };
-
-    console.log(carDTO);
     const response = await rentCar(carDTO);
 
     if (response.data) {
       console.log(
         'Ви успішно забронювали машину №' + response.data?.data.car_id,
       );
-    } else if ('error' in response!) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
 
@@ -63,15 +65,11 @@ const CarBookingForm = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap={2} justifyItems="center">
-          {isLoading && (
-            <Alert severity="info">
-              Запит обробляється, зачекайте будь-ласка.
-            </Alert>
-          )}
+          {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
           {isError && (
             <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-              Помилка підключення з сервером, спробуйте пізніше.
+              {errorText}
             </Alert>
           )}
 

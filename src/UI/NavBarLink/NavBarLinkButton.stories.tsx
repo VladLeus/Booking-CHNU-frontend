@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import NavBarLinkButton from '@ui/NavBarLink';
+import NavBarLinkButton from '@ui/NavBarLink/index.ts';
 import { NavBarLinkProps } from '@ui/NavBarLink/types.ts';
 import { Home as HomeIcon } from '@mui/icons-material';
 import { BrowserRouter as Router } from 'react-router-dom';

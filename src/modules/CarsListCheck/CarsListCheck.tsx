@@ -3,13 +3,14 @@ import { useGetAllCarsQuery } from '@modules/CarsListCheck/api/carsList.api.ts';
 import CarRental from '@components/CarRental';
 import { CarsListResponse } from '@modules/CarsListCheck/api/types.ts';
 import Stack from '@mui/material/Stack';
+import { LOADING_TEXT } from '@shared/constants';
 
 const CarsListCheck = () => {
   const { data: cars, isLoading, isError } = useGetAllCarsQuery('');
 
   return (
     <Box>
-      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
           Виникла помилка при завантаженні даних, спробуйте ще раз...

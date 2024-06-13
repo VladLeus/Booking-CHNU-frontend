@@ -22,8 +22,6 @@ const LoginActiveUser: FC<LoginActiveUserProps> = ({ onCheckComplete }) => {
           gender: response.data.data.gender,
           birthdate: response.data.data.birthdate,
         });
-      } else if (response.error) {
-        console.log(response.error);
       }
     }
     onCheckComplete();
@@ -36,7 +34,7 @@ const LoginActiveUser: FC<LoginActiveUserProps> = ({ onCheckComplete }) => {
   return (
     <>
       {isLoading && (
-        <Alert severity="info">Зачекайте, триває зв'язок з сервером </Alert>
+        <Alert severity="info">Зачекайте, триває зв'язок з сервером</Alert>
       )}
     </>
   );

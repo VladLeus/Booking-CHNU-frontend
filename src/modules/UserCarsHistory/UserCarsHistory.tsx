@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack';
 import { useGetUserCarsHistoryQuery } from '@modules/UserCarsHistory/api';
 import CarsHistory from '@components/CarsHistory';
 import { UserCarsHistoryResponse } from '@modules/UserCarsHistory/api/types.ts';
+import { LOADING_TEXT } from '@shared/constants';
 
 const UserCarsHistory: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const {
@@ -14,7 +15,7 @@ const UserCarsHistory: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   } = useGetUserCarsHistoryQuery('');
   return (
     <>
-      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
           Інформація відсутня, спробуйте пізніше...

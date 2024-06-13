@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import { HotelInfoResponse } from '@modules/HotelRoomsInfo/api/types.ts';
 import Box from '@mui/material/Box';
 import { renderStars } from '@shared/utils';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   hotelName,
@@ -47,13 +49,13 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
 
     if (response.data) {
       setHotelDetails(response.data.data[0]);
-    } else if (response.error) {
-      if ('status' in response.error && response.error.status === 422) {
+    } else if (response.error && 'status' in response.error) {
+      if (response.error.status === 422) {
         setDetailsErrorText(
           'На жаль ми не можемо отримати детальної інформації про обраний готель',
         );
       } else {
-        setDetailsErrorText("Помилка з'єднання з сервером");
+        setDetailsErrorText(errorMapper(response.error.status as number));
         setSeverity('error');
       }
     }
@@ -67,9 +69,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   return (
     <Stack gap={2} textAlign="center" alignItems="center">
       {isLoading ||
-        (isDetailsLoading && (
-          <Alert severity="info">Дані завантажуються...</Alert>
-        ))}
+        (isDetailsLoading && <Alert severity="info">{LOADING_TEXT}</Alert>)}
       {isError && (
         <Alert severity="error">Виникла помилка при завантаженні даних</Alert>
       )}

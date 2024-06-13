@@ -6,7 +6,6 @@ import {
   useTheme,
 } from '@mui/material';
 import { useForm } from 'react-hook-form';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +19,8 @@ import {
   PasswordResetSchema,
 } from '@modules/PasswordResetForm/schema';
 import { useResetMutation } from '@modules/PasswordResetForm/api';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const PasswordResetForm = () => {
   const {
@@ -40,6 +41,7 @@ const PasswordResetForm = () => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isChanged, setIsChanged] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
 
   const togglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -47,7 +49,6 @@ const PasswordResetForm = () => {
 
   const onSubmit = useCallback(async (data: PasswordResetSchema) => {
     const token = JSON.parse(localStorage.getItem('resetJWT')!);
-    console.log(data);
 
     const req = {
       password: data.password,
@@ -55,13 +56,12 @@ const PasswordResetForm = () => {
       token: token,
     };
 
-    console.log(req);
     const response = await reset(req);
 
     if (response.data) {
       setIsChanged(true);
-    } else if (response.error) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
 
     setTimeout(() => {
@@ -83,15 +83,11 @@ const PasswordResetForm = () => {
         minWidth={350}
         width={isSmScreen ? 450 : 300}
       >
-        {isLoading && (
-          <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
 

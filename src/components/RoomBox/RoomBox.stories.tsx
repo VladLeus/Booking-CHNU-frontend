@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from '@storybook/react';
-import RoomBox from '@components/RoomBox';
+import RoomBox from '@components/RoomBox/index.ts';
 import { RoomBoxProps } from '@components/RoomBox/types.ts';
 
 export default {
