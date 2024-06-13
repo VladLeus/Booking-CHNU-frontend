@@ -17,8 +17,9 @@ export const userDataEditSchema = z
       .string()
       .min(1, "Обов'язкове поле")
       .email('Некоректна електронна адреса'),
-    password: passwordSchema,
-    passwordConfirmation: passwordSchema,
+    current_password: passwordSchema,
+    new_password: passwordSchema.nullable(),
+    new_password_confirmation: passwordSchema.nullable(),
     gender: z.string().min(1, "Обов'язкове поле"),
     birthdate: dayJsSchema.nullable().refine((data) => {
       const today = dayjs();
@@ -26,9 +27,12 @@ export const userDataEditSchema = z
       return age >= 18 && age <= 90;
     }, 'Вік має бути від 18 до 90'),
   })
-  .refine((schema) => schema.password === schema.passwordConfirmation, {
-    message: 'Паролі не співпадають',
-    path: ['passwordConfirmation'],
-  });
+  .refine(
+    (schema) => schema.new_password === schema.new_password_confirmation,
+    {
+      message: 'Паролі не співпадають',
+      path: ['passwordConfirmation'],
+    },
+  );
 
 export type UserDataEditSchema = z.infer<typeof userDataEditSchema>;

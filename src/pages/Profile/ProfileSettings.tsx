@@ -1,15 +1,15 @@
 import { Divider, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import UserInfo from '@modules/UserInfo';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import UserDataEdit from '@modules/UserDataEdit';
 
 const ProfileSettings = () => {
   const [isModalActive, setIsModalActive] = useState<boolean>(false);
 
-  const toggleModal = () => {
+  const toggleModal = useCallback(() => {
     setIsModalActive(!isModalActive);
-  };
+  }, [isModalActive]);
 
   return (
     <>
@@ -39,7 +39,7 @@ const ProfileSettings = () => {
       </Stack>
 
       {!isModalActive && <UserInfo handleClick={toggleModal} />}
-      {isModalActive && <UserDataEdit />}
+      {isModalActive && <UserDataEdit handleClick={toggleModal} />}
     </>
   );
 };

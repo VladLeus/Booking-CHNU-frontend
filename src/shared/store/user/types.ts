@@ -26,3 +26,12 @@ export interface LoginActiveUserState {
   gender: 'Чоловік' | 'Жінка' | 'Інше';
   birthdate: string;
 }
+
+export interface UserInfoAfterEdit {
+  name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  gender: 'Чоловік' | 'Жінка' | 'Інше';
+  birthdate: string;
+}

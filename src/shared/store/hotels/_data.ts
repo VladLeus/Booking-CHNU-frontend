@@ -5,4 +5,4 @@ const hotels: HotelInfo[] = [];
 export const hotelsInitState = {
   hotels,
   city: '',
-}
+};
