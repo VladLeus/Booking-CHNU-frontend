@@ -27,8 +27,7 @@ const CarInfo: FC<CarInfoProps> = ({
           sx={{
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            //alignItems: 'center',
-            bgcolor: 'background.default',
+            backgroundColor: 'background.default',
             border: '1px solid',
             borderColor: 'divider',
             borderRadius: 2,

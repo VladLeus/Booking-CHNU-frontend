@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack';
 
 const CarsListCheck = () => {
   const { data: cars, isLoading, isError } = useGetAllCarsQuery('');
-  // console.log(cars.data);
 
   return (
     <Box>

@@ -1,17 +1,11 @@
-//import { useAppSelector } from '@shared/hooks';
 import BalanceInfoCard from '@components/BalanceInfoCard';
 import { Alert } from '@mui/material';
 import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
-// import { CarsListResponse } from "@modules/CarsListCheck/api/types.ts.ts";
-// import CarRental from "@components/CarRental";
-// import { BalanceInfoResponse } from "@modules/BalanceInfo/api/types.ts.ts";
 
 const BalanceInfo = () => {
-  //const user = useAppSelector((state) => state.user);
   const { data: wallet, isLoading, isError } = useGetBallanceQuery('');
 
   if (!wallet) {
-    console.log(wallet);
     return <Alert severity="error">Помилка завантаження даних</Alert>;
   }
 

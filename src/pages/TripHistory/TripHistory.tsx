@@ -37,8 +37,6 @@ const TripHistory = () => {
         </Typography>
         <Divider />
 
-        {/*<UserApartamentsHistory/>*/}
-
         {!isModalActive && <UserApartamentsHistory handleClick={toggleModal} />}
         {isModalActive && <UserCarsHistory handleClick={toggleModal} />}
       </Stack>
