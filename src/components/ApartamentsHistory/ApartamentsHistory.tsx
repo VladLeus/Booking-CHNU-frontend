@@ -41,7 +41,7 @@ const ApartamentsHistory: FC<ApartmentsHistoryProps> = ({
                 fontWeight: 'bold',
               }}
             >
-              {id}
+              Номер бронювання: {id}
             </Box>
             <Box
               component="span"
@@ -51,7 +51,7 @@ const ApartamentsHistory: FC<ApartmentsHistoryProps> = ({
                 fontWeight: 'medium',
               }}
             >
-              {apartment_id}
+              Номер кімнати: {apartment_id}
             </Box>
             <Stack sx={{ mt: 0.5, gap: 0.4 }}>
               <Box

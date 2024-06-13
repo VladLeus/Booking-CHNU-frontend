@@ -13,7 +13,7 @@ const TripHistory = () => {
 
   return (
     <>
-      <Stack direction="column" gap={1} sx={{ mt: 21 }}>
+      <Stack direction="column" gap={1} sx={{ mt: 5 }}>
         <Typography
           sx={{
             textAlign: 'left',

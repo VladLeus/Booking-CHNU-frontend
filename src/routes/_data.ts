@@ -12,6 +12,6 @@ export const AppRoutes = {
   resetTokenCheck: '/password/reset/edit',
   passwordReset: '/password-reset',
   hotelsResult: '/hotels',
-  hotelInfo: '/hotel/details',
+  roomInfo: '/hotel/room/details',
   hotelRooms: '/hotel/rooms',
 };

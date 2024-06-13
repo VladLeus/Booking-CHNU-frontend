@@ -25,7 +25,8 @@ const ForgotPasswordForm = () => {
       email: '',
     },
   });
-  const [getResetLink, { isLoading, isError }] = useForgotPasswordMutation();
+  const [getResetLink, { isLoading, isError, isSuccess }] =
+    useForgotPasswordMutation();
 
   const onSubmit = useCallback(async (data: ForgotPasswordFormSchema) => {
     const response = await getResetLink({ email: data.email });
@@ -35,9 +36,6 @@ const ForgotPasswordForm = () => {
     } else if ('error' in response) {
       console.log(response.error);
     }
-
-    // Test logging
-    // console.log(`http://localhost:5173/password/reset/edit?token=test`);
   }, []);
 
   const theme = useTheme();
@@ -93,6 +91,12 @@ const ForgotPasswordForm = () => {
           variant="contained"
           icon={SendIcon}
         />
+
+        {isSuccess && (
+          <Alert severity="info">
+            Вам на email було надіслано посилання для скидання паролю
+          </Alert>
+        )}
       </Stack>
     </form>
   );

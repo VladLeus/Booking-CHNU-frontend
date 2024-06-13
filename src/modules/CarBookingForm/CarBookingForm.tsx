@@ -7,7 +7,7 @@ import {
   carBookingSchema,
   CarBookingSchema,
 } from '@modules/CarBookingForm/schema';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { RentCarRequest } from '@modules/CarBookingForm/api/types.ts';
 import { useRentCarMutation } from '@modules/CarBookingForm/api';
 import { Alert } from '@mui/material';
@@ -34,8 +34,7 @@ const CarBookingForm = () => {
     },
   });
 
-  const [rentCar, { isLoading, isError }] = useRentCarMutation();
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [rentCar, { isLoading, isError, isSuccess }] = useRentCarMutation();
 
   const onSubmit = useCallback(async (data: CarBookingSchema) => {
     const carDTO: RentCarRequest = {
@@ -52,7 +51,6 @@ const CarBookingForm = () => {
     const response = await rentCar(carDTO);
 
     if (response.data) {
-      setIsSuccess(true);
       console.log(
         'Ви успішно забронювали машину №' + response.data?.data.car_id,
       );

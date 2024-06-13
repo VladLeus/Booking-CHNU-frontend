@@ -41,7 +41,7 @@ const CarsHistory: FC<CarsHistoryProps> = ({
                 fontWeight: 'bold',
               }}
             >
-              ID: {id}
+              Номер бронювання: {id}
             </Box>
             <Box
               component="span"
@@ -51,7 +51,7 @@ const CarsHistory: FC<CarsHistoryProps> = ({
                 fontWeight: 'medium',
               }}
             >
-              Car ID: {car_id}
+              Номер машини: {car_id}
             </Box>
             <Stack sx={{ mt: 0.5, gap: 0.4 }}>
               <Box

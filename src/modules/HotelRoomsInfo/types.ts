@@ -1,5 +1,6 @@
 export interface HotelRoomsInfoProps {
   hotelName: string;
+  hotelId: string;
   city: string;
 }
 
