@@ -28,6 +28,7 @@ const UserCarsHistory: FC<{ handleClick: () => void }> = ({ handleClick }) => {
       >
         {cars_history?.data.map((cars_history: UserCarsHistoryResponse) => (
           <CarsHistory
+            key={cars_history.id}
             id={cars_history.id}
             car_id={cars_history.car_id}
             start_date={cars_history.start_date}

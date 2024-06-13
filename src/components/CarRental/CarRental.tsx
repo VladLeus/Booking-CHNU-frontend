@@ -16,7 +16,6 @@ const CarRental: FC<CarRentalProps> = ({
   seats,
   transmissionType,
   manufactureYear,
-  // isPrepared,
   description,
   price,
   isLoading,

@@ -21,7 +21,7 @@ const RoomBox: FC<RoomBoxProps> = ({
         display: 'flex',
         flexDirection: { xs: 'column', md: 'row' },
         alignItems: 'center',
-        bgcolor: 'background.default',
+        backgroundColor: 'background.default',
         border: '1px solid',
         borderColor: 'divider',
         borderRadius: 2,

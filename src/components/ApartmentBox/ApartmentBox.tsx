@@ -11,8 +11,6 @@ const ApartmentBox: FC<ApartmentBoxProps> = ({
   availability,
   isLoading,
 }) => {
-  // const dateRangeString = `${dayjs(dateRange[0]).format('DD/MM/YYYY')} - ${dayjs(dateRange[1]).format('DD/MM/YYYY')}`;
-
   return (
     <>
       <Box

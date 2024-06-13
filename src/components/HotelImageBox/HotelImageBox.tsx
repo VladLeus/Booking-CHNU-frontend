@@ -19,7 +19,6 @@ const HotelImageBox: FC<HotelImageBoxProps> = ({
     <>
       <Box
         sx={{
-          //display: 'flex',
           height: 'auto',
           width: 280,
           flexDirection: 'column',
@@ -34,7 +33,6 @@ const HotelImageBox: FC<HotelImageBoxProps> = ({
       >
         <Box
           sx={{
-            // p: 2,
             minWidth: '280px',
             display: 'flex',
             flexDirection: 'column',
