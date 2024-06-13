@@ -9,10 +9,10 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 import { BalanceInfoCardProps } from '@components/BalanceInfoCard/types.ts';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import Stack from '@mui/material/Stack';
+import PercentIcon from '@mui/icons-material/Percent';
 
 const BalanceInfoCard: FC<BalanceInfoCardProps> = ({
   amount,
@@ -31,12 +31,12 @@ const BalanceInfoCard: FC<BalanceInfoCardProps> = ({
           <TableRow>
             <TableCell>
               <Stack sx={{ justifyContent: 'center', alignItems: 'center' }}>
-                <FormatListNumberedIcon />
+                <CreditCardIcon />
                 <Typography
                   variant="overline"
                   sx={{ fontSize: '7px', fontWeight: 'bold' }}
                 >
-                  Кількість
+                  Баланс
                 </Typography>
               </Stack>
             </TableCell>
@@ -59,7 +59,7 @@ const BalanceInfoCard: FC<BalanceInfoCardProps> = ({
           <TableRow>
             <TableCell>
               <Stack sx={{ justifyContent: 'center', alignItems: 'center' }}>
-                <CreditCardIcon />
+                <PercentIcon />
                 <Typography
                   variant="overline"
                   sx={{ fontSize: '7px', fontWeight: 'bold' }}

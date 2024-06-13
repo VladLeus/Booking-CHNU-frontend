@@ -1,4 +1,5 @@
 import {
+  Alert,
   Paper,
   Table,
   TableBody,
@@ -14,16 +15,21 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import {
   userDataEditSchema,
   UserDataEditSchema,
-} from '@modules/UserDataEdit/schema/userDataEditSchema.ts';
+} from './schema/userDataEditSchema.ts';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import SingleDatePicker from '@ui/SingleDatePicker';
 import DropDownSelector from '@ui/DropDownSelector';
 import { GENDER } from '@modules/RegistrationForm/_data.ts';
-import { useCallback } from 'react';
-import { useAppSelector } from '@shared/hooks';
+import { FC, useCallback, useEffect, useState } from 'react';
+import { useActions, useAppSelector } from '@shared/hooks';
 import dayjs from 'dayjs';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { useProfileEditMutation } from './api/userDataEdit.api.ts';
+import { UserInfoEdit, UserInfoEditRequest } from './api/types.ts';
+import { UserInfoAfterEdit } from '@shared/store/user/types.ts';
 
-const UserDataEdit = () => {
+const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const { user } = useAppSelector((state) => state.user);
   const {
     control,
@@ -36,16 +42,89 @@ const UserDataEdit = () => {
       name: user.name,
       surname: user.surname,
       email: user.email,
-      phone: user.phone,
+      phone: user.phone?.slice(3) ?? '',
       gender: user.gender,
       birthdate: dayjs(user.birthdate) || null,
+      current_password: '',
+      new_password: null,
+      new_password_confirmation: null,
     },
   });
 
-  const onSubmit = useCallback(async () => {}, []);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+
+  const togglePasswordVisibility = useCallback(() => {
+    setIsPasswordVisible(!isPasswordVisible);
+  }, [isPasswordVisible]);
+
+  const [profileEdit, { isLoading, isError }] = useProfileEditMutation();
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [updatedUserProfile, setUpdatedUserProfile] =
+    useState<UserInfoAfterEdit>();
+
+  const { updateUserProfile } = useActions();
+
+  const onSubmit = useCallback(async (data: UserDataEditSchema) => {
+    const userInfo: UserInfoEdit = {
+      email: data.email,
+      name: data.name,
+      last_name: data.surname,
+      phone_number: '+38' + data.phone,
+      gender: data.gender,
+      birthdate: data.birthdate?.toString() || '',
+      current_password: data.current_password,
+      new_password: !data.new_password ? '' : data.new_password,
+      new_password_confirmation: !data.new_password_confirmation
+        ? ''
+        : data.new_password_confirmation,
+    };
+
+    const userUpdateDTO: UserInfoEditRequest = {
+      user: userInfo,
+      token: JSON.parse(localStorage.getItem('user_auth_token')!),
+    };
+
+    console.log(userUpdateDTO);
+    const response = await profileEdit(userUpdateDTO);
+
+    if (response.data) {
+      console.log(response.data);
+      setUpdatedUserProfile({
+        email: response.data.data.email,
+        name: response.data.data.name,
+        last_name: response.data.data.last_name,
+        phone_number: response.data.data.phone_number,
+        gender: response.data.data.gender,
+        birthdate: response.data.data.birthdate,
+      });
+      setIsSuccess(true);
+      console.log('Ви успішно змінили дані' + response.data?.data);
+      handleClick();
+    } else if ('error' in response!) {
+      console.log(response.error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSuccess) {
+      updateUserProfile(updatedUserProfile!);
+    }
+  }, [updatedUserProfile, isSuccess]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {isLoading && (
+        <Alert severity="info">Запит обробляється, зачекайте будь-ласка.</Alert>
+      )}
+
+      {isError && (
+        <Alert severity="error" variant="filled" sx={{ my: 2 }}>
+          Помилка підключення з сервером, спробуйте пізніше.
+        </Alert>
+      )}
+
+      {isSuccess && <Alert severity="info">Ви успішно змінили дані!</Alert>}
+
       <TableContainer component={Paper} sx={{ mb: 1.4 }}>
         <Table>
           <TableBody>
@@ -130,6 +209,22 @@ const UserDataEdit = () => {
                 />
               </TableCell>
             </TableRow>
+            <TableRow>
+              <TableCell>Поточний пароль</TableCell>
+              <TableCell sx={{ textAlign: 'right' }}>
+                <CustomInput
+                  name="current_password"
+                  control={control}
+                  type={isPasswordVisible ? 'text' : 'password'}
+                  label="Пароль"
+                  variant="outlined"
+                  error={!!errors.current_password}
+                  helperText={errors.current_password?.message || ''}
+                  icon={isPasswordVisible ? VisibilityIcon : VisibilityOffIcon}
+                  handleIconClick={togglePasswordVisibility}
+                />
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
@@ -145,8 +240,7 @@ const UserDataEdit = () => {
           text={'Зберегти'}
           variant={'outlined'}
           size={'small'}
-          type={'button'}
-          //handleClick={handleClick}
+          type={'submit'}
           color={'primary'}
         />
 
@@ -155,7 +249,7 @@ const UserDataEdit = () => {
           variant={'outlined'}
           size={'small'}
           type={'button'}
-          //handleClick={handleClick}
+          handleClick={handleClick}
           color={'warning'}
         />
       </Stack>

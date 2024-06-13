@@ -23,4 +23,4 @@ export const userInfoApi = createApi({
   }),
 });
 
-export const { useGetUserInfoQuery } = userInfoApi;
+export const { useGetUserInfoQuery, useLazyGetUserInfoQuery } = userInfoApi;
