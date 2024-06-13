@@ -3,8 +3,8 @@ export interface RoomBoxProps {
   hotelName: string;
   city: string;
   bedNumber: number;
-  roomCategory: 'Saver' | 'Common' | 'Luxury' | 'Royal';
+  roomCategory: string;
   description: string;
-  price: number;
+  price: string;
   isLoading: boolean;
 }

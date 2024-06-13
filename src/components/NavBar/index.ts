@@ -1,1 +1,1 @@
-export * from './NavBar.tsx';
+export { default } from './NavBar.tsx';

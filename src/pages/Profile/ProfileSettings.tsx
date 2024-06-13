@@ -13,7 +13,7 @@ const ProfileSettings = () => {
 
   return (
     <>
-      <Stack direction="column" gap={1} sx={{ mt: 21 }}>
+      <Stack direction="column" gap={1}>
         <Typography
           sx={{
             textAlign: 'left',

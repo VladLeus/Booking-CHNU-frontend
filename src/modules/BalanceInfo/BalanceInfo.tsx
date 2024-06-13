@@ -2,9 +2,9 @@
 import BalanceInfoCard from '@components/BalanceInfoCard';
 import { Alert } from '@mui/material';
 import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
-// import { CarsListResponse } from "@modules/CarsListCheck/api/types.ts";
+// import { CarsListResponse } from "@modules/CarsListCheck/api/types.ts.ts";
 // import CarRental from "@components/CarRental";
-// import { BalanceInfoResponse } from "@modules/BalanceInfo/api/types.ts";
+// import { BalanceInfoResponse } from "@modules/BalanceInfo/api/types.ts.ts";
 
 const BalanceInfo = () => {
   //const user = useAppSelector((state) => state.user);

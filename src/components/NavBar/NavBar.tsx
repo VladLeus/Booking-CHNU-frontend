@@ -11,7 +11,7 @@ export function NavBar() {
   return (
     <AppBar
       position="fixed"
-      sx={{ height: 150, backgroundColor: '#01579b', mb: 4 }}
+      sx={{ height: 150, backgroundColor: '#01579b' }}
     >
       <Toolbar sx={{ flexDirection: 'column', alignItems: 'center' }}>
         <Box
