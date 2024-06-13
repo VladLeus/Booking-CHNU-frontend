@@ -28,6 +28,7 @@ const UserApartamentsHistory: FC<{ handleClick: () => void }> = ({
         {apartaments?.data.map(
           (apartaments: UserApartamentsHistoryResponse) => (
             <ApartamentsHistory
+              key={apartaments.id}
               id={apartaments.id}
               apartment_id={apartaments.apartment_id}
               start_date={apartaments.start_date}

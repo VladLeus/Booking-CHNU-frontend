@@ -20,7 +20,12 @@ function App() {
   return (
     <Stack gap={2}>
       {user.isAuth && <NavBar />}
-      <Stack justifyItems="center" alignItems="center" height="100%" sx={{ mt: 5 }}>
+      <Stack
+        justifyItems="center"
+        alignItems="center"
+        height="100%"
+        sx={{ mt: 5 }}
+      >
         <AppRouter />
       </Stack>
     </Stack>
