@@ -7,7 +7,6 @@ import { LOADING_TEXT } from '@shared/constants';
 
 const CarsListCheck = () => {
   const { data: cars, isLoading, isError } = useGetAllCarsQuery('');
-  // console.log(cars.data);
 
   return (
     <Box>

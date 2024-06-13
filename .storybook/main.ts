@@ -13,5 +13,5 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-};
+};    
 export default config;

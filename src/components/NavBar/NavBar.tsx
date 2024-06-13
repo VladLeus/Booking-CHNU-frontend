@@ -6,6 +6,7 @@ import KingBedIcon from '@mui/icons-material/KingBed';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import NavBarLinkButton from '@ui/NavBarLink';
 import { ProfileMenu } from '../ProfileMenu';
+import Stack from '@mui/material/Stack';
 
 export function NavBar() {
   return (
@@ -24,11 +25,10 @@ export function NavBar() {
           </Typography>
           <ProfileMenu />
         </Box>
-        <Box
+        <Stack
+          flexDirection={'row'}
           component="nav"
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
             width: '92%',
             mt: 1,
             gap: 2,
@@ -40,7 +40,7 @@ export function NavBar() {
             icon={DirectionsCarIcon}
             text="Оренда авто"
           />
-        </Box>
+        </Stack>
       </Toolbar>
     </AppBar>
   );

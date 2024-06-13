@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import { RoomBoxProps } from '@components/RoomBox/types.ts';
 import { FC } from 'react';
 import SkeletonLoad from '@modules/SkeletonLoad';
+import Stack from '@mui/material/Stack';
 
 const RoomBox: FC<RoomBoxProps> = ({
   icon,
@@ -52,23 +53,19 @@ const RoomBox: FC<RoomBoxProps> = ({
         />
       )}
 
-      <Box
+      <Stack
+        flexDirection={'column'}
         sx={{
           p: 0,
-          // minWidth: { md: 'auto' },
-          display: 'flex',
-          flexDirection: 'column',
-          // maxWidth: '275px',
           width: '275px',
           alignItems: { xs: 'center', md: 'flex-start' },
         }}
       >
-        <Box
+        <Stack
+          flexDirection={'column'}
           sx={{
             px: 1.25,
             minWidth: { md: 'auto' },
-            display: 'flex',
-            flexDirection: 'column',
             width: '260px',
             gap: 0.4,
           }}
@@ -99,7 +96,7 @@ const RoomBox: FC<RoomBoxProps> = ({
                 height={'auto'}
                 width={'70%'}
               />
-              <Box sx={{ display: 'flex', mt: 0.5, gap: 1 }}>
+              <Stack sx={{ mt: 0.5, gap: 1 }}>
                 <SkeletonLoad
                   variant="text"
                   animation="wave"
@@ -112,7 +109,7 @@ const RoomBox: FC<RoomBoxProps> = ({
                   height={'auto'}
                   width={'40%'}
                 />
-              </Box>
+              </Stack>
               <SkeletonLoad
                 variant="text"
                 animation="wave"
@@ -198,8 +195,8 @@ const RoomBox: FC<RoomBoxProps> = ({
               </Box>
             </>
           )}
-        </Box>
-      </Box>
+        </Stack>
+      </Stack>
     </Box>
   );
 };
