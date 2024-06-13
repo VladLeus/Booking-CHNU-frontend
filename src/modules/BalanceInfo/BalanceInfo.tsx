@@ -1,4 +1,4 @@
-import { useAppSelector } from '@shared/hooks';
+//import { useAppSelector } from '@shared/hooks';
 import BalanceInfoCard from '@components/BalanceInfoCard';
 import { Alert } from '@mui/material';
 import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
@@ -7,32 +7,26 @@ import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
 // import { BalanceInfoResponse } from "@modules/BalanceInfo/api/types.ts";
 
 const BalanceInfo = () => {
-  const user = useAppSelector((state) => state.user);
-  const {
-    data: wallet,
-    isLoading,
-    isError,
-  } = useGetBallanceQuery({ user_id: user.user.id! });
+  //const user = useAppSelector((state) => state.user);
+  const { data: wallet, isLoading, isError } = useGetBallanceQuery('');
 
   if (!wallet) {
     console.log(wallet);
     return <Alert severity="error">Помилка завантаження даних</Alert>;
   }
 
-  // if(wallet.error) {
-  //   console.log(wallet.error);
-  // }
-
   return (
     <>
-      {isLoading && <Alert severity="info">Loading...</Alert>}
-      {isError && (
-        <Alert variant="filled" severity="error">
-          Error fetching balance information.
+      {isLoading && (
+        <Alert severity="info">
+          Дані завантажуються, будь ласка, зачекайте...
         </Alert>
       )}
-
-      {/*<p>User ID: {user.user.id}</p>*/}
+      {isError && (
+        <Alert variant="filled" severity="error">
+          Помилка отримання даних, спробуйте ще раз пізніше.
+        </Alert>
+      )}
       <BalanceInfoCard
         id={wallet.data.id}
         user_id={wallet.data.user_id}

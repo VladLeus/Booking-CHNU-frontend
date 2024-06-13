@@ -15,6 +15,9 @@ import { getHotelsAPI } from '@modules/GetHotelsForm/api';
 import { hotelsReducer } from '@shared/store/hotels/hotels.slice.ts';
 import { balanceApi } from '@modules/BalanceInfo/api';
 import { userInfoApi } from '@modules/UserInfo/api';
+import { userInfoEditApi } from '@modules/UserDataEdit/api';
+import { userApartamentsHistoryApi } from '@modules/UserApartamentsHistory/api';
+import { userCarsHistoryApi } from '@modules/UserCarsHistory/api';
 
 export const store = configureStore({
   reducer: {
@@ -35,6 +38,9 @@ export const store = configureStore({
     [carBookingApi.reducerPath]: carBookingApi.reducer,
     [balanceApi.reducerPath]: balanceApi.reducer,
     [userInfoApi.reducerPath]: userInfoApi.reducer,
+    [userInfoEditApi.reducerPath]: userInfoEditApi.reducer,
+    [userApartamentsHistoryApi.reducerPath]: userApartamentsHistoryApi.reducer,
+    [userCarsHistoryApi.reducerPath]: userCarsHistoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -51,7 +57,10 @@ export const store = configureStore({
       .concat(carBookingApi.middleware)
       .concat(getHotelsAPI.middleware)
       .concat(balanceApi.middleware)
-      .concat(userInfoApi.middleware),
+      .concat(userInfoApi.middleware)
+      .concat(userInfoEditApi.middleware)
+      .concat(userApartamentsHistoryApi.middleware)
+      .concat(userCarsHistoryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

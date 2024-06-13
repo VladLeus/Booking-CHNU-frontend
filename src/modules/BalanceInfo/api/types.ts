@@ -1,7 +1,3 @@
-export type BalanceInfoRequest = {
-  user_id: number;
-};
-
 export type BalanceInfoResponse = {
   id: number;
   user_id: number;

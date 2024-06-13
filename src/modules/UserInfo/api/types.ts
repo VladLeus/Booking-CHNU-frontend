@@ -6,4 +6,5 @@ export type UserInfoResponse = {
   phone_number: string;
   gender: 'Чоловік' | 'Жінка' | 'Інше';
   birthdate: string;
+  current_password: string;
 };

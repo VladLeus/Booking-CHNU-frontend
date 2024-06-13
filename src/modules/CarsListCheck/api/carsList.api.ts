@@ -13,6 +13,7 @@ export const carsListApi = createApi({
     getAllCars: build.query<Response<CarsListResponse[]>, string>({
       query: () => ({
         url: BASE_URL + '/cars',
+        params: { page: 1, per_page: '' },
         headers: {
           Authorization: JSON.parse(localStorage.getItem('user_auth_token')!),
         },

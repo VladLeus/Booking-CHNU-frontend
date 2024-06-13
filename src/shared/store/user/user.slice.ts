@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initialState } from './_data.ts';
-import { LoginActiveUserState, UserStateAfterReg } from './types.ts';
+import {
+  LoginActiveUserState,
+  UserInfoAfterEdit,
+  UserStateAfterReg,
+} from './types.ts';
 
 export const userSlice = createSlice({
   name: 'user',
@@ -29,6 +33,20 @@ export const userSlice = createSlice({
         name: action.payload.name,
         surname: action.payload.surname,
         phone: action.payload.phone,
+        gender: action.payload.gender,
+        birthdate: action.payload.birthdate,
+        tripHistory: [],
+        wallet: [],
+        isAuth: true,
+      };
+    },
+    updateUserProfile(state, action: PayloadAction<UserInfoAfterEdit>): void {
+      state.user = {
+        id: state.user.id,
+        email: action.payload.email,
+        name: action.payload.name,
+        surname: action.payload.last_name,
+        phone: action.payload.phone_number,
         gender: action.payload.gender,
         birthdate: action.payload.birthdate,
         tripHistory: [],
