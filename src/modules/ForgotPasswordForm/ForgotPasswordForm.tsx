@@ -4,7 +4,7 @@ import {
   forgotPasswordSchema,
 } from '@modules/ForgotPasswordForm/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
@@ -12,6 +12,8 @@ import SendIcon from '@mui/icons-material/Send';
 import { Alert, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { useForgotPasswordMutation } from '@modules/ForgotPasswordForm/api';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const ForgotPasswordForm = () => {
   const {
@@ -25,16 +27,19 @@ const ForgotPasswordForm = () => {
       email: '',
     },
   });
-  const [getResetLink, { isLoading, isError, isSuccess }] =
-    useForgotPasswordMutation();
+  const [getResetLink, { isLoading, isError }] = useForgotPasswordMutation();
+
+  const [errorText, setErrorText] = useState<string>('');
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const onSubmit = useCallback(async (data: ForgotPasswordFormSchema) => {
     const response = await getResetLink({ email: data.email });
 
     if (response.data) {
       console.log(response.data.data.reset_password_url);
-    } else if ('error' in response) {
-      console.log(response.error);
+      setIsSuccess(true);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status));
     }
   }, []);
 
@@ -52,15 +57,11 @@ const ForgotPasswordForm = () => {
         maxWidth={600}
         width={isSmScreen ? 600 : 300}
       >
-        {isLoading && (
-          <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
 

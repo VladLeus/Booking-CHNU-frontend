@@ -26,6 +26,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { UserSignupRequest } from '@modules/RegistrationForm/api/types.ts';
 import { useSignupMutation } from '@modules/RegistrationForm/api';
+import { LOADING_TEXT } from '@shared/constants';
+import { errorMapper } from '@shared/utils';
 
 const RegistrationForm = () => {
   const {
@@ -39,6 +41,7 @@ const RegistrationForm = () => {
   });
   const navigate = useNavigate();
   const [signup, { isLoading, isError }] = useSignupMutation();
+  const [errorText, setErrorText] = useState<string>('');
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -65,8 +68,8 @@ const RegistrationForm = () => {
       console.log('Your code is ' + response.data?.data.confirmation_code);
       localStorage.setItem('temp-email', JSON.stringify(data.email));
       navigate('/email/confirm');
-    } else if ('error' in response!) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
 
@@ -82,15 +85,11 @@ const RegistrationForm = () => {
         minWidth={350}
         width={isSmScreen ? 650 : 300}
       >
-        {isLoading && (
-          <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
         <form onSubmit={handleSubmit(onSubmit)}>

@@ -6,8 +6,6 @@ export interface User {
   phone?: string;
   gender?: 'Чоловік' | 'Жінка' | 'Інше';
   birthdate?: string;
-  tripHistory: string[];
-  wallet: string[];
   isAuth: boolean;
 }
 

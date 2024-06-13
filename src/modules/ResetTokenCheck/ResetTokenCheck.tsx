@@ -3,6 +3,7 @@ import { Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@shared/hooks';
 import { useLazyTokenCheckQuery } from '@modules/ResetTokenCheck/api';
+import { LOADING_TEXT } from '@shared/constants';
 
 const ResetTokenCheck = () => {
   const query = useQuery();
@@ -40,7 +41,7 @@ const ResetTokenCheck = () => {
 
   return (
     <>
-      {isLoading && <Alert severity="info">Запит обробляється...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert severity="error" variant="filled">
           Це посилання більше не валідне!

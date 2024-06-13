@@ -12,6 +12,8 @@ import CustomButton from '@ui/CustomButton';
 import { Link } from 'react-router-dom';
 import { useLoginMutation } from '@modules/LoginForm/api';
 import { useActions } from '@shared/hooks';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const LoginForm = () => {
   const {
@@ -30,6 +32,7 @@ const LoginForm = () => {
   const { setUserRegOrLogData } = useActions();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
 
   const togglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -43,7 +46,6 @@ const LoginForm = () => {
     });
 
     if (response.data) {
-      console.log(response.data);
       setUserRegOrLogData({
         id: response.data.data.user.id,
         name: response.data.data.user.name,
@@ -53,8 +55,9 @@ const LoginForm = () => {
         'user_auth_token',
         JSON.stringify(response.data.data.user.token),
       );
-    } else if ('error' in response) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      console.log(response.error.status);
+      setErrorText(errorMapper(response.error.status));
     }
   }, []);
 
@@ -70,13 +73,13 @@ const LoginForm = () => {
       >
         {isLoading && (
           <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
+            {LOADING_TEXT}
           </Alert>
         )}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
 

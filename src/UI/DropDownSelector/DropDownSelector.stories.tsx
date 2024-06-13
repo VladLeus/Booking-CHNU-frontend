@@ -1,21 +1,18 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { useForm } from 'react-hook-form';
-import CustomInput from '@ui/CustomInput';
-import { CustomInputProps } from '@ui/CustomInput/types.ts';
-import { Add as AddIcon } from '@mui/icons-material';
+import DropDownSelector from '@ui/DropDownSelector/index.ts';
+import { DropDownSelectorProps } from '@ui/DropDownSelector/types.ts';
+import ListIcon from '@mui/icons-material/List';
 
 export default {
-  title: 'Example/CustomInput',
-  component: CustomInput,
+  title: 'Example/DropDownSelector',
+  component: DropDownSelector,
   argTypes: {
     error: { control: 'boolean' },
-    variant: {
-      control: { type: 'select', options: ['filled', 'outlined', 'standard'] },
-    },
     icon: {
       control: 'boolean',
       mapping: {
-        true: AddIcon,
+        true: ListIcon,
         false: null,
       },
     },
@@ -23,14 +20,14 @@ export default {
 } as Meta;
 
 interface FormValues {
-  inputValue: string;
+  selectedValue: string;
 }
 
-const Template: StoryFn<CustomInputProps<FormValues>> = ({
+const Template: StoryFn<DropDownSelectorProps<FormValues>> = ({
   control,
   ...args
 }) => {
-  return <CustomInput<FormValues> control={control} {...args} />;
+  return <DropDownSelector<FormValues> control={control} {...args} />;
 };
 
 export const Default = () => {
@@ -38,9 +35,9 @@ export const Default = () => {
   return (
     <Template
       control={control}
-      name="inputValue"
-      label="Input Label"
-      variant="outlined"
+      name="selectedValue"
+      label="Select an option"
+      valuesArray={['Option 1', 'Option 2', 'Option 3']}
       error={false}
       helperText=""
     />
@@ -52,11 +49,11 @@ export const WithError = () => {
   return (
     <Template
       control={control}
-      name="inputValue"
-      label="Input Label"
-      variant="outlined"
+      name="selectedValue"
+      label="Select an option"
+      valuesArray={['Option 1', 'Option 2', 'Option 3']}
       error={true}
-      helperText="This field is required"
+      helperText="Please select an option"
     />
   );
 };
@@ -66,15 +63,12 @@ export const WithIcon = () => {
   return (
     <Template
       control={control}
-      name="inputValue"
-      label="Input Label"
-      variant="outlined"
+      name="selectedValue"
+      label="Select an option"
+      valuesArray={['Option 1', 'Option 2', 'Option 3']}
       error={false}
       helperText="With Icon"
-      icon={AddIcon}
-      handleIconClick={() => {
-        alert('Icon clicked!');
-      }}
+      icon={ListIcon}
     />
   );
 };

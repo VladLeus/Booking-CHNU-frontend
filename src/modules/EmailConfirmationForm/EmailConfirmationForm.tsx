@@ -4,13 +4,15 @@ import {
   EmailConfirmationSchema,
 } from '@modules/EmailConfirmationForm/schema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import { Alert, Typography } from '@mui/material';
 import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
 import { useActions } from '@shared/hooks';
 import { useConfirmCodeMutation } from '@modules/EmailConfirmationForm/api';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const EmailConfirmationForm = () => {
   const {
@@ -27,6 +29,8 @@ const EmailConfirmationForm = () => {
   const [confirm, { isLoading, isError }] = useConfirmCodeMutation();
   const { setUserRegOrLogData } = useActions();
 
+  const [errorText, setErrorText] = useState<string>('');
+
   const onSubmit = useCallback(async (data: EmailConfirmationSchema) => {
     const response = await confirm({
       email: JSON.parse(localStorage.getItem('temp-email')!),
@@ -34,7 +38,6 @@ const EmailConfirmationForm = () => {
     });
 
     if (response.data) {
-      console.log(response.data);
       localStorage.removeItem('temp-email');
       setUserRegOrLogData({
         id: response.data.data.id,
@@ -45,23 +48,19 @@ const EmailConfirmationForm = () => {
         'user_auth_token',
         JSON.stringify(response.data.data.token),
       );
-    } else if ('error' in response!) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack gap={2} justifyItems="center" alignItems="center">
-        {isLoading && (
-          <Alert severity="info">
-            Запит обробляється, зачекайте будь-ласка.
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-            Помилка підключення з сервером, спробуйте пізніше.
+            {errorText}
           </Alert>
         )}
 

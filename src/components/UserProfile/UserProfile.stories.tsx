@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from '@storybook/react';
 import { UserProfileProps } from '@components/UserProfile/types.ts';
-import UserProfile from '@components/UserProfile/UserProfile';
+import UserProfile from '@components/UserProfile/UserProfile.tsx';
 
 export default {
   title: 'Example/UserProfile',

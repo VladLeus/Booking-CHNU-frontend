@@ -2,6 +2,7 @@
 import BalanceInfoCard from '@components/BalanceInfoCard';
 import { Alert } from '@mui/material';
 import { useGetBallanceQuery } from '@modules/BalanceInfo/api';
+import { LOADING_TEXT } from '@shared/constants';
 // import { CarsListResponse } from "@modules/CarsListCheck/api/types.ts.ts";
 // import CarRental from "@components/CarRental";
 // import { BalanceInfoResponse } from "@modules/BalanceInfo/api/types.ts.ts";
@@ -17,11 +18,7 @@ const BalanceInfo = () => {
 
   return (
     <>
-      {isLoading && (
-        <Alert severity="info">
-          Дані завантажуються, будь ласка, зачекайте...
-        </Alert>
-      )}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert variant="filled" severity="error">
           Помилка отримання даних, спробуйте ще раз пізніше.

@@ -6,17 +6,22 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { Alert, Divider, Typography } from '@mui/material';
 import RoomBookingForm from '@modules/RoomBookingForm';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
   const [getDetails, { isLoading, isError, isSuccess }] =
     useLazyGetRoomDetailsQuery();
   const [details, setDetails] = useState<RoomDetailsResponse>();
+  const [errorText, setErrorText] = useState<string>('');
 
   const getRoomDetails = async () => {
     const response = await getDetails(roomId);
 
     if (response.data) {
       setDetails(response.data.data);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   };
 
@@ -26,10 +31,10 @@ const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
 
   return (
     <Stack gap={2}>
-      {isLoading && <Alert severity="info">Дані завантажуються...</Alert>}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
       {isError && (
         <Alert severity="error" variant="filled">
-          Помилка завантаження даних
+          {errorText}
         </Alert>
       )}
       {isSuccess && (

@@ -28,6 +28,8 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useProfileEditMutation } from './api/userDataEdit.api.ts';
 import { UserInfoEdit, UserInfoEditRequest } from './api/types.ts';
 import { UserInfoAfterEdit } from '@shared/store/user/types.ts';
+import { errorMapper } from '@shared/utils';
+import { LOADING_TEXT } from '@shared/constants';
 
 const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   const { user } = useAppSelector((state) => state.user);
@@ -52,13 +54,14 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
   });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [errorText, setErrorText] = useState<string>('');
 
   const togglePasswordVisibility = useCallback(() => {
     setIsPasswordVisible(!isPasswordVisible);
   }, [isPasswordVisible]);
 
-  const [profileEdit, { isLoading, isError }] = useProfileEditMutation();
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [profileEdit, { isLoading, isError, isSuccess }] =
+    useProfileEditMutation();
   const [updatedUserProfile, setUpdatedUserProfile] =
     useState<UserInfoAfterEdit>();
 
@@ -84,11 +87,9 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
       token: JSON.parse(localStorage.getItem('user_auth_token')!),
     };
 
-    console.log(userUpdateDTO);
     const response = await profileEdit(userUpdateDTO);
 
     if (response.data) {
-      console.log(response.data);
       setUpdatedUserProfile({
         email: response.data.data.email,
         name: response.data.data.name,
@@ -97,29 +98,27 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
         gender: response.data.data.gender,
         birthdate: response.data.data.birthdate,
       });
-      setIsSuccess(true);
-      console.log('Ви успішно змінили дані' + response.data?.data);
-      handleClick();
-    } else if ('error' in response!) {
-      console.log(response.error);
+    } else if (response.error && 'status' in response.error) {
+      setErrorText(errorMapper(response.error.status as number));
     }
   }, []);
 
   useEffect(() => {
     if (isSuccess) {
       updateUserProfile(updatedUserProfile!);
+      handleClick();
     }
-  }, [updatedUserProfile, isSuccess]);
+  }, [updatedUserProfile]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && (
-        <Alert severity="info">Запит обробляється, зачекайте будь-ласка.</Alert>
+        <Alert severity="info">{LOADING_TEXT}</Alert>
       )}
 
       {isError && (
         <Alert severity="error" variant="filled" sx={{ my: 2 }}>
-          Помилка підключення з сервером, спробуйте пізніше.
+          {errorText}
         </Alert>
       )}
 
