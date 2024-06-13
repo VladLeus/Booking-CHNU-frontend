@@ -16,8 +16,8 @@ import Wallet from '@pages/Wallet';
 import EmailConfirmation from '@pages/EmailConfirmation';
 import CarBooking from '@pages/CarBooking/CarBooking.tsx';
 import HotelResults from '@pages/HotelsResults';
-import HotelInfo from '@pages/HotelInfo';
 import HotelRooms from '@pages/HotelRooms';
+import RoomInfo from '@pages/RoomInfo';
 
 const routes: RouteObject[] = [
   {
@@ -151,12 +151,12 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: AppRoutes.hotelInfo,
+    path: AppRoutes.roomInfo,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.hotelInfo,
-        element: <HotelInfo />,
+        path: AppRoutes.roomInfo,
+        element: <RoomInfo />,
       },
     ],
   },

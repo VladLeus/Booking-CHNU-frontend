@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { Alert, Divider, Theme, useMediaQuery, useTheme } from '@mui/material';
+import { Alert, Theme, useMediaQuery, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { useForm } from 'react-hook-form';
 import {
@@ -93,14 +93,7 @@ const RegistrationForm = () => {
             Помилка підключення з сервером, спробуйте пізніше.
           </Alert>
         )}
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log('Form submit button clicked');
-            console.log('Form errors:', errors);
-            handleSubmit(onSubmit)();
-          }}
-        >
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Stack justifyItems="center" alignItems="center" gap={2}>
             <Typography
               variant="h3"
@@ -215,11 +208,6 @@ const RegistrationForm = () => {
           </Stack>
         </form>
       </Stack>
-      <Divider sx={{ width: isSmScreen ? 600 : 300, mt: -2 }}>
-        <Typography color="textSecondary" variant="body2">
-          Вхід через соціальні мережі
-        </Typography>
-      </Divider>
     </LocalizationProvider>
   );
 };

@@ -6,6 +6,7 @@ const HotelRooms = () => {
   return (
     <HotelRoomsInfo
       hotelName={query.get('hotel-name')!}
+      hotelId={query.get('hotel-id')!}
       city={query.get('city')!}
     />
   );

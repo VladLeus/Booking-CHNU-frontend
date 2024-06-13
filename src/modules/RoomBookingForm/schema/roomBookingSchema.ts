@@ -5,10 +5,9 @@ import dayJsSchema from '@shared/schema/dayjsSchema.ts';
 
 const currentDate = dayjs();
 
-export const carBookingSchema = z
+export const roomBookingSchema = z
   .object({
     firstName: z.string().min(2, "Обов'язкове поле"),
-    city: z.string().min(1, "Обов'язкове поле"),
     start_date: dayJsSchema
       .nullable()
       .refine((data) => data !== null, 'Оберіть початок оренди')
@@ -49,4 +48,4 @@ export const carBookingSchema = z
     },
   );
 
-export type CarBookingSchema = z.infer<typeof carBookingSchema>;
+export type RoomBookingSchema = z.infer<typeof roomBookingSchema>;
