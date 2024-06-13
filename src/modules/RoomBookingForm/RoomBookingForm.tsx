@@ -17,8 +17,8 @@ import { BookRoomRequest } from '@modules/RoomBookingForm/api/types.ts';
 import { useNavigate } from 'react-router-dom';
 
 const RoomBookingForm: FC<RoomBookingFormProps> = ({
-  hotel_id,
-  apartment_id,
+  hotelId,
+  apartmentId,
 }) => {
   const { user } = useAppSelector((state) => state.user);
   const {
@@ -41,12 +41,11 @@ const RoomBookingForm: FC<RoomBookingFormProps> = ({
 
   const onSubmit = useCallback(async (formData: RoomBookingSchema) => {
     const bookRoomReq: BookRoomRequest = {
-      hotel_id: hotel_id,
-      apartment_id: apartment_id,
+      hotel_id: hotelId,
+      apartment_id: apartmentId,
       start_date: formData.start_date?.toString()!,
       end_date: formData.end_date?.toString()!,
     };
-    console.log(bookRoomReq);
     const response = await book(bookRoomReq);
 
     if (response.data) {

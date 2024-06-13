@@ -52,8 +52,8 @@ const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
           <Typography>Ціна за ніч: {details?.price} UAH</Typography>
           <Divider sx={{ width: '100%' }}>Забронювати кімнату</Divider>
           <RoomBookingForm
-            apartment_id={details?.id!}
-            hotel_id={details?.hotel_id!}
+            apartmentId={details?.id!}
+            hotelId={details?.hotel_id!}
           />
         </Box>
       )}
