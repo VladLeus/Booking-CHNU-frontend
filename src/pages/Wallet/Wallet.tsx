@@ -5,7 +5,8 @@ const Wallet = () => {
   return (
     <>
       <Typography
-        variant="h6"
+        variant="h4"
+        component={'h1'}
         sx={{
           color: 'text.primary',
           fontWeight: 'bold',

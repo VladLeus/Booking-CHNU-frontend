@@ -25,7 +25,7 @@ const BalanceInfoCard: FC<BalanceInfoCardProps> = ({
   };
 
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper} sx={{ width: '300px', mt: 2 }}>
       <Table>
         <TableBody>
           <TableRow>

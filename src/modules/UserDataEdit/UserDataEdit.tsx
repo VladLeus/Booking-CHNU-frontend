@@ -112,9 +112,7 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {isLoading && (
-        <Alert severity="info">{LOADING_TEXT}</Alert>
-      )}
+      {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
       {isError && (
         <Alert severity="error" variant="filled" sx={{ my: 2 }}>
@@ -124,7 +122,7 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
 
       {isSuccess && <Alert severity="info">Ви успішно змінили дані!</Alert>}
 
-      <TableContainer component={Paper} sx={{ mb: 1.4 }}>
+      <TableContainer component={Paper} sx={{ mb: 1.4, mt: 2 }}>
         <Table>
           <TableBody>
             <TableRow>
