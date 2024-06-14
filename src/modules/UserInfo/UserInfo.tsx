@@ -37,7 +37,6 @@ const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
     getInfo();
   }, []);
 
-
   return (
     <>
       {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
@@ -47,7 +46,7 @@ const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
         </Alert>
       )}
 
-      <Stack>
+      <Stack sx={{ mt: 2 }}>
         <UserProfile
           firstName={user.name}
           lastName={user.surname!}

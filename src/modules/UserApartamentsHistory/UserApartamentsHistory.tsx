@@ -25,7 +25,9 @@ const UserApartamentsHistory: FC<{ handleClick: () => void }> = ({
         </Alert>
       )}
 
-      <Stack sx={{ flexDirection: 'column', gap: 3 }}>
+      <Stack alignItems="center"
+             justifyContent="center"
+             sx={{ flexDirection: 'column', gap: 2 }}>
         {apartaments?.data.map(
           (apartaments: UserApartamentsHistoryResponse) => (
             <ApartamentsHistory
