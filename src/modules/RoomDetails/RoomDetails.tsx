@@ -10,8 +10,7 @@ import { errorMapper } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
-  const [getDetails, { isLoading, isError, isSuccess }] =
-    useLazyGetRoomDetailsQuery();
+  const [getDetails, { isLoading, isError }] = useLazyGetRoomDetailsQuery();
   const [details, setDetails] = useState<RoomDetailsResponse>();
   const [errorText, setErrorText] = useState<string>('');
 
@@ -19,6 +18,7 @@ const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
     const response = await getDetails(roomId);
 
     if (response.data) {
+      console.log(response.data.data);
       setDetails(response.data.data);
     } else if (response.error && 'status' in response.error) {
       setErrorText(errorMapper(response.error.status as number));
@@ -37,31 +37,29 @@ const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
           {errorText}
         </Alert>
       )}
-      {isSuccess && (
-        <Box>
-          <Box
-            component="img"
-            sx={{
-              height: 350,
-              width: 480,
-              mx: 2,
-              borderRadius: 4,
-            }}
-            alt="The house from the offer."
-            src={details?.image_url}
-          />
-          <Typography>Категорія кімнати: {details?.room_category} </Typography>
-          <Typography>Кількість людей: {details?.adults}</Typography>
-          <Typography>Кількість ліжок: {details?.beds}</Typography>
-          <Typography>Опис: {details?.description}</Typography>
-          <Typography>Ціна за ніч: {details?.price} UAH</Typography>
-          <Divider sx={{ width: '100%' }}>Забронювати кімнату</Divider>
-          <RoomBookingForm
-            apartmentId={details?.id!}
-            hotelId={details?.hotel_id!}
-          />
-        </Box>
-      )}
+      <Box>
+        <Box
+          component="img"
+          sx={{
+            height: 350,
+            width: 480,
+            mx: 2,
+            borderRadius: 4,
+          }}
+          alt="The house from the offer."
+          src={details?.image_url}
+        />
+        <Typography>Категорія кімнати: {details?.room_category} </Typography>
+        <Typography>Кількість людей: {details?.adults}</Typography>
+        <Typography>Кількість ліжок: {details?.beds}</Typography>
+        <Typography>Опис: {details?.description}</Typography>
+        <Typography>Ціна за ніч: {details?.price} UAH</Typography>
+        <Divider sx={{ width: '100%' }}>Забронювати кімнату</Divider>
+        <RoomBookingForm
+          apartmentId={details?.id!}
+          hotelId={details?.hotel_id!}
+        />
+      </Box>
     </Stack>
   );
 };

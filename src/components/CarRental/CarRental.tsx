@@ -25,7 +25,7 @@ const CarRental: FC<CarRentalProps> = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/cars/booking/${id}`);
+    navigate(`cars/booking/${id}`);
   };
 
   return (

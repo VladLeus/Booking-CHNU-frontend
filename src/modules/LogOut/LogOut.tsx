@@ -26,7 +26,7 @@ const LogOut: FC<LogOutProps> = ({ setOpen, anchorRef }) => {
   return (
     <Stack gap={1} onClick={handleLogOutClick}>
       <PopoverMenuItem
-        to={'/'}
+        to={''}
         icon={LogoutIcon}
         text={'Вийти'}
         handleClose={handleClose(setOpen, anchorRef)}

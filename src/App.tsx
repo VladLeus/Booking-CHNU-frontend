@@ -5,7 +5,7 @@ import { useAppSelector } from '@shared/hooks';
 import LoginActiveUser from '@modules/LoginActiveUser';
 import NavBar from '@components/NavBar';
 
-function App() {
+const App = () => {
   const { user } = useAppSelector((state) => state.user);
   const [checkComplete, setCheckComplete] = useState(false);
 
@@ -30,6 +30,6 @@ function App() {
       </Stack>
     </Stack>
   );
-}
+};
 
 export default App;
