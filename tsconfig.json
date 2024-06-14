@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@pages/*": ["./pages/*"],
+      "@ui/*": ["./UI/*"],
+      "@assets/*": ["./assets/*"],
+      "@modules/*": ["./modules/*"],
+      "@components/*": ["./components/*"],
+      "@shared/*": ["./shared/*"]
+    },
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
