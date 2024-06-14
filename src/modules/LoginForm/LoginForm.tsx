@@ -71,11 +71,7 @@ const LoginForm = () => {
         alignItems="center"
         justifyItems="center"
       >
-        {isLoading && (
-          <Alert severity="info">
-            {LOADING_TEXT}
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
@@ -114,7 +110,7 @@ const LoginForm = () => {
             helperText={errors.password?.message || ''}
             handleIconClick={togglePasswordVisibility}
           />
-          <Link to={'/forgot-password'}>
+          <Link to={'forgot-password'}>
             <CustomButton
               type="button"
               text="Забули пароль?"

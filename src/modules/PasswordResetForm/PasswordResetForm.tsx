@@ -66,7 +66,7 @@ const PasswordResetForm = () => {
 
     setTimeout(() => {
       localStorage.removeItem('resetJWT');
-      navigate('/login');
+      navigate('sign-in');
     }, 2500);
   }, []);
 

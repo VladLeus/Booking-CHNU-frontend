@@ -34,9 +34,9 @@ export function NavBar() {
             gap: 2,
           }}
         >
-          <NavBarLinkButton to="/home" icon={KingBedIcon} text="Помешкання" />
+          <NavBarLinkButton to="home" icon={KingBedIcon} text="Помешкання" />
           <NavBarLinkButton
-            to="/cars"
+            to="cars"
             icon={DirectionsCarIcon}
             text="Оренда авто"
           />

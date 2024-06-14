@@ -27,7 +27,6 @@ const CarsListCheck = () => {
             seats={car.seats}
             transmissionType={car.transmission}
             manufactureYear={car.year}
-            // isPrepared={car.can_be_prepared}
             description={car.description}
             price={car.price}
             isLoading={isLoading}

@@ -106,7 +106,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
       </Typography>
       {rooms.map((room: Room) => (
         <Box
-          onClick={() => navigate(`/hotel/room/details?room-id=${room.id}`)}
+          onClick={() => navigate(`hotel/room/details?room-id=${room.id}`)}
           textAlign="left"
           maxWidth={600}
         >
