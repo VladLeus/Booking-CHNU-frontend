@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { hotelsInitState } from '@shared/store/hotels/_data.ts';
-import { HotelInfo } from '@shared/store/hotels/types.ts';
+import { hotelsInitState } from '@store/hotels/_data.ts';
+import { HotelInfo } from '@store/hotels/types.ts';
 
 export const hotelsSlice = createSlice({
   name: 'hotels',

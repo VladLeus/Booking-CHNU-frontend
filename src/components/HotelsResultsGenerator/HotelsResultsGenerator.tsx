@@ -1,5 +1,5 @@
 import { useAppSelector, useLoading, useQuery } from '@shared/hooks';
-import { HotelInfo } from '@shared/store/hotels/types.ts';
+import { HotelInfo } from '@store/hotels/types.ts';
 import Box from '@mui/material/Box';
 import HotelImageBox from '@components/HotelImageBox';
 import { Theme, useMediaQuery, useTheme } from '@mui/material';

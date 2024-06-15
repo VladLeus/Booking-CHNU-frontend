@@ -10,7 +10,7 @@ import { Alert } from '@mui/material';
 
 const LogOut: FC<LogOutProps> = ({ setOpen, anchorRef }) => {
   const [logout, { isLoading, isError }] = useLogoutMutation();
-  const { logOutUser } = useActions();
+  const { logOutUser, setIsUserTokenChecked } = useActions();
 
   const handleLogOutClick = async () => {
     const token = JSON.parse(localStorage.getItem('user_auth_token')!);
@@ -18,6 +18,7 @@ const LogOut: FC<LogOutProps> = ({ setOpen, anchorRef }) => {
 
     if (response.data) {
       localStorage.removeItem('user_auth_token');
+      setIsUserTokenChecked(false);
       logOutUser();
     } else if (response.error) {
       console.log(response.error);

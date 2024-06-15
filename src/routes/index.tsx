@@ -4,7 +4,7 @@ import PublicRoute from './PublicRoutes/PublicRoute';
 import PrivateRoute from './PrivateRoutes/PrivateRoute';
 import PrivatePasswordResetRoute from './PrivateRoutes/PrivatePasswordResetRoute';
 import RegistrationPage from '@pages/Registration';
-import LoginPage from '@pages/Login';
+import SignIn from 'pages/SignIn';
 import ForgotPassword from '@pages/ForgotPassword';
 import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
 import PasswordReset from '@pages/PasswordReset';
@@ -36,7 +36,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: AppRoutes.SIGN_IN,
-        element: <LoginPage />,
+        element: <SignIn />,
       },
     ],
   },
@@ -121,58 +121,58 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: AppRoutes.TRIP_HISTORY,
+    path: AppRoutes.tripHistory,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.TRIP_HISTORY,
+        path: AppRoutes.tripHistory,
         element: <TripHistory />,
       },
     ],
   },
   {
-    path: AppRoutes.WALLET,
+    path: AppRoutes.wallet,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.WALLET,
+        path: AppRoutes.wallet,
         element: <Wallet />,
       },
     ],
   },
   {
-    path: AppRoutes.HOTELS_RESULT,
+    path: AppRoutes.hotelsResult,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.HOTELS_RESULT,
+        path: AppRoutes.hotelsResult,
         element: <HotelResults />,
       },
     ],
   },
   {
-    path: AppRoutes.ROOM_INFO,
+    path: AppRoutes.roomInfo,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.ROOM_INFO,
+        path: AppRoutes.roomInfo,
         element: <RoomInfo />,
       },
     ],
   },
   {
-    path: AppRoutes.HOTEL_ROOMS,
+    path: AppRoutes.hotelRooms,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.HOTEL_ROOMS,
+        path: AppRoutes.hotelRooms,
         element: <HotelRooms />,
       },
     ],
   },
   {
     path: '*',
-    element: <Navigate to={AppRoutes.SIGN_UP} />,
+    element: <Navigate to={AppRoutes.default} />,
   },
 ];
 

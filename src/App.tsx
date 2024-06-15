@@ -1,20 +1,15 @@
-import { useState } from 'react';
 import { AppRouter } from './routes';
 import Stack from '@mui/material/Stack';
 import { useAppSelector } from '@shared/hooks';
-import LoginActiveUser from '@modules/LoginActiveUser';
+import SignInActiveUser from '@modules/LoginActiveUser';
 import NavBar from '@components/NavBar';
 
 const App = () => {
   const { user } = useAppSelector((state) => state.user);
-  const [checkComplete, setCheckComplete] = useState(false);
+  const { isUserTokenChecked } = useAppSelector((state) => state.appState);
 
-  const handleCheckComplete = () => {
-    setCheckComplete(true);
-  };
-
-  if (!checkComplete) {
-    return <LoginActiveUser onCheckComplete={handleCheckComplete} />;
+  if (!isUserTokenChecked) {
+    return <SignInActiveUser />;
   }
 
   return (

@@ -1,19 +1,18 @@
 import { useLazyLoginActiveQuery } from '@modules/LoginActiveUser/api';
 import { useActions } from '@shared/hooks';
 import { Alert } from '@mui/material';
-import { FC, useEffect } from 'react';
-import { LoginActiveUserProps } from '@modules/LoginActiveUser/types.ts';
+import { useEffect } from 'react';
 
-const LoginActiveUser: FC<LoginActiveUserProps> = ({ onCheckComplete }) => {
-  const [loginActive, { isLoading }] = useLazyLoginActiveQuery();
-  const { loginActiveUser } = useActions();
+const SignInActiveUser = () => {
+  const [signInActive, { isLoading }] = useLazyLoginActiveQuery();
+  const { signInActiveUser, setIsUserTokenChecked } = useActions();
 
-  const loginIfActive = async () => {
+  const signInIfActive = async () => {
     if (localStorage.getItem('user_auth_token')) {
       const token = JSON.parse(localStorage.getItem('user_auth_token')!);
-      const response = await loginActive({ token: token });
+      const response = await signInActive({ token: token });
       if (response.data) {
-        loginActiveUser({
+        signInActiveUser({
           id: response.data.data.id,
           email: response.data.data.email,
           name: response.data.data.name,
@@ -24,11 +23,11 @@ const LoginActiveUser: FC<LoginActiveUserProps> = ({ onCheckComplete }) => {
         });
       }
     }
-    onCheckComplete();
+    setIsUserTokenChecked(true);
   };
 
   useEffect(() => {
-    loginIfActive();
+    signInIfActive();
   }, []);
 
   return (
@@ -40,4 +39,4 @@ const LoginActiveUser: FC<LoginActiveUserProps> = ({ onCheckComplete }) => {
   );
 };
 
-export default LoginActiveUser;
+export default SignInActiveUser;

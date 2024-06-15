@@ -3,7 +3,7 @@ import CarRepairIcon from '@mui/icons-material/CarRepair';
 import ManageHistoryIcon from '@mui/icons-material/ManageHistory';
 import KeyIcon from '@mui/icons-material/Key';
 import { FC } from 'react';
-import SkeletonLoad from '@modules/SkeletonLoad';
+import SkeletonLoad from 'components/SkeletonLoad';
 import { CarInfoProps } from '@components/CarInfo/types.ts';
 import { Stack } from '@mui/material';
 import { Box, Typography } from '@mui/material';

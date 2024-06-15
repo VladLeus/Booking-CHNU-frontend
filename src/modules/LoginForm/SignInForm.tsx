@@ -12,10 +12,10 @@ import CustomButton from '@ui/CustomButton';
 import { Link } from 'react-router-dom';
 import { useLoginMutation } from '@modules/LoginForm/api';
 import { useActions } from '@shared/hooks';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
-const LoginForm = () => {
+const SignInForm = () => {
   const {
     control,
     handleSubmit,
@@ -57,7 +57,7 @@ const LoginForm = () => {
       );
     } else if (response.error && 'status' in response.error) {
       console.log(response.error.status);
-      setErrorText(errorMapper(response.error.status));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 
@@ -132,4 +132,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;

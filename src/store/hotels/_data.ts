@@ -1,4 +1,4 @@
-import { HotelInfo } from '@shared/store/hotels/types.ts';
+import { HotelInfo } from '@store/hotels/types.ts';
 
 const hotels: HotelInfo[] = [];
 

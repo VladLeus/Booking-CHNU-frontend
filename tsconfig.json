@@ -8,6 +8,7 @@
       "@modules/*": ["./modules/*"],
       "@components/*": ["./components/*"],
       "@shared/*": ["./shared/*"],
+      "@store/*": ["./store/*"],
       "@routes/*": ["./routes/*"],
     },
     "target": "ES2020",
