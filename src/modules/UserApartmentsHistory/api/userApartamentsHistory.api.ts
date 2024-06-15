@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '@shared/constants';
 import { Response } from '@shared/types';
 import { identity } from '@shared/utils';
-import { UserApartamentsHistoryResponse } from '@modules/UserApartamentsHistory/api/types.ts';
+import { UserApartamentsHistoryResponse } from './types.ts';
 
 export const userApartamentsHistoryApi = createApi({
   reducerPath: 'trip-history/api',
