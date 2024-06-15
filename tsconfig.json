@@ -7,7 +7,9 @@
       "@assets/*": ["./assets/*"],
       "@modules/*": ["./modules/*"],
       "@components/*": ["./components/*"],
-      "@shared/*": ["./shared/*"]
+      "@shared/*": ["./shared/*"],
+      "@store/*": ["./store/*"],
+      "@routes/*": ["./routes/*"],
     },
     "target": "ES2020",
     "useDefineForClassFields": true,

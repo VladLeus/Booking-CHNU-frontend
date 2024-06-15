@@ -3,16 +3,16 @@ import UserProfile from '@components/UserProfile';
 import { Alert } from '@mui/material';
 import { useLazyGetUserInfoQuery } from '@modules/UserInfo/api';
 import CustomButton from '@ui/CustomButton';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useActions, useAppSelector } from '@shared/hooks';
-import { LoginActiveUserState } from '@shared/store/user/types.ts';
-import { errorMapper } from '@shared/utils';
+import { LoginActiveUserState } from '@store/user/types.ts';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
-const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
+const UserInfo = () => {
   const { user } = useAppSelector((state) => state.user);
   const [getUserInfo, { isLoading, isError }] = useLazyGetUserInfoQuery();
-  const { loginActiveUser } = useActions();
+  const { signInActiveUser, toggleModal } = useActions();
   const [errorText, setErrorText] = useState<string>('');
 
   const getInfo = async () => {
@@ -27,9 +27,9 @@ const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
         gender: response.data.data.gender,
         birthdate: response.data.data.birthdate,
       };
-      loginActiveUser(user);
+      signInActiveUser(user);
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   };
 
@@ -61,7 +61,7 @@ const UserInfo: FC<{ handleClick: () => void }> = ({ handleClick }) => {
             variant={'outlined'}
             size={'small'}
             type={'button'}
-            handleClick={handleClick}
+            handleClick={() => toggleModal()}
             color={'primary'}
           />
         </Stack>

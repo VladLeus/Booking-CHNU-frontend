@@ -1,27 +1,32 @@
-import { FC, useEffect, useState } from 'react';
-import { RoomDetailsProps } from './types.ts';
+import { useEffect, useState } from 'react';
 import { useLazyGetRoomDetailsQuery } from '@modules/RoomDetails/api';
 import { RoomDetailsResponse } from '@modules/RoomDetails/api/types.ts';
 import Stack from '@mui/material/Stack';
-import Box from '@mui/material/Box';
-import { Alert, Divider, Typography } from '@mui/material';
+import { Alert } from '@mui/material';
 import RoomBookingForm from '@modules/RoomBookingForm';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import RoomDetailsText from '@components/RoomDetailText';
+import { useActions, useQuery } from '@shared/hooks';
 
-const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
-  const [getDetails, { isLoading, isError, isSuccess }] =
-    useLazyGetRoomDetailsQuery();
+const RoomDetails = () => {
+  const [getDetails, { isLoading, isError }] = useLazyGetRoomDetailsQuery();
+  const query = useQuery();
+  const { setBookingFormData } = useActions();
   const [details, setDetails] = useState<RoomDetailsResponse>();
   const [errorText, setErrorText] = useState<string>('');
 
   const getRoomDetails = async () => {
-    const response = await getDetails(roomId);
+    const response = await getDetails(query.get('room-id')!);
 
     if (response.data) {
       setDetails(response.data.data);
+      setBookingFormData({
+        apartmentId: response.data.data.id,
+        hotelId: response.data.data.hotel_id,
+      });
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   };
 
@@ -37,30 +42,18 @@ const RoomDetails: FC<RoomDetailsProps> = ({ roomId }) => {
           {errorText}
         </Alert>
       )}
-      {isSuccess && (
-        <Box>
-          <Box
-            component="img"
-            sx={{
-              height: 350,
-              width: 480,
-              mx: 2,
-              borderRadius: 4,
-            }}
-            alt="The house from the offer."
-            src={details?.image_url}
+      {details && (
+        <>
+          <RoomDetailsText
+            imageUrl={details.image_url}
+            roomCategory={details.room_category}
+            adults={details.adults}
+            beds={details.beds}
+            description={details.description}
+            price={details.price}
           />
-          <Typography>Категорія кімнати: {details?.room_category} </Typography>
-          <Typography>Кількість людей: {details?.adults}</Typography>
-          <Typography>Кількість ліжок: {details?.beds}</Typography>
-          <Typography>Опис: {details?.description}</Typography>
-          <Typography>Ціна за ніч: {details?.price} UAH</Typography>
-          <Divider sx={{ width: '100%' }}>Забронювати кімнату</Divider>
-          <RoomBookingForm
-            apartmentId={details?.id!}
-            hotelId={details?.hotel_id!}
-          />
-        </Box>
+          <RoomBookingForm />
+        </>
       )}
     </Stack>
   );

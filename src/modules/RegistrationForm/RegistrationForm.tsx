@@ -27,7 +27,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import { UserSignupRequest } from '@modules/RegistrationForm/api/types.ts';
 import { useSignupMutation } from '@modules/RegistrationForm/api';
 import { LOADING_TEXT } from '@shared/constants';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 
 const RegistrationForm = () => {
   const {
@@ -67,9 +67,9 @@ const RegistrationForm = () => {
     if ('data' in response!) {
       console.log('Your code is ' + response.data?.data.confirmation_code);
       localStorage.setItem('temp-email', JSON.stringify(data.email));
-      navigate('/email/confirm');
+      navigate('email/confirm');
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 
@@ -195,7 +195,7 @@ const RegistrationForm = () => {
               color="primary"
               variant="contained"
             />
-            <Link to="/login">
+            <Link to="sign-in">
               <CustomButton
                 type="button"
                 text="Маєте акаунт?"

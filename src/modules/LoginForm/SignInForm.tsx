@@ -12,10 +12,11 @@ import CustomButton from '@ui/CustomButton';
 import { Link } from 'react-router-dom';
 import { useLoginMutation } from '@modules/LoginForm/api';
 import { useActions } from '@shared/hooks';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import { AppRoutes } from '../../routes/_data.ts';
 
-const LoginForm = () => {
+const SignInForm = () => {
   const {
     control,
     handleSubmit,
@@ -39,8 +40,6 @@ const LoginForm = () => {
   }, [isPasswordVisible]);
 
   const onSubmit = useCallback(async (data: LoginFormSchema) => {
-    //console.log('submit', data);
-
     const response = await login({
       user: { email: data.email, password: data.password },
     });
@@ -57,7 +56,7 @@ const LoginForm = () => {
       );
     } else if (response.error && 'status' in response.error) {
       console.log(response.error.status);
-      setErrorText(errorMapper(response.error.status));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 
@@ -71,11 +70,7 @@ const LoginForm = () => {
         alignItems="center"
         justifyItems="center"
       >
-        {isLoading && (
-          <Alert severity="info">
-            {LOADING_TEXT}
-          </Alert>
-        )}
+        {isLoading && <Alert severity="info">{LOADING_TEXT}</Alert>}
 
         {isError && (
           <Alert severity="error" variant="filled" sx={{ my: 2 }}>
@@ -114,7 +109,7 @@ const LoginForm = () => {
             helperText={errors.password?.message || ''}
             handleIconClick={togglePasswordVisibility}
           />
-          <Link to={'/forgot-password'}>
+          <Link to={AppRoutes.FORGOT_PASSWORD}>
             <CustomButton
               type="button"
               text="Забули пароль?"
@@ -136,4 +131,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;

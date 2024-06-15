@@ -1,15 +1,11 @@
 import { Divider, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import UserInfo from '@modules/UserInfo';
-import { useCallback, useState } from 'react';
 import UserDataEdit from '@modules/UserDataEdit';
+import { useAppSelector } from '@shared/hooks';
 
 const ProfileSettings = () => {
-  const [isModalActive, setIsModalActive] = useState<boolean>(false);
-
-  const toggleModal = useCallback(() => {
-    setIsModalActive(!isModalActive);
-  }, [isModalActive]);
+  const { isModalActive } = useAppSelector((state) => state.appState);
 
   return (
     <>
@@ -38,8 +34,7 @@ const ProfileSettings = () => {
         <Divider />
       </Stack>
 
-      {!isModalActive && <UserInfo handleClick={toggleModal} />}
-      {isModalActive && <UserDataEdit handleClick={toggleModal} />}
+      {!isModalActive ? <UserInfo /> : <UserDataEdit />}
     </>
   );
 };

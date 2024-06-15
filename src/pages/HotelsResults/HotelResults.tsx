@@ -1,7 +1,7 @@
 import Stack from '@mui/material/Stack';
 import { useAppSelector, useQuery } from '@shared/hooks';
 import { Typography } from '@mui/material';
-import HotelsResultsGenerator from '@modules/HotelsResultsGenerator/HotelsResultsGenerator.tsx';
+import HotelsResultsGenerator from '@components/HotelsResultsGenerator/HotelsResultsGenerator.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 

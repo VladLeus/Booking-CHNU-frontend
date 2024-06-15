@@ -4,7 +4,7 @@ import PublicRoute from './PublicRoutes/PublicRoute';
 import PrivateRoute from './PrivateRoutes/PrivateRoute';
 import PrivatePasswordResetRoute from './PrivateRoutes/PrivatePasswordResetRoute';
 import RegistrationPage from '@pages/Registration';
-import LoginPage from '@pages/Login';
+import SignIn from 'pages/SignIn';
 import ForgotPassword from '@pages/ForgotPassword';
 import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
 import PasswordReset from '@pages/PasswordReset';
@@ -21,158 +21,158 @@ import RoomInfo from '@pages/RoomInfo';
 
 const routes: RouteObject[] = [
   {
-    path: AppRoutes.default,
+    path: AppRoutes.SIGN_UP,
     element: <PublicRoute />,
     children: [
       {
-        path: AppRoutes.default,
+        path: AppRoutes.SIGN_UP,
         element: <RegistrationPage />,
       },
     ],
   },
   {
-    path: AppRoutes.login,
+    path: AppRoutes.SIGN_IN,
     element: <PublicRoute />,
     children: [
       {
-        path: AppRoutes.login,
-        element: <LoginPage />,
+        path: AppRoutes.SIGN_IN,
+        element: <SignIn />,
       },
     ],
   },
   {
-    path: AppRoutes.forgotPassword,
+    path: AppRoutes.FORGOT_PASSWORD,
     element: <PublicRoute />,
     children: [
       {
-        path: AppRoutes.forgotPassword,
+        path: AppRoutes.FORGOT_PASSWORD,
         element: <ForgotPassword />,
       },
     ],
   },
   {
-    path: AppRoutes.resetTokenCheck,
+    path: AppRoutes.RESET_TOKEN_CHECK,
     element: <PublicRoute />,
     children: [
       {
-        path: AppRoutes.resetTokenCheck,
+        path: AppRoutes.RESET_TOKEN_CHECK,
         element: <ResetTokenCheckPage />,
       },
     ],
   },
   {
-    path: AppRoutes.emailConfirmation,
+    path: AppRoutes.EMAIL_CONFIRMATION,
     element: <PublicRoute />,
     children: [
       {
-        path: AppRoutes.emailConfirmation,
+        path: AppRoutes.EMAIL_CONFIRMATION,
         element: <EmailConfirmation />,
       },
     ],
   },
   {
-    path: AppRoutes.passwordReset,
+    path: AppRoutes.PASSWORD_RESET,
     element: <PrivatePasswordResetRoute />,
     children: [
       {
-        path: AppRoutes.passwordReset,
+        path: AppRoutes.PASSWORD_RESET,
         element: <PasswordReset />,
       },
     ],
   },
   {
-    path: AppRoutes.home,
+    path: AppRoutes.HOME,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.home,
+        path: AppRoutes.HOME,
         element: <Home />,
       },
     ],
   },
   {
-    path: AppRoutes.cars,
+    path: AppRoutes.CARS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.cars,
+        path: AppRoutes.CARS,
         element: <Cars />,
       },
     ],
   },
   {
-    path: AppRoutes.carbooking,
+    path: AppRoutes.CAR_BOOKING,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.carbooking,
+        path: AppRoutes.CAR_BOOKING,
         element: <CarBooking />,
       },
     ],
   },
   {
-    path: AppRoutes.profileSettings,
+    path: AppRoutes.PROFILE_SETTINGS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.profileSettings,
+        path: AppRoutes.PROFILE_SETTINGS,
         element: <ProfileSettings />,
       },
     ],
   },
   {
-    path: AppRoutes.tripHistory,
+    path: AppRoutes.TRIP_HISTORY,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.tripHistory,
+        path: AppRoutes.TRIP_HISTORY,
         element: <TripHistory />,
       },
     ],
   },
   {
-    path: AppRoutes.wallet,
+    path: AppRoutes.WALLET,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.wallet,
+        path: AppRoutes.WALLET,
         element: <Wallet />,
       },
     ],
   },
   {
-    path: AppRoutes.hotelsResult,
+    path: AppRoutes.HOTELS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.hotelsResult,
+        path: AppRoutes.HOTELS,
         element: <HotelResults />,
       },
     ],
   },
   {
-    path: AppRoutes.roomInfo,
+    path: AppRoutes.HOTEL_ROOMS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.roomInfo,
-        element: <RoomInfo />,
-      },
-    ],
-  },
-  {
-    path: AppRoutes.hotelRooms,
-    element: <PrivateRoute />,
-    children: [
-      {
-        path: AppRoutes.hotelRooms,
+        path: AppRoutes.HOTEL_ROOMS,
         element: <HotelRooms />,
       },
     ],
   },
   {
+    path: AppRoutes.ROOM_INFO,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.ROOM_INFO,
+        element: <RoomInfo />,
+      },
+    ],
+  },
+  {
     path: '*',
-    element: <Navigate to={AppRoutes.default} />,
+    element: <Navigate to={AppRoutes.SIGN_UP} />,
   },
 ];
 

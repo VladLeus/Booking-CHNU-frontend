@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userReducer } from '@shared/store/user';
+import { userReducer } from '@store/user';
 import { signupAPI } from '@modules/RegistrationForm/api';
 import { confirmationAPI } from '@modules/EmailConfirmationForm/api';
 import { loginAPI } from '@modules/LoginForm/api';
@@ -12,15 +12,16 @@ import { carsListApi } from '@modules/CarsListCheck/api';
 import { mapBoxApi } from '@modules/GetHotelsForm/api/mapBox';
 import { carBookingApi } from '@modules/CarBookingForm/api';
 import { getHotelsAPI } from '@modules/GetHotelsForm/api';
-import { hotelsReducer } from '@shared/store/hotels/hotels.slice.ts';
+import { hotelsReducer } from '@store/hotels/hotels.slice.ts';
 import { balanceApi } from '@modules/BalanceInfo/api';
 import { userInfoApi } from '@modules/UserInfo/api';
 import { roomsAPI } from '@modules/HotelRoomsInfo/api/rooms.api.ts';
 import { userInfoEditApi } from '@modules/UserDataEdit/api';
-import { userApartamentsHistoryApi } from '@modules/UserApartamentsHistory/api';
+import { userApartamentsHistoryApi } from '@modules/UserApartmentsHistory/api';
 import { userCarsHistoryApi } from '@modules/UserCarsHistory/api';
 import { roomDetailsAPI } from '@modules/RoomDetails/api';
 import { roomBookingAPI } from '@modules/RoomBookingForm/api';
+import { appReducer } from 'store/appState';
 
 export const store = configureStore({
   reducer: {
@@ -39,6 +40,7 @@ export const store = configureStore({
     [roomBookingAPI.reducerPath]: roomBookingAPI.reducer,
     user: userReducer,
     hotels: hotelsReducer,
+    appState: appReducer,
 
     [carsListApi.reducerPath]: carsListApi.reducer,
     [carBookingApi.reducerPath]: carBookingApi.reducer,

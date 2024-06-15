@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ApartmentBoxProps } from '@components/ApartmentBox/types.ts';
 import { Box } from '@mui/material';
-import SkeletonLoad from '@modules/SkeletonLoad';
+import SkeletonLoad from 'components/SkeletonLoad';
 
 const ApartmentBox: FC<ApartmentBoxProps> = ({
   icon,

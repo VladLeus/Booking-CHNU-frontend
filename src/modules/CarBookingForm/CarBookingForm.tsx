@@ -16,7 +16,7 @@ import CustomButton from '@ui/CustomButton';
 import DropDownSelector from '@ui/DropDownSelector';
 import { CITIES, CITY_MAP } from '@modules/CarBookingForm/_data.ts';
 import Stack from '@mui/material/Stack';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const CarBookingForm = () => {
@@ -57,7 +57,7 @@ const CarBookingForm = () => {
         'Ви успішно забронювали машину №' + response.data?.data.car_id,
       );
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 

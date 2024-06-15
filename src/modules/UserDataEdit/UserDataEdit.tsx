@@ -20,19 +20,21 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import SingleDatePicker from '@ui/SingleDatePicker';
 import DropDownSelector from '@ui/DropDownSelector';
 import { GENDER } from '@modules/RegistrationForm/_data.ts';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useActions, useAppSelector } from '@shared/hooks';
 import dayjs from 'dayjs';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useProfileEditMutation } from './api/userDataEdit.api.ts';
 import { UserInfoEdit, UserInfoEditRequest } from './api/types.ts';
-import { UserInfoAfterEdit } from '@shared/store/user/types.ts';
-import { errorMapper } from '@shared/utils';
+import { UserInfoAfterEdit } from '@store/user/types.ts';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
-const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
+const UserDataEdit = () => {
   const { user } = useAppSelector((state) => state.user);
+  const { toggleModal } = useActions();
+
   const {
     control,
     handleSubmit,
@@ -99,14 +101,14 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
         birthdate: response.data.data.birthdate,
       });
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 
   useEffect(() => {
     if (isSuccess) {
       updateUserProfile(updatedUserProfile!);
-      handleClick();
+      toggleModal();
     }
   }, [updatedUserProfile]);
 
@@ -246,7 +248,7 @@ const UserDataEdit: FC<{ handleClick: () => void }> = ({ handleClick }) => {
           variant={'outlined'}
           size={'small'}
           type={'button'}
-          handleClick={handleClick}
+          handleClick={() => toggleModal()}
           color={'warning'}
         />
       </Stack>

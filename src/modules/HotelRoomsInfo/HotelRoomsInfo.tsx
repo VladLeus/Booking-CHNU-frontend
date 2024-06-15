@@ -11,9 +11,9 @@ import { useLoading } from '@shared/hooks';
 import { useNavigate } from 'react-router-dom';
 import { HotelInfoResponse } from '@modules/HotelRoomsInfo/api/types.ts';
 import Box from '@mui/material/Box';
-import { renderStars } from '@shared/utils';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
 const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   hotelName,
@@ -21,16 +21,20 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   hotelId,
 }) => {
   const [getRooms, { isLoading, isError }] = useLazyGetHotelRoomsQuery();
-  const [
-    getDetails,
-    { isLoading: isDetailsLoading, isError: isDetailsError, isSuccess },
-  ] = useLazyGetHotelInfoQuery();
+  const [getDetails, { isLoading: isDetailsLoading, isError: isDetailsError }] =
+    useLazyGetHotelInfoQuery();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [hotelDetails, setHotelDetails] = useState<HotelInfoResponse>();
   const [severity, setSeverity] = useState<'warning' | 'error'>('warning');
   const [detailsErrorText, setDetailsErrorText] = useState<string>('');
   const skeleton = useLoading();
   const navigate = useNavigate();
+
+  const renderStars = (rating: string) => {
+    return Array.from(rating).map((_char, index) => (
+      <StarRoundedIcon key={index} />
+    ));
+  };
 
   const getAllRooms = async () => {
     const response = await getRooms('');
@@ -55,7 +59,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
           'На жаль ми не можемо отримати детальної інформації про обраний готель',
         );
       } else {
-        setDetailsErrorText(errorMapper(response.error.status as number));
+        setDetailsErrorText(ERROR_MAPPER[response.error.status]);
         setSeverity('error');
       }
     }
@@ -78,13 +82,13 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
           {detailsErrorText}
         </Alert>
       )}
-      {isSuccess && (
+      {hotelDetails && (
         <Stack color="textSecondary">
           <Typography variant="body1" fontWeight="normal">
             Детальна інформація про {hotelName}
           </Typography>
           <Typography>
-            Рейтинг: {renderStars(hotelDetails.offers[0].rateCode!)}
+            Рейтинг:{renderStars(hotelDetails.offers[0].rateCode!)}
           </Typography>
           <Typography>
             Прийомі їжі що входять у вартість:{' '}
@@ -106,7 +110,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
       </Typography>
       {rooms.map((room: Room) => (
         <Box
-          onClick={() => navigate(`/hotel/room/details?room-id=${room.id}`)}
+          onClick={() => navigate(`/hotels/room/details?room-id=${room.id}`)}
           textAlign="left"
           maxWidth={600}
         >

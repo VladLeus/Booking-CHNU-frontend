@@ -1,9 +1,9 @@
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/material';
-import { ApartmentsHistoryProps } from '@components/ApartamentsHistory/types.ts';
+import { ApartmentsHistoryProps } from '@components/ApartmentsHistory/types.ts';
 import { FC } from 'react';
 
-const ApartamentsHistory: FC<ApartmentsHistoryProps> = ({
+const ApartmentsHistory: FC<ApartmentsHistoryProps> = ({
   id,
   apartment_id,
   start_date,
@@ -82,4 +82,4 @@ const ApartamentsHistory: FC<ApartmentsHistoryProps> = ({
   );
 };
 
-export default ApartamentsHistory;
+export default ApartmentsHistory;

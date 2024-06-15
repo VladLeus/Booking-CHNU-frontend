@@ -12,7 +12,7 @@ import SendIcon from '@mui/icons-material/Send';
 import { Alert, Typography, useMediaQuery, useTheme } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import { useForgotPasswordMutation } from '@modules/ForgotPasswordForm/api';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const ForgotPasswordForm = () => {
@@ -39,7 +39,7 @@ const ForgotPasswordForm = () => {
       console.log(response.data.data.reset_password_url);
       setIsSuccess(true);
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 
