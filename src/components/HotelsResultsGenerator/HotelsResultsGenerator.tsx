@@ -32,7 +32,7 @@ const HotelsResultsGenerator = () => {
         <Box
           onClick={() =>
             navigate(
-              `hotel/rooms?city=${query.get('city')}&hotel-name=${hotel.name}&hotel-id=${hotel.hotelId}`,
+              `/hotels/rooms?city=${query.get('city')}&hotel-name=${hotel.name}&hotel-id=${hotel.hotelId}`,
             )
           }
         >

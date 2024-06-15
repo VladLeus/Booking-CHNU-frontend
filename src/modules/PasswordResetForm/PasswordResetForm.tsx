@@ -21,6 +21,7 @@ import {
 import { useResetMutation } from '@modules/PasswordResetForm/api';
 import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import { AppRoutes } from '../../routes/_data.ts';
 
 const PasswordResetForm = () => {
   const {
@@ -66,7 +67,7 @@ const PasswordResetForm = () => {
 
     setTimeout(() => {
       localStorage.removeItem('resetJWT');
-      navigate('sign-in');
+      navigate(AppRoutes.SIGN_IN);
     }, 2500);
   }, []);
 

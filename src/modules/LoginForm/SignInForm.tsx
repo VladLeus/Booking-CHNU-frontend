@@ -14,6 +14,7 @@ import { useLoginMutation } from '@modules/LoginForm/api';
 import { useActions } from '@shared/hooks';
 import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import { AppRoutes } from '../../routes/_data.ts';
 
 const SignInForm = () => {
   const {
@@ -39,8 +40,6 @@ const SignInForm = () => {
   }, [isPasswordVisible]);
 
   const onSubmit = useCallback(async (data: LoginFormSchema) => {
-    //console.log('submit', data);
-
     const response = await login({
       user: { email: data.email, password: data.password },
     });
@@ -110,7 +109,7 @@ const SignInForm = () => {
             helperText={errors.password?.message || ''}
             handleIconClick={togglePasswordVisibility}
           />
-          <Link to={'forgot-password'}>
+          <Link to={AppRoutes.FORGOT_PASSWORD}>
             <CustomButton
               type="button"
               text="Забули пароль?"

@@ -63,14 +63,6 @@ const GetHotelsForm = () => {
   const onSubmit = useCallback(async (formData: GetHotelsSchema) => {
     const city = getCityName(formData.city);
 
-    if (!city) {
-      return (
-        <Alert severity="error" variant="filled">
-          Таке місто не обслуговується нашою компанією
-        </Alert>
-      );
-    }
-
     const response = await getHotels(city!);
     if (response.data) {
       setHotels(response.data.data as HotelInfo[]);

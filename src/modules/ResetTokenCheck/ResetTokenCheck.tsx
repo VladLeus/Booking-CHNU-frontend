@@ -16,10 +16,8 @@ const ResetTokenCheck = () => {
     const response = await checkToken(jwtTempToken!);
 
     if (response.data) {
-      console.log(response.data);
       setIsTokenValid(true);
     } else if (response.error) {
-      console.log(response.error);
       setIsTokenValid(false);
     }
   };

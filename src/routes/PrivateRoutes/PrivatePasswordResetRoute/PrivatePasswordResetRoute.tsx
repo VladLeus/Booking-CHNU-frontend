@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { AppRoutes } from '@routes/_data.ts';
+import { AppRoutes } from '../../_data.ts';
 
 const PrivatePasswordResetRoute = () => {
   const tempJWTToken = localStorage.getItem('resetJWT');

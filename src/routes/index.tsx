@@ -121,58 +121,58 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    path: AppRoutes.tripHistory,
+    path: AppRoutes.TRIP_HISTORY,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.tripHistory,
+        path: AppRoutes.TRIP_HISTORY,
         element: <TripHistory />,
       },
     ],
   },
   {
-    path: AppRoutes.wallet,
+    path: AppRoutes.WALLET,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.wallet,
+        path: AppRoutes.WALLET,
         element: <Wallet />,
       },
     ],
   },
   {
-    path: AppRoutes.hotelsResult,
+    path: AppRoutes.HOTELS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.hotelsResult,
+        path: AppRoutes.HOTELS,
         element: <HotelResults />,
       },
     ],
   },
   {
-    path: AppRoutes.roomInfo,
+    path: AppRoutes.HOTEL_ROOMS,
     element: <PrivateRoute />,
     children: [
       {
-        path: AppRoutes.roomInfo,
-        element: <RoomInfo />,
-      },
-    ],
-  },
-  {
-    path: AppRoutes.hotelRooms,
-    element: <PrivateRoute />,
-    children: [
-      {
-        path: AppRoutes.hotelRooms,
+        path: AppRoutes.HOTEL_ROOMS,
         element: <HotelRooms />,
       },
     ],
   },
   {
+    path: AppRoutes.ROOM_INFO,
+    element: <PrivateRoute />,
+    children: [
+      {
+        path: AppRoutes.ROOM_INFO,
+        element: <RoomInfo />,
+      },
+    ],
+  },
+  {
     path: '*',
-    element: <Navigate to={AppRoutes.default} />,
+    element: <Navigate to={AppRoutes.SIGN_UP} />,
   },
 ];
 

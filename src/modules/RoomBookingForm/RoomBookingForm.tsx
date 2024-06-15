@@ -43,7 +43,7 @@ const RoomBookingForm = () => {
   const [errorText, setErrorText] = useState<string>('');
 
   const onSubmit = useCallback(async (formData: RoomBookingSchema) => {
-    console.log(formData, hotelId, apartmentId);
+    console.log(formData, roomBooking.hotelId, roomBooking.apartmentId);
     const bookRoomReq: BookRoomRequest = {
       hotel_id: roomBooking.hotelId,
       apartment_id: roomBooking.apartmentId!,

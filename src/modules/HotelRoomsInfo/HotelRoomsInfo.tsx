@@ -21,16 +21,20 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   hotelId,
 }) => {
   const [getRooms, { isLoading, isError }] = useLazyGetHotelRoomsQuery();
-  const [
-    getDetails,
-    { isLoading: isDetailsLoading, isError: isDetailsError, isSuccess },
-  ] = useLazyGetHotelInfoQuery();
+  const [getDetails, { isLoading: isDetailsLoading, isError: isDetailsError }] =
+    useLazyGetHotelInfoQuery();
   const [rooms, setRooms] = useState<Room[]>([]);
   const [hotelDetails, setHotelDetails] = useState<HotelInfoResponse>();
   const [severity, setSeverity] = useState<'warning' | 'error'>('warning');
   const [detailsErrorText, setDetailsErrorText] = useState<string>('');
   const skeleton = useLoading();
   const navigate = useNavigate();
+
+  const renderStars = (rating: string) => {
+    return Array.from(rating).map((_char, index) => (
+      <StarRoundedIcon key={index} />
+    ));
+  };
 
   const getAllRooms = async () => {
     const response = await getRooms('');
@@ -78,27 +82,22 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
           {detailsErrorText}
         </Alert>
       )}
-      {isSuccess && (
+      {hotelDetails && (
         <Stack color="textSecondary">
           <Typography variant="body1" fontWeight="normal">
             Детальна інформація про {hotelName}
           </Typography>
           <Typography>
-            Рейтинг:{' '}
-            {Array.from(hotelDetails?.offers[0].rateCode as string).map(
-              (_char, index) => (
-                <StarRoundedIcon key={index} />
-              ),
-            )}
+            Рейтинг:{renderStars(hotelDetails.offers[0].rateCode!)}
           </Typography>
           <Typography>
             Прийомі їжі що входять у вартість:{' '}
-            {hotelDetails?.offers[0].boardType}
+            {hotelDetails.offers[0].boardType}
           </Typography>
           <Typography>
             Ціна налогу за 1 день, що не входить у вартість до оплати:{' '}
-            {hotelDetails?.offers[0].price.taxes[0].amount}{' '}
-            {hotelDetails?.offers[0].price.taxes[0].currency}
+            {hotelDetails.offers[0].price.taxes[0].amount}{' '}
+            {hotelDetails.offers[0].price.taxes[0].currency}
           </Typography>
           <Alert severity="warning">
             Хочемо зауважити, що наш сервіс не приймає оплату. Оплата
@@ -111,7 +110,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
       </Typography>
       {rooms.map((room: Room) => (
         <Box
-          onClick={() => navigate(`hotel/room/details?room-id=${room.id}`)}
+          onClick={() => navigate(`/hotels/room/details?room-id=${room.id}`)}
           textAlign="left"
           maxWidth={600}
         >
