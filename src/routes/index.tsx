@@ -4,7 +4,7 @@ import PublicRoute from './PublicRoutes/PublicRoute';
 import PrivateRoute from './PrivateRoutes/PrivateRoute';
 import PrivatePasswordResetRoute from './PrivateRoutes/PrivatePasswordResetRoute';
 import RegistrationPage from '@pages/Registration';
-import LoginPage from '@pages/Login';
+import SignIn from 'pages/SignIn';
 import ForgotPassword from '@pages/ForgotPassword';
 import ResetTokenCheckPage from '@pages/ResetTokenCheckPage';
 import PasswordReset from '@pages/PasswordReset';
@@ -36,7 +36,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: AppRoutes.login,
-        element: <LoginPage />,
+        element: <SignIn />,
       },
     ],
   },

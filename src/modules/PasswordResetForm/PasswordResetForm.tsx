@@ -19,7 +19,7 @@ import {
   PasswordResetSchema,
 } from '@modules/PasswordResetForm/schema';
 import { useResetMutation } from '@modules/PasswordResetForm/api';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const PasswordResetForm = () => {
@@ -61,7 +61,7 @@ const PasswordResetForm = () => {
     if (response.data) {
       setIsChanged(true);
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
 
     setTimeout(() => {

@@ -11,7 +11,7 @@ import CustomInput from '@ui/CustomInput';
 import CustomButton from '@ui/CustomButton';
 import { useActions } from '@shared/hooks';
 import { useConfirmCodeMutation } from '@modules/EmailConfirmationForm/api';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const EmailConfirmationForm = () => {
@@ -49,7 +49,7 @@ const EmailConfirmationForm = () => {
         JSON.stringify(response.data.data.token),
       );
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { HotelImageBoxProps } from '@components/HotelImageBox/types.ts';
 import { FC } from 'react';
-import SkeletonLoad from '@modules/SkeletonLoad';
+import SkeletonLoad from 'components/SkeletonLoad';
 
 const HotelImageBox: FC<HotelImageBoxProps> = ({
   hotelName,

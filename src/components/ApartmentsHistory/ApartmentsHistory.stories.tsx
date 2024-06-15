@@ -1,10 +1,10 @@
 import { Meta, StoryFn } from '@storybook/react';
-import ApartamentsHistory from '@components/ApartamentsHistory/ApartamentsHistory.tsx';
-import { ApartmentsHistoryProps } from '@components/ApartamentsHistory/types.ts';
+import ApartmentsHistory from '@components/ApartmentsHistory/ApartmentsHistory.tsx';
+import { ApartmentsHistoryProps } from '@components/ApartmentsHistory/types.ts';
 
 export default {
-  title: 'Example/ApartamentsHistory',
-  component: ApartamentsHistory,
+  title: 'Example/ApartmentsHistory',
+  component: ApartmentsHistory,
   argTypes: {
     id: { control: 'text' },
     apartment_id: { control: 'text' },
@@ -14,7 +14,7 @@ export default {
 } as Meta;
 
 const Template: StoryFn<ApartmentsHistoryProps> = (args) => (
-  <ApartamentsHistory {...args} />
+  <ApartmentsHistory {...args} />
 );
 
 export const Default = Template.bind({});

@@ -1,18 +1,18 @@
+import ApartmentsHistory from 'components/ApartmentsHistory';
+import { useGetUserApartamentsHistoryQuery } from './api';
 import { Alert } from '@mui/material';
-import CustomButton from '@ui/CustomButton';
 import Stack from '@mui/material/Stack';
-import { useGetUserCarsHistoryQuery } from './api';
-import CarsHistory from '@components/CarsHistory';
-import { UserCarsHistoryResponse } from './api/types.ts';
+import { UserApartamentsHistoryResponse } from './api/types.ts';
+import CustomButton from '@ui/CustomButton';
 import { LOADING_TEXT } from '@shared/constants';
 import { useActions } from '@shared/hooks';
 
-const UserCarsHistory = () => {
+const UserApartmentsHistory = () => {
   const {
-    data: cars_history,
+    data: apartments,
     isLoading,
     isError,
-  } = useGetUserCarsHistoryQuery('');
+  } = useGetUserApartamentsHistoryQuery('');
   const { switchHistories } = useActions();
 
   return (
@@ -27,22 +27,22 @@ const UserCarsHistory = () => {
       <Stack
         alignItems="center"
         justifyContent="center"
-        sx={{ flexDirection: 'column', gap: 3 }}
+        sx={{ flexDirection: 'column', gap: 2 }}
       >
-        {cars_history?.data.map((cars_history: UserCarsHistoryResponse) => (
-          <CarsHistory
-            key={cars_history.id}
-            id={cars_history.id}
-            car_id={cars_history.car_id}
-            start_date={cars_history.start_date}
-            end_date={cars_history.end_date}
+        {apartments?.data.map((apartaments: UserApartamentsHistoryResponse) => (
+          <ApartmentsHistory
+            key={apartaments.id}
+            id={apartaments.id}
+            apartment_id={apartaments.apartment_id}
+            start_date={apartaments.start_date}
+            end_date={apartaments.end_date}
           />
         ))}
       </Stack>
 
       <Stack mt={1.2} alignItems="center" justifyContent="center">
         <CustomButton
-          text="Перейти до історії бронювання апартаментів"
+          text="Перейти до історії бронювання машин"
           variant="outlined"
           size="small"
           type="button"
@@ -54,4 +54,4 @@ const UserCarsHistory = () => {
   );
 };
 
-export default UserCarsHistory;
+export default UserApartmentsHistory;

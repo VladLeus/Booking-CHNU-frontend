@@ -11,9 +11,9 @@ import { useLoading } from '@shared/hooks';
 import { useNavigate } from 'react-router-dom';
 import { HotelInfoResponse } from '@modules/HotelRoomsInfo/api/types.ts';
 import Box from '@mui/material/Box';
-import { renderStars } from '@shared/utils';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
 
 const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
   hotelName,
@@ -55,7 +55,7 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
           'На жаль ми не можемо отримати детальної інформації про обраний готель',
         );
       } else {
-        setDetailsErrorText(errorMapper(response.error.status as number));
+        setDetailsErrorText(ERROR_MAPPER[response.error.status]);
         setSeverity('error');
       }
     }
@@ -84,16 +84,21 @@ const HotelRoomsInfo: FC<HotelRoomsInfoProps> = ({
             Детальна інформація про {hotelName}
           </Typography>
           <Typography>
-            Рейтинг: {renderStars(hotelDetails.offers[0].rateCode!)}
+            Рейтинг:{' '}
+            {Array.from(hotelDetails?.offers[0].rateCode as string).map(
+              (_char, index) => (
+                <StarRoundedIcon key={index} />
+              ),
+            )}
           </Typography>
           <Typography>
             Прийомі їжі що входять у вартість:{' '}
-            {hotelDetails.offers[0].boardType}
+            {hotelDetails?.offers[0].boardType}
           </Typography>
           <Typography>
             Ціна налогу за 1 день, що не входить у вартість до оплати:{' '}
-            {hotelDetails.offers[0].price.taxes[0].amount}{' '}
-            {hotelDetails.offers[0].price.taxes[0].currency}
+            {hotelDetails?.offers[0].price.taxes[0].amount}{' '}
+            {hotelDetails?.offers[0].price.taxes[0].currency}
           </Typography>
           <Alert severity="warning">
             Хочемо зауважити, що наш сервіс не приймає оплату. Оплата

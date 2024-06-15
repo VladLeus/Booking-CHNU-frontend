@@ -24,7 +24,7 @@ export const userSlice = createSlice({
     logOutUser(state): void {
       state.user = initialState.user;
     },
-    loginActiveUser(state, action: PayloadAction<LoginActiveUserState>): void {
+    signInActiveUser(state, action: PayloadAction<LoginActiveUserState>): void {
       state.user = {
         id: action.payload.id,
         email: action.payload.email,

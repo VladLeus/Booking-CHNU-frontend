@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import { RoomBoxProps } from '@components/RoomBox/types.ts';
 import { FC } from 'react';
-import SkeletonLoad from '@modules/SkeletonLoad';
+import SkeletonLoad from 'components/SkeletonLoad';
 import Stack from '@mui/material/Stack';
 
 const RoomBox: FC<RoomBoxProps> = ({

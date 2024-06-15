@@ -15,10 +15,10 @@ import { Alert } from '@mui/material';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import SearchIcon from '@mui/icons-material/Search';
 import { useLazyGetHotelsQuery } from '@modules/GetHotelsForm/api/getHotels.api.ts';
-import { HotelInfo } from '@shared/store/hotels/types.ts';
+import { HotelInfo } from '@store/hotels/types.ts';
 import { useNavigate } from 'react-router-dom';
 import { getCityName } from '@modules/GetHotelsForm/_data.ts';
-import { errorMapper } from '@shared/utils';
+import { ERROR_MAPPER } from '@shared/utils';
 import { LOADING_TEXT } from '@shared/constants';
 
 const GetHotelsForm = () => {
@@ -73,12 +73,11 @@ const GetHotelsForm = () => {
 
     const response = await getHotels(city!);
     if (response.data) {
-      console.log(response.data);
       setHotels(response.data.data as HotelInfo[]);
       setCity(formData.city);
       navigate(`/hotels?city=${formData.city}`);
     } else if (response.error && 'status' in response.error) {
-      setErrorText(errorMapper(response.error.status as number));
+      setErrorText(ERROR_MAPPER[response.error.status]);
     }
   }, []);
 

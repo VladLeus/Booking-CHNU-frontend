@@ -6,7 +6,7 @@ import KeyIcon from '@mui/icons-material/Key';
 import CustomButton from '@ui/CustomButton';
 import { FC } from 'react';
 import { CarRentalProps } from '@components/CarRental/types.ts';
-import SkeletonLoad from '@modules/SkeletonLoad';
+import SkeletonLoad from 'components/SkeletonLoad';
 import { useNavigate } from 'react-router-dom';
 
 const CarRental: FC<CarRentalProps> = ({

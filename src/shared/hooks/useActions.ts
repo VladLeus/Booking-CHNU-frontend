@@ -1,11 +1,13 @@
-import { userActions } from '@shared/store/user';
+import { userActions } from '@store/user';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from '@reduxjs/toolkit';
-import { hotelsActions } from '@shared/store/hotels/hotels.slice.ts';
+import { appActions } from '@store/appState';
+import { hotelsActions } from '@store/hotels';
 
 const actions = {
   ...userActions,
   ...hotelsActions,
+  ...appActions,
 };
 
 export const useActions = () => {

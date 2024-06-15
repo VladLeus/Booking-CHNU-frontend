@@ -1,4 +1,4 @@
-import { SkeletonLoadProps } from '@modules/SkeletonLoad/types.ts';
+import { SkeletonLoadProps } from '@components/SkeletonLoad/types.ts';
 import { FC } from 'react';
 import { Skeleton } from '@mui/material';
 
